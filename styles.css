@@ -1,0 +1,173 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0, 0, 0) !important;
+    border-radius: 8px !important;
+
+}
+
+.wrapper {
+    width: 100%;
+    margin: 20px;
+    background-color: rgb(145, 168, 150);
+    border-radius: 8px;
+}
+.menu {
+    background-color: #226304;
+    overflow: hidden;   
+    border-radius: 8px;
+}
+.menu a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: black 1px solid;
+}
+.menu a:hover {
+    background-color: #4CAF50;
+    color: black;    
+}
+
+.top{
+    margin: 10px;
+}
+
+.top a{
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 13px;
+    text-decoration: none;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.top a:hover {
+    background-color: #4CAF50;
+    color: black;
+    border: black solid 1px;    
+}
+
+.container {
+    margin-top: 20px;
+}
+.search-bar {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    border: rgba(0,0,0,0.2)2px;
+}
+
+.shearch {
+    width: 200%;
+    height: 30px;
+}
+.product-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.product-list th, .product-list td {
+    border: 1px solid black;
+    padding: 8px;
+}
+.product-list th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+.button {
+    background-color: #4CAF50;
+    color: white;    
+    margin: 10px 5px;
+    border-radius: 5px;
+}
+
+.button a{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;    
+    cursor: pointer;
+}
+
+.button a:hover{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;    
+    cursor: pointer;
+}
+.button-modify {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+
+.button-modify a {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;    
+    cursor: pointer;
+}
+
+.button-modify a:hover{
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.filter-box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;    
+    cursor:pointer;
+}
+.filter-box label {
+    margin-right: 20px;
+    cursor:pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}

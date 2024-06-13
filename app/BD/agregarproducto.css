@@ -1,0 +1,136 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+
+}
+
+.form-container {
+    background-color: rgb(145, 168, 150);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    }
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.form-group .price-input {
+    display: flex;
+    align-items: center;
+}
+
+.form-group .price-input span {
+    margin-right: 5px;
+}
+
+.form-group .error {
+    display: none;
+    color: red;
+    font-size: 15px;
+    margin-left: 125px;
+}
+
+.form-group input.invalid, .form-group select.invalid, .form-group textarea.invalid {
+    border: 2px solid red;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+    transform: scale(1.02);
+}
+
+.subtitulo {
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+/* Estilo para los interruptores */
+.switch {
+    position:relative;
+    margin-bottom: 25px;
+    margin-top: 12px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 110px;
+    right: 195px;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 8px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
