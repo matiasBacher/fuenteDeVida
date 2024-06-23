@@ -51,7 +51,9 @@ final class buscadorProductos
             if($this->getErrorConn()){
 
                 $sqlProductos = 
-                    "SELECT `productos`.`ID_PRODUCTO` as id, `productos`.`NOMBRE_PRODUCTO` as nombre, `productos`.`PRECIODEVENTA_PRODUCTO` as precio, `categorias`.`NOMBRE_CATEGORIA` as categoria
+                    "SELECT `productos`.`ID_PRODUCTO` as id, `productos`.`NOMBRE_PRODUCTO` as nombre,
+                     `productos`.`PRECIODEVENTA_PRODUCTO` as precio, 
+                     `categorias`.`NOMBRE_CATEGORIA` as categoria, `productos`.`descripcion_producto` as descripcion
                     FROM `productos` 
                         LEFT JOIN `categorias` ON `productos`.`ID_CATEGORIA` = `categorias`.`ID_CATEGORIA`
                     WHERE (`productos`.`ID_PRODUCTO` LIKE '".$this->busqueda."%' OR `productos`.`NOMBRE_PRODUCTO` LIKE '%".$this->busqueda."%');"
@@ -92,6 +94,8 @@ final class buscadorProductos
                                                                 $rowProductos->nombre,
                                                                 (int)$rowProductos->precio,
                                                                 $rowProductos->categoria,
+                                                                $rowProductos->descripcion==null?""
+                                                                :$rowProductos->descripcion,
                                                                 $propiedades) ;
                     }
 

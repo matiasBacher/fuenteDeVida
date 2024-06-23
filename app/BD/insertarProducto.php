@@ -14,11 +14,13 @@ public function __construct(Producto $producto){
     if(!$this->hacerConeccion()){
         echo'<script>alert("coneccion fallida")</script>';
     }
+    if(!$producto->getCategoria()==0){
+        $this->idCategoria=$this->buscarIDCategoria();
+        }
     $this->arrayIdPropiedades=$this->buscarIDPropiedades();
-    $this->idCategoria=$this->buscarIDCategoria();
-
         
-    }
+        
+        }
 
 private function hacerConeccion():bool{
     try
@@ -53,10 +55,12 @@ function buscarIDPropiedades():Array{
 
     $arrayId = [];
     $resultado = $this->conn->query($sql);
-    while($fila = $resultado->fetch_object())
-    {
-        $arrayId[] = $fila->id;
+    if ($resultado) {
+        while ($fila = $resultado->fetch_object()) {
+            $arrayId[] = $fila->id;
+        }
     }
+    
     return $arrayId;
 }
 
@@ -90,19 +94,48 @@ function validarSiCodigoEstaDisponible(){
 }
 
 function grabarProducto(){
-    if($this->validarSiCodigoEstaDisponible()){
-   $sql= 
-   "INSERT INTO `productos`(`ID_PRODUCTO`,`NOMBRE_PRODUCTO`,`ID_CATEGORIA`,`PRECIODEVENTA_PRODUCTO`) 
-   VALUES('{$this->producto->getCodigo()}','{$this->producto->getNombre()}',{$this->idCategoria},{$this->producto->getPrecioDeVenta()})";
-    $this->conn->query($sql);
-    $this->insertarPropiedades();
-    $this->exito = true ;
-    return true;
-}
-else {
-    return false;
-}
+        if ($this->validarSiCodigoEstaDisponible()) {
+            $sql =
+                "INSERT INTO `productos`(`ID_PRODUCTO`,`NOMBRE_PRODUCTO`,`ID_CATEGORIA`,`PRECIODEVENTA_PRODUCTO`, `descripcion_producto`) 
+                VALUES('{$this->producto->getCodigo()}','{$this->producto->getNombre()}',{$this->idCategoria},{$this->producto->getPrecioDeVenta()},'{$this->producto->getDescripcion()}')";
+            if (!$this->conn->query($sql)) {
+                return -1;
+            }
+            ;
+            $this->insertarPropiedades();
+            $this->exito = true;
+            return 1;
+        } else {
+            return 0;
+        }
 
 
-}
+    }
+    public function eliminarRelaciones(){
+        $sql="DELETE FROM propiedades_productos
+        WHERE ID_PRODUCTO='{$this->producto->getCodigo()}' ";
+        if( $this->conn->query($sql) ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public function borrarProducto(){
+        $sql=
+        "DELETE FROM productos
+        WHERE ID_PRODUCTO='{$this->producto->getCodigo()}' ";
+        if($this->eliminarRelaciones()) {
+            if( $this->conn->query($sql) ) {
+                return 1;
+            }
+            else { 
+                return 0;
+            }
+        }
+        else {
+            return -1;  
+        }
+
+    }
 }

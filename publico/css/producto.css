@@ -1,0 +1,480 @@
+*{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #000000;
+    align-items: center;
+}
+
+.wrapper {
+    max-width: 1500px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.menu {
+    background-color: #226304;
+    overflow: hidden;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1920px;
+}
+
+.menu a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.menu a:hover {
+    background-color: rgb(145, 168, 150);
+    color: black;
+    transform: scale(1.10);
+}
+
+.container {
+    margin-top: 20px;
+    background-color: rgb(145, 168, 150);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1920px;
+    box-sizing: border-box;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    max-width: 700px;
+    
+    }
+
+
+.search-bar input {
+    padding: 10px;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.search-bar select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.filter-box { 
+    display: flex;
+    margin-bottom: 20px;   
+    width: 100%;
+    border: solid black 1px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+}
+
+.filter-box label {
+    display: block;      
+}
+
+/* Estilos para los interruptores */
+
+.comSwitch{
+    display: flex;
+    text-align:left;
+    padding: 14px 16px;
+    text-decoration: none;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.switch {
+    position:relative;
+    width: 49px;
+    height: 23px;
+    margin-right: 10px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 195px;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+/* Fin de los estilos para los interruptores */
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 20px;
+    width: 49px;
+    height: 23px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(255, 255, 255);
+    transition: .4s;
+}
+/* Fin del Rounded sliders */
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.product-list table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 20px;
+    caption-side: bottom;
+    color: #000000;
+    text-align:left;
+    letter-spacing: 1px;
+}
+
+.product-list tr:nth-of-type(2n+1){
+    background-color: rgb(145, 168, 150);
+}
+.product-list tr:nth-of-type(2n) {
+    background-color: rgb(124, 148, 128);
+}
+
+.product-list th, .product-list td {
+    border: 1px solid #000000;
+    padding: 8px;  
+}
+
+.product-list tr:hover{
+    background-color:#86d694 ;
+}
+
+.product-list th {
+    background-color: #226304;
+    text-align: left;
+    color: #ffffff;
+}
+
+.button {
+    background-color: #226304;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.button:hover {
+    filter: brightness(150%);
+    transform: scale(1.02);
+}
+
+.button-modify {
+    background-color: #007BFF;
+    padding: 5px 10px;
+    font-size: large;
+    margin: 0px;
+    margin-right: 10px;
+}
+.button-remove {
+
+    background-color: #d32a2a;
+    padding: 5px 10px;
+    font-size: large;
+    margin: 0px;
+}
+
+
+.buttons {
+    text-align: center;
+}
+.product-list {
+    min-height: 500px;
+}
+.badge {
+    padding: 0.35em 0.65em;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    vertical-align: baseline;
+    border-radius: 0.375em;
+    font-size: 0.75em;
+    margin: 0px 5px;
+}
+.badgeAzul{
+    background-color: blue;
+    color: white;
+}
+.badgeRojo{
+    background-color: red;
+    color: white;
+}
+.badgeVerde{
+    background-color: green;
+    color: white;
+}
+.badgeNaranja{
+    background-color: orange;
+    color: black;
+}
+.badgeNegro{
+    background-color: black;
+    color: white;
+}
+
+/* modal agregar producto  */
+
+/* Estilos para la ventana flotante */
+.fondoModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background-color: rgb(145, 168, 150);
+    margin:  auto;
+    border: 1px solid #000000;
+    width: 80vh;
+    max-width: 420px;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.modal-content-child{
+    margin: 50px;
+}
+
+.close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    display: block;    
+    width: 30px;
+    color: rgb(0, 0, 0);
+    background-color: #dc3545;
+    font-size: 28px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.close:hover{
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.agregarCont {
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#newCategory {
+    padding: 10px;
+    font-size: 16px;
+    width: calc(100% - 100px);
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#addBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+    background-color: #226304;
+    color: white;
+    border: none;
+    border: 1px solid #000000;
+}
+
+#addBtn:hover {
+    background-color: rgb(60, 164, 82);
+    transform: scale(1.02);
+}
+
+#AgregarCategoria h2 {
+    text-align: center;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #000000;
+    margin-bottom: 10px;
+    background-color: rgb(61, 156, 82);;
+    border-radius: 5px;
+}
+
+.category-item:hover{
+    filter: brightness(130%);
+}
+
+#AgregarCategoria .deleteBtn {
+
+    background-color: #dc3545;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+}
+
+#AgregarCategoria .deleteBtn:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+#AgregarCategoria .deleteBtn:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+#openModal {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+    background-color: #226304;
+    color: white;
+    border: none;
+    margin-top: 10px;
+}
+
+#openModal:hover {
+    background-color: rgb(60, 164, 82);
+    transform: scale(1.02);
+}
+
+/* Estilo agregar producto modal*/
+.form-container {
+    background-color: rgb(145, 168, 150);
+    padding: 20px;
+    width: 360px;
+    border-radius: 5px;
+} 
+#contenedorAP .comSwitch {
+    justify-content:flex-start;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.subtitulo {
+    font-size: 20px;
+}
+.form-group {
+    margin-bottom: 15px;
+    }
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+
+
+.form-group .price-input {
+    display: flex;
+    align-items: center;
+}
+
+.form-group .price-input span { 
+    margin-right: 5px;
+}
+
+.form-group .error {
+    display: none;
+    color: red;
+    font-size: 15px;
+}
+
+.form-group input.invalid, .form-group select.invalid, .form-group textarea.invalid {
+    border: 2px solid red;
+    border-radius: 8px;
+}

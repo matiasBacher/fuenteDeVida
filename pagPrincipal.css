@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #000000;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+}
+
+.wrapper {
+    width: 80%;
+    margin: 20px;
+}
+
+.menu {
+    background-color: #226304;
+    overflow: hidden;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1920px;
+}
+
+.menu a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.menu a:hover {
+    background-color: rgb(145, 168, 150);;
+    color: black;
+    transform: scale(1.10);
+}
+
+.container {
+    margin-top: 20px;
+    background-color: rgb(145, 168, 150);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1920px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.search-bar select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 370px;
+}
+
+.filter-box { 
+    display: flex;
+    margin-bottom: 20px;   
+    width: 1100px;
+    height: 20px;
+    margin-left: 70px;
+}
+
+.filter-box label {
+    margin-right: 60px;
+    width: 800px;
+    height: 40px;
+    font-size: 15px;    
+}
+
+.switch {
+    position: relative;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: -2px;
+    left: -49px;
+    right: 122px;
+    bottom: 20px;
+    background-color: #ccc;
+    transition: .4s;
+    
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.product-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-list th, .product-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.product-list th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.button:hover {
+    background-color: #45a049;
+    transform: scale(1.02);
+}
+
+.button-modify {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.button-modify:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+.buttons {
+    text-align: center;
+}
+.product-list {
+    min-height: 600px;
+}
