@@ -31,8 +31,13 @@ async function cargarCategorias(bandera =1){ //busca las categorias en la BD
         if(bandera==1){
             dibujarCategorias();
         }
-        if(bandera=2){
+        if(bandera==2){
             dibujarSelect();
+        }
+        if(bandera==3){
+            abrirModal(modalModifPro)
+            MdibujarSelect()
+            cargarInput(productoSeleccionado, elemModifProd)
         }
 }
 
@@ -84,17 +89,17 @@ async function eliminarCategoria(e){
             // Manejar el error según sea necesario
         }
         if(respuesta.mensaje==-1){
-            alert(`No se pudieron actualizar los productos con categoria ${nodo.value}`)
+            Swal.fire({confirmButtonText:"Volver",text:`No se pudieron actualizar los productos con categoria ${nodo.value}`, background:"#d6dfee",icon: "error", showConfirmButton: false,})
             return;
         }
         if(respuesta.mensaje==0){
-            alert(`No se pudo eliminar $`)
+            Swal.fire({confirmButtonText:"Volver",text:`No se pudo eliminar $`, background:"#d6dfee",icon: "error", showConfirmButton: false,})         
             return;
         }
         if(respuesta.mensaje==1){
             cargarCategorias();
             dibujarCategorias();
-            alert(`La Categoria ${nodo.value} fue eliminada`);
+            Swal.fire({customclass: {confirmButton:"custombutton"},text:`La Categoria "${nodo.value}" fue eliminada`,icon: "success",background:"#d6dfee"})
             return;
             }
 
@@ -102,7 +107,7 @@ async function eliminarCategoria(e){
 }
 async function insertarcategorias(nombre) {
     if (nombre === "") {
-        alert("Por favor, ingrese un nombre de categoría.");
+        Swal.fire({confirmButtonText:"Volver",text:"Por favor, ingrese un nombre de categoría.", background:"#d6dfee", showConfirmButton: false,}) 
         return;
     }
     const f = new FormData();
@@ -130,18 +135,18 @@ async function insertarcategorias(nombre) {
     let mensaje=respuesta.mensaje;
     // Verificar si la categoría ya existe
     if (mensaje == -1) {
-        alert("Esta categoría ya existe.");
+        Swal.fire({confirmButtonText:"Volver",text:"Esta categoría ya existe.", background:"#d6dfee",icon: "error", showConfirmButton: false,})  
         return;
     }
 
     if (mensaje == 0) {
-        alert("error al cargar los datos en la base de datos")
+        Swal.fire({confirmButtonText:"Volver",text:"error al cargar los datos en la base de datos", background:"#d6dfee",icon: "error", showConfirmButton: false,})        
         return
     }
     if (respuesta.mensaje == 1) {
         cargarCategorias();
         dibujarCategorias();
-        alert(`la categoria ${nombre} fue cargada correctamente`)
+        Swal.fire({customclass: {confirmButton:"custombutton"},text:`La categoria "${nombre}" fue cargada correctamente`,icon: "success",background:"#d6dfee"})
         // Limpiar el campo de entrada
         newCategory.value = "";
         return
@@ -166,10 +171,22 @@ closeModalCat.onclick = function() {
 
 
 // formar tablas de categorías
-addBtn.onclick = function() {
-    insertarcategorias(newCategory.value.trim())
+addBtn.onclick = function () {
+    Swal.fire({
+        title: "Deseas eliminar la categoría: " +newCategory.value.trim()+ "?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            insertarcategorias(newCategory.value.trim())
+        }
+    })
 
-    }
+}
 
 
 

@@ -6,11 +6,14 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 50px;
     display: flex;
     justify-content: center;
-    background-color: #000000;
-    align-items: center;
+    background-image:url('../../publico/img/Fondo.webp');
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size: 100% 100%;
+    color: #000000;
 }
 
 .wrapper {
@@ -470,11 +473,34 @@ cursor: pointer;
 
 .form-group .error {
     display: none;
-    color: red;
+    color: rgb(204, 2, 2);
     font-size: 15px;
 }
 
 .form-group input.invalid, .form-group select.invalid, .form-group textarea.invalid {
-    border: 2px solid red;
+    border: 2px solid rgb(204, 2, 2);
     border-radius: 8px;
+}
+
+.swal2-html-container{
+    color: #000000 !important;
+    font-size: 25px !important;
+}
+
+.swal2-confirm {
+    border: 0 !important;
+    border-radius: .25em !important;
+    background: initial !important;
+    background-color: #226304 !important;
+    color: #fff !important;
+    font-size: 1em !important;
+}
+
+.swal2-confirm:hover{
+    filter: brightness(150%);
+    transform: scale(1.02);
+}
+
+.swal2-icon-show{
+    size: 30px;
 }

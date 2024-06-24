@@ -7,10 +7,12 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Productos</title>
-  
+    <link rel="icon" type="image/x-icon" href="/publico/img/favicon.png">
+    <link rel="stylesheet" href="/publico/css/sweetalert2.min.css">
     <link rel="stylesheet" type="text/css" href="<?="publico/css/".$_SESSION["sitio"].".css"?>">
+    
 </head>
-<body>
+<body >
     <div class="wrapper">
         <div class="menu">            
              <a class="top" href="#">Proveedores</a>

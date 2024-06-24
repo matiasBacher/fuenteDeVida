@@ -100,9 +100,15 @@
                 <button class="button" id="openModalProduct">Agregar Producto</button>
                 <button class="button" id="openModalCat">Agregar Categoría</button>
             </div>
-            <script src="publico/js/producto.js"></script>
             <?php require_once($_SERVER['DOCUMENT_ROOT'] .'/app/vista/addCatModal.php');
              require_once($_SERVER['DOCUMENT_ROOT'] .'/app/vista/agregarProductoModal.php');
              modalAgregModif(true);
              modalAgregModif(false);
             ?>
+            <script src="publico/js/producto.js"></script>
+            <script src="publico/js/addCatModal.js"></script>
+            <script src="publico/js/agregarProductoModal.js"></script>
+            <script src="publico/js/modificarProductoModal.js"></script>
+            <script src="publico/js/sweetalert2.all.min.js"></script>
+ 
+

@@ -99,6 +99,4 @@
             </div>
         </div>    
     </div> 
-    <?=$modo?'<script src="/publico/js/agregarProductoModal.js"></script>':
-    '<script src="/publico/js/modificarProductoModal.js"></script>'?>
-    <?php } ?>
+<?php } ?>

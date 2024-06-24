@@ -16,5 +16,4 @@
         </div>
     </div>
 
-    <script src="publico/js/addCatModal.js"></script>
 

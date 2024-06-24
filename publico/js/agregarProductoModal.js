@@ -4,121 +4,133 @@ var closeModalProduct = document.getElementById("closeModalAddProduct");
 
 // Abrir la ventana flotante cuando se hace clic en el botón
 openModalProducto.onclick = function() {
-    modalProduct.style.display = "flex";
+    abrirModal(modalProduct)
     cargarCategorias(2)
 }
 
 // Cerrar la ventana flotante cuando se hace clic en la "x"
 closeModalProduct.onclick = function() {
-    modalProduct.style.display = "none";
+    cerrarModal(modalProduct)
+}
+
+elemAgreProd={
+    codigo: document.getElementById('codigo'),
+    precio: document.getElementById('precio'),
+    nombre: document.getElementById('nombreProducto'),
+    descripcion: document.getElementById('descripcionProducto'),
+    categoria:  document.getElementById('categoria'),
+    propiedades: Array.from(document.querySelectorAll('#caracteristicas input[type="checkbox"]'))
+}
+elemAgreProdErr={
+    codigo: document.getElementById('codigoError'),
+    precio: document.getElementById('precioError'),
+    nombre: document.getElementById('nombreProductoError'),
+    categoria:  document.getElementById('categoriaError'),
+}
+let isValid=[false]
+
+function validarVacio(opcion, elementoObjeto, errorObjeto, mensajr,  corregir=false, valido=[false] ){
+    let codigoArreglado=corregir?elementoObjeto[opcion].value.trim()
+    :elementoObjeto[opcion].value;
+    if (codigoArreglado === '') {
+        elementoObjeto[opcion].classList.add('invalid');
+        errorObjeto[opcion].innerText=mensajr
+        errorObjeto[opcion].style.display = 'block';
+        valido[0]=false   }
+ else {
+    elementoObjeto[opcion].classList.remove('invalid');
+    errorObjeto[opcion].style.display = 'none';
+    valido[0]=true
+ }
+
+
 }
 
 
-function aplicarSoloNumerico(inputs) {
-    inputs.forEach(function(input) {
-        input.addEventListener('input', function () {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-    });
+
+function aplicarSoloNumerico(input) {
+
+            input.value = input.value.replace(/[^0-9]/g, '');
+
+    
+}
+function ajustarValor(input) {
+    let inputValue = input.value;
+
+    // Limitar el tamaño a 8 caracteres y rellenar con ceros a la izquierda si es necesario
+    if (inputValue.length > 8) {
+        inputValue = inputValue.substring(0, 8);
+    } else {
+        inputValue = inputValue.padEnd(8, '0');
+    }
+
+    // Actualizamos el valor del input sin mover el cursor al final
+    const start = input.selectionStart;
+    const end = input.selectionEnd;
+    input.value = inputValue;
+    input.setSelectionRange(start, end);
 }
 
-    let isValid = true;
-    // Validación del nombre del producto
-    const nombreProducto = document.getElementById('nombreProducto');
-    const nombreProductoError = document.getElementById('nombreProductoError');
-
-    nombreProducto.addEventListener("blur", validarNombre)
+    
+elemAgreProd["nombre"].addEventListener("blur", validarNombre);
     function validarNombre() {
 
 
-        if (nombreProducto.value.trim() === '') {
-            nombreProducto.classList.add('invalid');
-            nombreProducto.textContent="ponga el nombre"
-            nombreProductoError.style.display = 'block';
-            isValid = false;
-        } else {
-            nombreProducto.classList.remove('invalid');
-            nombreProductoError.style.display = 'none';
-        }
+        validarVacio('nombre', elemAgreProd, elemAgreProdErr, "complete el nombre", true, isValid)
     }
 
     // Validación de la categoría
-    const categoria = document.getElementById('categoria');
-    const categoriaError = document.getElementById('categoriaError');
-    categoria.addEventListener("blur", validarCategoria)
+    elemAgreProd["categoria"].addEventListener("blur", validarCategoria)
     function validarCategoria() {
-        if (categoria.value === '') {
-            categoria.classList.add('invalid');
-            categoriaError.innerText="Elija una Categoria"
-            categoriaError.style.display = 'block';
-            isValid = false;
-        } else {
-            categoria.classList.remove('invalid');
-            categoriaError.style.display = 'none';
-
-        }
+        validarVacio('categoria', elemAgreProd, elemAgreProdErr, "elija una categoría",false, isValid)
     }
+
+        
+    
 
     // Validación del código
+    elemAgreProd["codigo"].addEventListener("blur", validarCodigo);
 
-    const codigo = document.getElementById('codigo');
-    const codigoError = document.getElementById('codigoError');
-    codigo.addEventListener("blur", validarCodigo);
-
-   aplicarSoloNumerico([ codigo ]);
+   elemAgreProd["codigo"].addEventListener("input", function(event) {
+    let input = event.target;
+    aplicarSoloNumerico(input)
+    ajustarValor(input)
+   }
+)
     function validarCodigo() {
-       let codigoArreglado =codigo.value.trim();
-        if (codigoArreglado === '') {
-            codigo.classList.add('invalid');
-            codigoError.innerText="Ponga un Codigo"
-            codigoError.style.display = 'block';
-            isValid = false
-        } else {
-            if(codigoArreglado.length<8){
-            codigo.classList.add('invalid');
-            codigoError.innerText="El codigo debe ser de más de 8 digitos"
-            codigoError.style.display = 'block';
-            isValid = false
-
-            }
-            else{
-                codigo.classList.remove('invalid');
-                codigoError.style.display = 'none';
-            }
-        }
+        validarVacio('codigo', elemAgreProd, elemAgreProdErr, "complete el codigo", true, isValid)
     }
+    
 
 
-    // Validación del precio
-    const precio = document.getElementById('precio');
-    const precioError = document.getElementById('precioError');
-    aplicarSoloNumerico([ precio ])
+
+     elemAgreProd["precio"].addEventListener("input", function(event){
+        let input = event.target
+        aplicarSoloNumerico(target)
+     })
     precio.addEventListener("blur", validarPrecio)
     function validarPrecio() {
-        if (precio.value.trim() === '' ) {
-            precio.classList.add('invalid');
-            precioError.innerText='Ponga un Precio'
-            precioError.style.display = 'block';
-        } else {
-            precio.classList.remove('invalid');
-            precioError.style.display = 'none';
-        }
+        validarVacio('precio', elemAgreProd, elemAgreProdErr, "complete el precio",false, isValid)
     }
+    
 
-    function validarTodo() {
-        isValid=true
-        validarCodigo();
-        validarCategoria();
-        validarCodigo();
-        validarPrecio();
-        validarNombre();
+    function validarTodo(funciones) {
+        
+            funciones.forEach(x=>{
+                x()
+            })
 
-        if(isValid){
-            grabarProductos()
-        }
+            if(isValid[0]){
+                grabarProductos();
+                cargarInput("",elemAgreProd)
+            }
         
     }
     function dibujarSelect(){
+        hacerSelect(elemAgreProd.categoria)
+    }
+    function hacerSelect(categoria){
+
         while (categoria.firstChild){
             categoria.removeChild(categoria.firstChild);
           };
@@ -159,18 +171,41 @@ async function grabarProductos(){
         // Manejar el error según sea necesario
     }
     if(respuesta.mensaje==1){
-        alert("El producto fue grabado")
+        Swal.fire({customclass: {confirmButton:"custombutton"},text:"EL PRODUCTO FUE AGREGADO",icon: "success",background:"#d6dfee"})
     }
     else if(respuesta.mensaje==0){
-        alert("Codigo de producto repetido")
+        Swal.fire({confirmButtonText:"Volver",text:"Codigo del producto repetido", background:"#d6dfee",icon: "error", showConfirmButton: false,})
     }
     else{
-        alert("Error al grabar el producto")
+        Swal.fire({confirmButtonText:"Volver",text:"Codigo del producto repetido", background:"#d6dfee",icon: "error", showConfirmButton: false,})
     }
 
 }
+function cargarInput(carga, elementos){
+    if(carga==""){
+        elementos.codigo.value=""
+        elementos.precio.value=""
+        elementos.nombre.value=""
+        elementos.descripcion.value=""
+        elementos.categoria.value=""
+        elementos.propiedades.forEach(x => {
+            x.checked=false
+            
+        })
+    }
+        else{
 
+        elementos.codigo.value=carga.codigo.toString().padStart(8, '0')
+        elementos.precio.value=carga.precio
+        elementos.nombre.value=carga.nombre 
+        elementos.descripcion.value=carga.descripcion
+        elementos.categoria.value=carga.categoria=="ninguno"?"":carga.categoria
+        elementos.propiedades.forEach(x=>{
+            x.checked=carga.propiedades[x.name]
+        })
+        }
+    }
 
-document.getElementById('modalAgregProdEnviar').addEventListener('click', ()=>validarTodo());
+document.getElementById('modalAgregProdEnviar').addEventListener('click', ()=>validarTodo([validarCategoria,validarCodigo,validarNombre,validarPrecio]));
 
 
