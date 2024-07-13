@@ -119,11 +119,6 @@ elemAgreProd["nombre"].addEventListener("blur", validarNombre);
             funciones.forEach(x=>{
                 x()
             })
-
-            if(isValid[0]){
-                grabarProductos();
-                cargarInput("",elemAgreProd)
-            }
         
     }
     function dibujarSelect(){
@@ -149,6 +144,8 @@ elemAgreProd["nombre"].addEventListener("blur", validarNombre);
 const formularioGrabar = document.getElementById("productoForm")
 
 async function grabarProductos(){
+    mostrarCarga()
+
     const f = new FormData(formularioGrabar);
     let respuesta;
     f.append("accion", "insertar")
@@ -162,16 +159,22 @@ async function grabarProductos(){
         );
 
         if (response.ok) {
+            ocualtarCarga()
             respuesta = await response.json();
         } else {
             throw new Error('Error al obtener la respuesta del servidor')
+            ocualtarCarga()
+
         }
     } catch (error) {
+        ocualtarCarga()
+
         console.error('Error:', error);
         // Manejar el error según sea necesario
     }
     if(respuesta.mensaje==1){
         Swal.fire({customclass: {confirmButton:"custombutton"},text:"EL PRODUCTO FUE AGREGADO",icon: "success",background:"#d6dfee"})
+        cargarInput("", elemAgreProd)
     }
     else if(respuesta.mensaje==0){
         Swal.fire({confirmButtonText:"Volver",text:"Codigo del producto repetido", background:"#d6dfee",icon: "error", showConfirmButton: false,})
@@ -206,6 +209,11 @@ function cargarInput(carga, elementos){
         }
     }
 
-document.getElementById('modalAgregProdEnviar').addEventListener('click', ()=>validarTodo([validarCategoria,validarCodigo,validarNombre,validarPrecio]));
+document.getElementById('modalAgregProdEnviar').addEventListener('click', ()=>{
+    validarTodo([validarCategoria,validarCodigo,validarNombre,validarPrecio])
+    if(isValid[0]){
+        grabarProductos()
+    }
+})
 
 

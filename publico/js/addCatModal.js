@@ -8,6 +8,7 @@ var categoriesList = document.getElementById("categoriesList");
 
 let categoriaEnMemoria;
 async function cargarCategorias(bandera =1){ //busca las categorias en la BD
+    mostrarCarga()
     const f = new FormData();
     let categorias;
     f.append("accion", "buscarTodo");
@@ -19,11 +20,16 @@ async function cargarCategorias(bandera =1){ //busca las categorias en la BD
         );
 
         if(response.ok){
+            ocualtarCarga()
             categorias = await response.json();
         } else {
+            ocualtarCarga()
+
             throw new Error('Error al obtener la respuesta del servidor')
         }
         } catch (error) {
+            ocualtarCarga()
+
             console.error('Error:', error);
             // Manejar el error según sea necesario
         }
@@ -62,7 +68,24 @@ function dibujarCategorias(){
         categoriesList.appendChild(categoryItem);
 
         let deleteBtn = categoryItem.querySelector(".deleteBtn");
-        deleteBtn.addEventListener("click",eliminarCategoria);
+        deleteBtn.addEventListener("click",(e)=>  {
+            let evento = e
+            Swal.fire({
+                title: "Deseas eliminar la categoría: " +newCategory.value.trim()+ "?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    eliminarCategoria(e)
+                }
+            }
+        )
+
+        });
     }
 }
 async function eliminarCategoria(e){
@@ -106,7 +129,9 @@ async function eliminarCategoria(e){
 
 }
 async function insertarcategorias(nombre) {
+    mostrarCarga()
     if (nombre === "") {
+        ocualtarCarga()
         Swal.fire({confirmButtonText:"Volver",text:"Por favor, ingrese un nombre de categoría.", background:"#d6dfee", showConfirmButton: false,}) 
         return;
     }
@@ -124,11 +149,14 @@ async function insertarcategorias(nombre) {
         );
 
         if (response.ok) {
+            ocualtarCarga()
             respuesta = await response.json();
         } else {
+            ocualtarCarga()
             throw new Error('Error al obtener la respuesta del servidor')
         }
     } catch (error) {
+        ocualtarCarga()
         console.error('Error:', error);
         // Manejar el error según sea necesario
     }
@@ -173,8 +201,8 @@ closeModalCat.onclick = function() {
 // formar tablas de categorías
 addBtn.onclick = function () {
     Swal.fire({
-        title: "Deseas eliminar la categoría: " +newCategory.value.trim()+ "?",
-        icon: "warning",
+        title: "Deseas agregar la categoría: " +newCategory.value.trim()+ "?",
+        icon: "question",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",

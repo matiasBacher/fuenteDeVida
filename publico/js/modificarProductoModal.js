@@ -39,12 +39,14 @@ const MproductForm= document.getElementById("MproductoForm")
 const enviarModif = document.getElementById("MmodalAgregProdEnviar")
  enviarModif.addEventListener('click',  ()=>{
     validarTodo(arrayFunc)
-    modificarProducto()
+    if(isValidModif[0]){modificarProducto()}
  })
  function MdibujarSelect(){
     hacerSelect(elemModifProd.categoria)
 }
  async function modificarProducto(){ //busca las categorias en la BD
+    mostrarCarga()
+
     const f = new FormData(MproductForm);
     let categorias;
     f.append("accion", "actualizar");
@@ -58,10 +60,13 @@ const enviarModif = document.getElementById("MmodalAgregProdEnviar")
 
         if(response.ok){
             respuesta = await response.json();
+            ocualtarCarga()
         } else {
+            ocualtarCarga()
             throw new Error('Error al obtener la respuesta del servidor')
         }
         } catch (error) {
+            ocualtarCarga
             console.error('Error:', error);
             // Manejar el error según sea necesario
         }

@@ -12,6 +12,8 @@ function cerrarModal(modal) {
     modal.style.display="none"
 }
 async function devolverBusquedaProducto (busqueda){
+    mostrarCarga()
+
     const f = new FormData();
     let productos;
     f.append("accion","busqueda")
@@ -25,11 +27,14 @@ async function devolverBusquedaProducto (busqueda){
         });
         
         if (response.ok) {
+            ocualtarCarga()
             productos = await response.json();
         } else {
+            ocualtarCarga()
             throw new Error('Error al obtener la respuesta del servidor');
         }
     } catch (error) {
+        ocualtarCarga()
         console.error('Error:', error);
         // Manejar el error según sea necesario
     }
@@ -53,13 +58,14 @@ async function devolverBusquedaProducto (busqueda){
 }
 
 function filtrar( bandera=true){
-    orden = 
     productosEnMemoria=productosEnMemoriaSinFiltrar;
     let filtro = convertirCheckboxesAObjeto();
     let productosFiltrados = productosEnMemoria.filter(x => {
         for (let i = 0; i < filtro.length; i++) {
-            if (!x.propiedades[filtro[i]]) {
-                return false;
+            if (x.propiedades[filtro[i]]) {
+            }
+            else{
+                return false
             }
         }
         return true;
@@ -85,6 +91,8 @@ function ordenar(bandera=true){
 }
 
 async function borrarProducto(codigo, nombre){ 
+                 mostrarCarga()
+
                 const f = new FormData();
                 f.append("accion","borrar")
                 f.append("codigo", codigo);
@@ -100,13 +108,17 @@ async function borrarProducto(codigo, nombre){
                     
                     
                     if (response.ok) {
+                        ocualtarCarga()
                         let r= await response.json();
                         mensaje = r.mensaje;
 
                     } else {
+                        ocualtarCarga()
+
                         throw new Error('Error al obtener la respuesta del servidor');
                     }
                 } catch (error) {
+                    ocualtarCarga()
                     console.error('Error:', error);
                     // Manejar el error según sea necesario
                 }
@@ -171,12 +183,12 @@ function crearTabla() {
 
             // Creamos y asignamos la celda de la descripción del producto
             let descripcion = document.createElement('td');
-            descripcion.textContent = x.descripcion;
+            descripcion.textContent = x.descripcion==0?"":x.descripcion;
             fila.appendChild(descripcion);
 
             // Creamos y asignamos la celda de las propiedades del producto
             let propiedades = document.createElement('td');
-            if (x.propiedades.esiuretico) {
+            if (x.propiedades.esDiuretico) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeAzul';
                 span.textContent = 'Diuretico';
@@ -185,13 +197,13 @@ function crearTabla() {
             if (x.propiedades.sinSodio) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeRojo';
-                span.textContent = 'Sin sodio';
+                span.textContent = 'Bajo Sodio';
                 propiedades.appendChild(span);
             }
             if (x.propiedades.esNatural) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeVerde';
-                span.textContent = 'Es natural';
+                span.textContent = 'Es Natural';
                 propiedades.appendChild(span);
             }
             if (x.propiedades.sinTacc) {
@@ -203,7 +215,7 @@ function crearTabla() {
             if (x.propiedades.aptoDiabetico) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeNegro';
-                span.textContent = 'Apto diabetico';
+                span.textContent = 'Apto Diabetico';
                 propiedades.appendChild(span);
             }
             fila.appendChild(propiedades);
@@ -248,7 +260,7 @@ function crearTabla() {
 
                 // Añadimos la fila creada al array filas
                 filas.push(fila);
-            });
+            })};
 
 
             // Seleccionamos la tabla en el DOM donde se mostrarán los productos
@@ -261,7 +273,7 @@ function crearTabla() {
             });
 
         
-    }}
+    }
 
 
 
@@ -284,3 +296,14 @@ ordenElemento.addEventListener("change", ordenar)
 checkboxes.forEach(x=>{
     x.addEventListener("change",filtrar)
 })
+
+function mostrarCarga(){
+    let loader = document.querySelector("#cont-espera")
+    loader.style.display="block"
+}
+
+function ocualtarCarga(){
+    let loader = document.querySelector("#cont-espera")
+    loader.style.display="none"
+
+}

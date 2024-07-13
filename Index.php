@@ -34,6 +34,8 @@ session_start();
 ?>
            
     </div>
+
+    <div id="cont-espera"> <span class="loader"> </span> </div>
       
 </body>
 </html>

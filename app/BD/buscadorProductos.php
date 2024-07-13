@@ -77,7 +77,7 @@ final class buscadorProductos
                                 if ($rowPropiedades->nombre == 'aptoDiabetico') {
                                     $propiedades->setAptoDiabetico(true);
                                 } elseif ($rowPropiedades->nombre == 'esDiuretico') {
-                                    $propiedades->setAptoDiabetico(true);
+                                    $propiedades->setEsDiuretico(true);
                                 } elseif ($rowPropiedades->nombre == 'sinSodio') {
                                     $propiedades->setSinSodio(true);
                                 } elseif ($rowPropiedades->nombre == 'esNatural') {

@@ -61,7 +61,7 @@
                         <div class="textSwitch">Natural</div>
                     </div>
 
-                    <div class="comSwitch">
+                    <!-- <div class="comSwitch">
                         <label class="switch">
                             <input type="checkbox" name="caracteristicas[]" value="En Stock">
                             <span class="slider round"></span> 
@@ -69,7 +69,7 @@
 
                         <div class="textSwitch">En Stock</div>
                     </div>
-                
+                 -->
             </div>
             <!-- ACA TERMINA EL SWITCH -->
 
