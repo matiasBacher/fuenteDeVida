@@ -3,14 +3,7 @@ let productosEnMemoriaSinFiltrar;
 let productoSeleccionado
 
 
-function abrirModal(modal){
 
-    modal.style.display="flex"
-}
-
-function cerrarModal(modal) {
-    modal.style.display="none"
-}
 async function devolverBusquedaProducto (busqueda){
     mostrarCarga()
 
@@ -124,16 +117,16 @@ async function borrarProducto(codigo, nombre){
                 }
 
                 if(mensaje==-2){
-                    Swal.fire({confirmButtonText:"Volver",text:"Error desconocido", background:"#d6dfee",icon: "error", showConfirmButton: false,})                   
+                    errorMensaje.fire({text:"Error desconocido"})                   
                     return;
                 }
                 if(mensaje==-1 || mensaje==0){
-                    Swal.fire({confirmButtonText:"Volver",text:"No se pudo Borrar el producto: "+nombreProducto, background:"#d6dfee",icon: "error", showConfirmButton: false,})
+                    errorMensaje.fire({text:"No se pudo Borrar el producto: "+nombreProducto})
                     return;
                 }
                 if(mensaje==1){
                     devolverBusquedaProducto(buscarElemento.value)
-                    Swal.fire({customclass: {confirmButton:"custombutton"},text:"El producto: "+nombreProducto+" se ha borrado",icon: "success",background:"#d6dfee"})
+                    okMensaje.fire({text:"El producto: "+nombreProducto+" se ha borrado"})
                     return; 
                 }
             }
@@ -244,12 +237,6 @@ function crearTabla() {
             buttonRemove.addEventListener("click", () => {
                 Swal.fire({
                     title: "Deseas eliminar el producto: " + x.nombre + "?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Aceptar",
-                    cancelButtonText: "Cancelar",
                 }).then((result) => {
                     if (result.isConfirmed) { borrarProducto(x.codigo, x.nombre) }
                 }
@@ -297,13 +284,3 @@ checkboxes.forEach(x=>{
     x.addEventListener("change",filtrar)
 })
 
-function mostrarCarga(){
-    let loader = document.querySelector("#cont-espera")
-    loader.style.display="block"
-}
-
-function ocualtarCarga(){
-    let loader = document.querySelector("#cont-espera")
-    loader.style.display="none"
-
-}

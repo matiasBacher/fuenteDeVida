@@ -95,7 +95,20 @@ require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/categorias.php");
         }
     
     }
+    public function actualizarCategoria(){
 
+        $sql=
+        "UPDATE categorias
+        SET NOMBRE_CATEGORIA = '{$this->buscar->getNom()}'
+        WHERE ID_CATEGORIA = {$this->buscar->getId()}";
+
+        if($this->comprobarNoRepetido())
+            return $this->conn->query($sql)?1:0;
+        else{
+            return -1;
+        }
+
+    }
 
 
 

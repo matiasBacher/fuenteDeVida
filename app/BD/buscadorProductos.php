@@ -53,7 +53,8 @@ final class buscadorProductos
                 $sqlProductos = 
                     "SELECT `productos`.`ID_PRODUCTO` as id, `productos`.`NOMBRE_PRODUCTO` as nombre,
                      `productos`.`PRECIODEVENTA_PRODUCTO` as precio, 
-                     `categorias`.`NOMBRE_CATEGORIA` as categoria, `productos`.`descripcion_producto` as descripcion
+                     `categorias`.`NOMBRE_CATEGORIA` as categoria, `productos`.`descripcion_producto` as descripcion,
+                     `productos`.`FECHA_CREACION_PRODUCTO` as fecha
                     FROM `productos` 
                         LEFT JOIN `categorias` ON `productos`.`ID_CATEGORIA` = `categorias`.`ID_CATEGORIA`
                     WHERE (`productos`.`ID_PRODUCTO` LIKE '".$this->busqueda."%' OR `productos`.`NOMBRE_PRODUCTO` LIKE '%".$this->busqueda."%');"
@@ -96,7 +97,7 @@ final class buscadorProductos
                                                                 $rowProductos->categoria,
                                                                 $rowProductos->descripcion==null?""
                                                                 :$rowProductos->descripcion,
-                                                                $propiedades) ;
+                                                                $propiedades, $rowProductos->fecha) ;
                     }
 
                     return true;

@@ -50,47 +50,103 @@ async function cargarCategorias(bandera =1){ //busca las categorias en la BD
 
 
 function dibujarCategorias(){
-    while (categoriesList.firstChild){
-        categoriesList.removeChild(categoriesList.firstChild);
-      };
+        categoriesList.innerHTML="";
+ 
 
 
     for(let i=0; i<categoriaEnMemoria.length; i++){
         let categoryItem = document.createElement("div");
         categoryItem.className = "category-item";
-        categoryItem.innerHTML = 
-        `${categoriaEnMemoria[i].nombre} 
-        <button id="btd-${categoriaEnMemoria[i].id}" 
-        value="${categoriaEnMemoria[i].nombre}"
-        class="deleteBtn">&times;</button>`;
 
-        // Agregar el nuevo elemento a la lista
-        categoriesList.appendChild(categoryItem);
+        let label = document.createElement("div")
+        label.className = "label-categoria";
+        label.innerHTML=
+        `${categoriaEnMemoria[i].nombre}`;
+        categoryItem.appendChild(label)
 
-        let deleteBtn = categoryItem.querySelector(".deleteBtn");
-        deleteBtn.addEventListener("click",(e)=>  {
-            let evento = e
-            Swal.fire({
-                title: "Deseas eliminar la categoría: " +newCategory.value.trim()+ "?",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Aceptar",
-                cancelButtonText: "Cancelar",
+        let modifyBtn= document.createElement("button");
+        modifyBtn.className = 'button button-modify'
+        modifyBtn.innerHTML = '🖊'
+
+        modifyBtn.addEventListener("click", ()=>{
+            inputPreguntaMensaje.fire({title:"cual es el nuevo nombre de la categoría?"})
+            .then(async (r)=>{
+                if (r.isConfirmed){
+                   await actualizarCategoria(categoriaEnMemoria[i].id, categoriaEnMemoria[i].nombre,r.value)
+                   await cargarCategorias()
+                }
+            })
+        })
+
+
+
+        categoryItem.appendChild(modifyBtn)
+
+
+        
+        let deleteBtn = document.createElement("button");
+        deleteBtn.className='button button-remove' 
+        deleteBtn.innerHTML='&times'
+
+      
+
+        deleteBtn.addEventListener("click",()=>  {
+            preguntaMensaje.fire({
+                title: "Deseas eliminar la categoría: " +categoriaEnMemoria[i].nombre.trim()+ "?"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    eliminarCategoria(e)
+                    eliminarCategoria(categoriaEnMemoria[i].id,categoriaEnMemoria[i].nombre)
                 }
             }
         )
 
         });
+        categoryItem.appendChild(deleteBtn)
+        // Agregar el nuevo elemento a la lista
+        categoriesList.appendChild(categoryItem);
     }
 }
-async function eliminarCategoria(e){
-    let nodo = e.target
-    let id = nodo.id.slice(4);
+async function actualizarCategoria(id, nombreViejo, nombreNuevo){
+    mostrarCarga()
+    let respuesta;
+    f=new FormData();
+    f.append("accion", "actualizar")
+    f.append("id", id)
+    f.append("nombre", nombreNuevo)
+
+    try{
+        const r = await fetch('../../app/controlador/controladorCategorias.php',
+            {method:'POST',
+            body: f});
+            if(r.ok){
+                respuesta = r.json()
+            }
+            else{
+                ocualtarCarga
+                errorMensaje.fire({text:"Error al obtener la respuesta del servidor"})
+            }
+    }
+    catch(e){
+        ocualtarCarga
+        errorMensaje.fire({text:`ERROR: ${e}`})
+    }
+    if(respuesta.mensaje==-1){
+        ocualtarCarga
+        errorMensaje.fire({text:`La categoría ${nombreNuevo} ya existe`})
+        return;
+    }
+    if(respuesta.mensaje==0){
+        ocualtarCarga
+        errorMensaje.fire({text:`No se pudo actualizar la categoria ${nombreViejo}`})         
+        return;
+    }
+    if(respuesta.mensaje==1){
+        ocualtarCarga
+        cargarCategorias();
+        okMensaje.fire({text:`La Categoria "${nombreViejo}" fue actualizada por ${nombreNuevo}`})
+        return;
+        }}
+async function eliminarCategoria(id, nombre){
     let respuesta;
     f= new FormData();
     f.append("accion", "eliminar")
@@ -105,24 +161,24 @@ async function eliminarCategoria(e){
         if(response.ok){
             respuesta = await response.json();
         } else {
-            throw new Error('Error al obtener la respuesta del servidor')
+            errorMensaje.fire({text:"Error al obtener la respuesta del servidor"})
         }
-        } catch (error) {
-            console.error('Error:', error);
+        } catch (e) {
+            errorMensaje.fire({text:`ERROR: ${e}`})
             // Manejar el error según sea necesario
         }
         if(respuesta.mensaje==-1){
-            Swal.fire({confirmButtonText:"Volver",text:`No se pudieron actualizar los productos con categoria ${nodo.value}`, background:"#d6dfee",icon: "error", showConfirmButton: false,})
+            errorMensaje.fire({text:`No se pudieron actualizar los productos con categoria ${nombre}`})
             return;
         }
         if(respuesta.mensaje==0){
-            Swal.fire({confirmButtonText:"Volver",text:`No se pudo eliminar $`, background:"#d6dfee",icon: "error", showConfirmButton: false,})         
+            errorMensaje.fire({text:`No se pudo eliminar ${nombre}`})         
             return;
         }
         if(respuesta.mensaje==1){
             cargarCategorias();
             dibujarCategorias();
-            Swal.fire({customclass: {confirmButton:"custombutton"},text:`La Categoria "${nodo.value}" fue eliminada`,icon: "success",background:"#d6dfee"})
+            okMensaje.fire({text:`La Categoria "${nombre}" fue eliminada`})
             return;
             }
 
@@ -132,7 +188,7 @@ async function insertarcategorias(nombre) {
     mostrarCarga()
     if (nombre === "") {
         ocualtarCarga()
-        Swal.fire({confirmButtonText:"Volver",text:"Por favor, ingrese un nombre de categoría.", background:"#d6dfee", showConfirmButton: false,}) 
+        advertenciaMensaje.fire({text:"Por favor, ingrese un nombre de categoría."}) 
         return;
     }
     const f = new FormData();
@@ -163,18 +219,18 @@ async function insertarcategorias(nombre) {
     let mensaje=respuesta.mensaje;
     // Verificar si la categoría ya existe
     if (mensaje == -1) {
-        Swal.fire({confirmButtonText:"Volver",text:"Esta categoría ya existe.", background:"#d6dfee",icon: "error", showConfirmButton: false,})  
+        errorMensaje.fire({text:"Esta categoría ya existe."})  
         return;
     }
 
     if (mensaje == 0) {
-        Swal.fire({confirmButtonText:"Volver",text:"error al cargar los datos en la base de datos", background:"#d6dfee",icon: "error", showConfirmButton: false,})        
+        errorMensaje.fire({text:"error al cargar los datos en la base de datos"})        
         return
     }
     if (respuesta.mensaje == 1) {
         cargarCategorias();
         dibujarCategorias();
-        Swal.fire({customclass: {confirmButton:"custombutton"},text:`La categoria "${nombre}" fue cargada correctamente`,icon: "success",background:"#d6dfee"})
+        okMensaje.fire({text:`La categoria "${nombre}" fue cargada correctamente`})
         // Limpiar el campo de entrada
         newCategory.value = "";
         return
@@ -200,14 +256,9 @@ closeModalCat.onclick = function() {
 
 // formar tablas de categorías
 addBtn.onclick = function () {
-    Swal.fire({
+    preguntaMensaje.fire({
         title: "Deseas agregar la categoría: " +newCategory.value.trim()+ "?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Aceptar",
-        cancelButtonText: "Cancelar",
+
     }).then((result) => {
         if (result.isConfirmed) {
             insertarcategorias(newCategory.value.trim())

@@ -109,6 +109,5 @@
             <script src="publico/js/addCatModal.js"></script>
             <script src="publico/js/agregarProductoModal.js"></script>
             <script src="publico/js/modificarProductoModal.js"></script>
-            <script src="publico/js/sweetalert2.all.min.js"></script>
  
 

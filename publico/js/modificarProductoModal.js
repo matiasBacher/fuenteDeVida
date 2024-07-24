@@ -71,15 +71,15 @@ const enviarModif = document.getElementById("MmodalAgregProdEnviar")
             // Manejar el error según sea necesario
         }
         if(respuesta.mensajeBorrado<0){
-            Swal.fire({confirmButtonText:"Volver",text:"No se pudo Borrar el producto", background:"#d6dfee",icon: "error", showConfirmButton: false,})            
+            errorMensaje.fire({text:"No se pudo Borrar el producto"})            
             return;
         }
         if(respuesta.mensajeGrabado<1){
-            Swal.fire({confirmButtonText:"Volver",text:"falla a grabar los productos", background:"#d6dfee",icon: "error", showConfirmButton: false,})
+            errorMensaje.fire({text:"falla a grabar los productos"})
             return
         }
         if(respuesta.mensajeGrabado==1){
-            Swal.fire({customclass: {confirmButton:"custombutton"},text:"El producto se actualizo con exito",icon: "success",background:"#d6dfee"})
+            okMensaje.fire({text:"El producto se actualizo con exito"})
             cerrarModal(modalModifPro)
        }
    

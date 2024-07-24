@@ -173,14 +173,14 @@ async function grabarProductos(){
         // Manejar el error según sea necesario
     }
     if(respuesta.mensaje==1){
-        Swal.fire({customclass: {confirmButton:"custombutton"},text:"EL PRODUCTO FUE AGREGADO",icon: "success",background:"#d6dfee"})
+        okMensaje.fire({text:"EL PRODUCTO FUE AGREGADO"})
         cargarInput("", elemAgreProd)
     }
     else if(respuesta.mensaje==0){
-        Swal.fire({confirmButtonText:"Volver",text:"Codigo del producto repetido", background:"#d6dfee",icon: "error", showConfirmButton: false,})
+        errorMensaje.fire({text:"Codigo del producto repetido"})
     }
     else{
-        Swal.fire({confirmButtonText:"Volver",text:"Codigo del producto repetido", background:"#d6dfee",icon: "error", showConfirmButton: false,})
+        Swal.fire({text:"Codigo del producto repetido"})
     }
 
 }

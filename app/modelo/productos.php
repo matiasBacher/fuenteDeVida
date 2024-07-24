@@ -8,6 +8,7 @@ class Producto implements JsonSerializable {
     private $precioDeVenta;
     private $categoria;
     private $descripcion;
+    private $fechaCreacion;
 
     private Propiedades $propiedades;
 
@@ -19,7 +20,7 @@ class Producto implements JsonSerializable {
      // Constructor
     public function __construct(int $codigo, string $nombre="", 
     int $precioDeVenta=0, string $categoria="", 
-    string $descripcion="", Propiedades $propiedades= null) {
+    string $descripcion="", Propiedades $propiedades= null, string $fechaCreacion="") {
 
         $this->codigo = $codigo;
         $this->nombre = $nombre;
@@ -27,6 +28,7 @@ class Producto implements JsonSerializable {
         $this->categoria = $categoria;
         $this->propiedades = $propiedades ?? new Propiedades();
         $this->descripcion = $descripcion;
+        $this->fechaCreacion =$fechaCreacion;
 
         
 
@@ -39,6 +41,7 @@ class Producto implements JsonSerializable {
             "categoria"=> $this->categoria,
             "propiedades"=> $this->propiedades,
             "descripcion"=> $this->descripcion,
+            "fechaCreacion"=> $this->fechaCreacion,
         ];
     }
     
@@ -83,5 +86,8 @@ class Producto implements JsonSerializable {
     }
     public function getDescripcion(){
         return $this->descripcion;
+    }
+    public function getFechaCreacion(){
+        return $this->fechaCreacion;
     }
 }

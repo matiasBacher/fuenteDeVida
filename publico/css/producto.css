@@ -398,15 +398,9 @@ input:checked + .slider:before {
     display: block;
 }
 
-#AgregarCategoria .deleteBtn:hover {
-    background-color: #c82333;
-    transform: scale(1.1);
-}
-
-#AgregarCategoria .deleteBtn:focus {
-color: black;
-text-decoration: none;
-cursor: pointer;
+.label-categoria{
+    width: 100%;
+    text-align: left;
 }
 
 #openModal {
