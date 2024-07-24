@@ -6,7 +6,7 @@
                
                 <div class="agregarCont">
                     <input type="text" id="newCategory" placeholder="Nueva categoría">
-                    <button id="addBtn">Agregar</button>
+                    <button id="addBtn" class="button">Agregar</button>
                 </div>
                 <h2>Categorías</h2>
                 <div id="categoriesList">
