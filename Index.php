@@ -46,7 +46,7 @@ session_start();
                     require_once($_SERVER['DOCUMENT_ROOT']."/app/vista/".$pagina.".php");
                 ?>
         </div>
-        
+
     <?php }
     else{
         require_once($_SERVER['DOCUMENT_ROOT']."/app/vista/".$pagina.".php");

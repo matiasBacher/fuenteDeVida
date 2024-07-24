@@ -9,16 +9,17 @@ $users = [
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $usuario = $_POST["usuario"];
     $password = $_POST["password"];
 
-    if (!isset($users[$username])) {
+    if (!isset($users[$usuario])) {
         $error = "El usuario no existe.";
-    } elseif ($users[$username] !== $password) {
+    } elseif ($users[$usuario] !== $password) {
         $error = "La contraseña es incorrecta.";
     } else {
-        $_SESSION["username"] = $username;
-        header("Location: welcome.php");
+        $_SESSION["usuario"] = $usuario;
+        $pagina="producto";
+        header("Location: index.php?p=$pagina");
         exit();
     }
 }
@@ -28,8 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login-container">
         <h1>Iniciar sesión</h1>
         <form method="POST" action="">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" required>
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required>
             <button type="submit">Ingresar</button>
