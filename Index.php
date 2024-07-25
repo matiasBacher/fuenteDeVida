@@ -37,6 +37,10 @@ session_start();
                 <a class="top" href="#">Caja</a>
                 <a class="top" href="#">Devoluciones</a>
                 <a class="top" href="#">Cliente</a>            
+                <a id="logOutCont" class="top" href="#">
+                    <?php include("publico/img/iconos/box-arrow-left.svg")?>
+                    <span>cerrar</span>
+                </a>
             </div>
 
             <div class="container">

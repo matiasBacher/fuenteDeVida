@@ -6,7 +6,6 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 50px;
     display: flex;
     justify-content: center;
     background-image:url('../img/Fondo.webp');
@@ -14,6 +13,8 @@ body {
     background-attachment:fixed;
     background-size: 100% 100%;
     color: #000000;
+    box-sizing: border-box;
+   
 }
 
 .wrapper {
@@ -30,10 +31,11 @@ body {
     border-radius: 8px;
     width: 100%;
     max-width: 1920px;
+    display: flex;
+
 }
 
 .menu a {
-    float: left;
     display: block;
     color: white;
     text-align: center;
@@ -281,4 +283,25 @@ input:checked + .slider:before {
     
     .swal2-icon-show{
         size: 30px;
+    }
+
+    .icono {
+        display: inline-block;
+        height: 20px;
+        width: auto;
+        vertical-align: middle;
+
+    }
+    #logOutCont {
+        display: flex;
+        align-items: center;
+        background-color: red;
+        box-sizing: border-box;
+        margin-left: auto;
+    }
+    /* #btnLogOut {
+    
+    } */
+    #logOutCont .icono{
+        margin-right: 5px;
     }
