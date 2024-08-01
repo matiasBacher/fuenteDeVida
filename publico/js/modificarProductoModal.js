@@ -81,6 +81,7 @@ const enviarModif = document.getElementById("MmodalAgregProdEnviar")
         if(respuesta.mensajeGrabado==1){
             okMensaje.fire({text:"El producto se actualizo con exito"})
             cerrarModal(modalModifPro)
+            eventoBuscar()
        }
    
 

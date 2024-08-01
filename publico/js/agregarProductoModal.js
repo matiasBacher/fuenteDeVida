@@ -11,6 +11,8 @@ openModalProducto.onclick = function() {
 // Cerrar la ventana flotante cuando se hace clic en la "x"
 closeModalProduct.onclick = function() {
     cerrarModal(modalProduct)
+    eventoBuscar()
+
 }
 
 elemAgreProd={
@@ -82,7 +84,7 @@ elemAgreProd["nombre"].addEventListener("blur", validarNombre);
 
      elemAgreProd["precio"].addEventListener("input", function(event){
         let input = event.target
-        aplicarSoloNumerico(target)
+        aplicarSoloNumerico(input)
      })
     precio.addEventListener("blur", validarPrecio)
     function validarPrecio() {

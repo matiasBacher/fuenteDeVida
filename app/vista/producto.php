@@ -8,6 +8,7 @@
                     <option value="categoria">Ordenar por Categoría</option>
                     <option value="codigo">Ordenar por Código</option>
                 </select>
+                <button class="button" id="allProduct">Buscar Todos</button>
             </div>
 
             <!-- ACA COMIENZA EL SWITCH -->
@@ -95,11 +96,15 @@
                         </tr>
                     </tbody>
                 </table>
+                <div id="contenedorNPro"><span>Productos encontrados: </span><span id="nProducto">0</span>
             </div>
             <div class="buttons">
                 <button class="button" id="openModalProduct">Agregar Producto</button>
                 <button class="button" id="openModalCat">Agregar Categoría</button>
             </div>
+            
+            <div class="buttons"> <button class="button" id="openPDF"><?php include($_SERVER['DOCUMENT_ROOT'].'/publico/img/iconos/file-pdf.svg') ?> Descargar Listado de todos los productos</button> </div>
+
             <?php require_once($_SERVER['DOCUMENT_ROOT'] .'/app/vista/addCatModal.php');
              require_once($_SERVER['DOCUMENT_ROOT'] .'/app/vista/agregarProductoModal.php');
              modalAgregModif(true);

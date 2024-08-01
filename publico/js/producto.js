@@ -2,7 +2,7 @@ let productosEnMemoria;
 let productosEnMemoriaSinFiltrar;
 let productoSeleccionado
 
-
+const npro = document.querySelector("#nProducto")
 
 async function devolverBusquedaProducto (busqueda){
     mostrarCarga()
@@ -135,7 +135,7 @@ async function borrarProducto(codigo, nombre){
 
 function crearTabla() {
 
-
+    npro.innerHTML= productosEnMemoria.length;
 
 
 
@@ -235,7 +235,7 @@ function crearTabla() {
             buttonRemove.className = 'button button-remove';
             buttonRemove.textContent = '✖';
             buttonRemove.addEventListener("click", () => {
-                Swal.fire({
+                preguntaMensaje.fire({
                     title: "Deseas eliminar el producto: " + x.nombre + "?",
                 }).then((result) => {
                     if (result.isConfirmed) { borrarProducto(x.codigo, x.nombre) }
@@ -284,3 +284,13 @@ checkboxes.forEach(x=>{
     x.addEventListener("change",filtrar)
 })
 
+
+const abrirpdf = document.querySelector("#openPDF")
+
+abrirpdf.addEventListener("click",()=>{abrirNuevoTab("app/vista/pdf/productoPDF.php")})
+
+
+const buscarTodo = document.querySelector("#allProduct")
+buscarTodo.addEventListener("click", ()=> {
+    devolverBusquedaProducto("")
+})
