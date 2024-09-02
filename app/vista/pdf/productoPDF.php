@@ -53,24 +53,24 @@ ob_start()
             margin-bottom: auto;
         }
 
-.product-list tr:nth-of-type(2n+1){
-    background-color: rgb(145, 168, 150);
+.product-list tr:nth-of-type(2n){
+    background-color: #d6d6d6;
 }
-.product-list tr:nth-of-type(2n) {
+/* .product-list tr:nth-of-type(2n) {
     background-color: rgb(124, 148, 128);
-}
+} */
 
 .product-list th, .product-list td {
     border: 1px solid #000000;
-    padding: 8px; 
+    padding: 2px; 
     font-size: small; 
+    text-align: center;
 }
 
 
 .product-list th {
-    background-color: #226304;
-    text-align: left;
-    color: #ffffff;
+    background-color: #a6a6a6 ;
+
 }
 .badge {
     padding: 0.35em 0.65em;
@@ -80,28 +80,10 @@ ob_start()
     vertical-align: baseline;
     border-radius: 0.375em;
     font-size: 0.75em;
-    margin: 5px 5px;
+    margin: 2px 2px;
+    border: 1px solid ;
 }
-.badgeAzul{
-    background-color: blue;
-    color: white;
-}
-.badgeRojo{
-    background-color: red;
-    color: white;
-}
-.badgeVerde{
-    background-color: green;
-    color: white;
-}
-.badgeNaranja{
-    background-color: orange;
-    color: black;
-}
-.badgeNegro{
-    background-color: black;
-    color: white;
-}
+
 
     </style>
 
