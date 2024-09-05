@@ -1,6 +1,6 @@
 export{cargarCategorias, actualizarCategoria, eliminarCategoria, insertarcategorias}
 
-async function cargarCategorias(bandera =1){ //busca las categorias en la BD
+async function cargarCategorias(){ //busca las categorias en la BD
     mostrarCarga()
     const f = new FormData();
     let categorias;
