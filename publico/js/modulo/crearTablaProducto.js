@@ -1,6 +1,9 @@
-function crearTabla(memoria,padre) {
 
-    npro.innerHTML= productosEnMemoria.length;
+import { abrirModalModificarProducto } from "../producto/modificarProductoModal";
+export{crearTabla}
+function crearTabla(memoria,padre,contador) {
+
+    contador.innerHTML= memoria.length;
 
 
 
@@ -89,9 +92,8 @@ function crearTabla(memoria,padre) {
             buttonModify.className = 'button button-modify';
             buttonModify.textContent = '🖊';
             buttonModify.addEventListener("click", () => {
-                productoSeleccionado = x
-                cargarCategorias(3)
-
+                abrirModalModificarProducto(x)
+                
 
             })
             acciones.appendChild(buttonModify);

@@ -1,8 +1,16 @@
 import { categoriaEnMemoria, grabarCategoria } from "./variablesGlobales.js";
-import{ajustarValor, validarVacio, aplicarSoloNumerico} from "../modulo/validaciones.js"
-import { cargarCategorias } from "../modulo/sincCat.js";
+import{ validarVacio, aplicarSoloNumerico} from "../modulo/validaciones.js"
 import {dibujarSelectCategorias} from "../modulo/dibujarSelectCategorias.js"
 import { modificarProducto } from "../modulo/sincProducto.js";
+import { cargarInputProducto } from "../modulo/cargarInput.js";
+export {abrirModalModificarProducto}
+
+async function abrirModalModificarProducto(producto){
+    abrirModal(modalModifPro)
+    dibujarSelectCategorias(elemModifProd.categoria, categoriaEnMemoria);
+    cargarInputProducto(producto, elemModifProd)
+
+}
 
 let isValidModif=[false]
 const modalModifPro = document.getElementById('mProducto');

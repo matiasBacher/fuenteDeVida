@@ -1,6 +1,8 @@
+import { crearTabla } from "../modulo/crearTablaProducto";
 let productosEnMemoria;
 let productosEnMemoriaSinFiltrar;
 let productoSeleccionado
+
 
 const npro = document.querySelector("#nProducto")
 
@@ -31,11 +33,7 @@ async function devolverBusquedaProducto (busqueda){
         console.error('Error:', error);
         // Manejar el error según sea necesario
     }
-    productosEnMemoriaSinFiltrar=productos
-    productosEnMemoria=productos;    
-    ordenar(false);
-    filtrar(false);
-    crearTabla();
+    return productos
    }
 
    function convertirCheckboxesAObjeto() {
@@ -50,10 +48,9 @@ async function devolverBusquedaProducto (busqueda){
     return checkboxArray;
 }
 
-function filtrar( bandera=true){
-    productosEnMemoria=productosEnMemoriaSinFiltrar;
-    let filtro = convertirCheckboxesAObjeto();
-    let productosFiltrados = productosEnMemoria.filter(x => {
+function filtrar( bandera=true, filtro, memoria, memoriaSinFiltro){
+    memoria=memoriaSinFiltro;
+    let productosFiltrados = memoria.filter(x => {
         for (let i = 0; i < filtro.length; i++) {
             if (x.propiedades[filtro[i]]) {
             }
