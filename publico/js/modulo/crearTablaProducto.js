@@ -1,9 +1,9 @@
 
-import { abrirModalModificarProducto } from "../producto/modificarProductoModal";
+import { abrirModalModificarProducto } from "../producto/modificarProductoModal.js";
+import{borrarProducto} from "../modulo/sincProducto.js"
 export{crearTabla}
-function crearTabla(memoria,padre,contador) {
+function crearTabla(memoria,padre, funcionBorrar) {
 
-    contador.innerHTML= memoria.length;
 
 
 
@@ -104,8 +104,23 @@ function crearTabla(memoria,padre,contador) {
             buttonRemove.addEventListener("click", () => {
                 preguntaMensaje.fire({
                     title: "Deseas eliminar el producto: " + x.nombre + "?",
-                }).then((result) => {
-                    if (result.isConfirmed) { borrarProducto(x.codigo, x.nombre) }
+                }).then(async (result) => {
+                    if (result.isConfirmed) { 
+                        let m=borrarProducto(x.codigo, x.nombre)
+                        if(m==-2){
+                            errorMensaje.fire({text:"Error desconocido"})                   
+                            return;
+                        }
+                        if(m==-1 || mensaje==0){
+                            errorMensaje.fire({text:"No se pudo Borrar el producto: "+nombreProducto})
+                            return;
+                        }
+                        if(m==1){
+                            funcionBorrar()
+                            okMensaje.fire({text:"El producto: "+nombreProducto+" se ha borrado"})
+                            return; 
+                        }
+                    }
                 }
                 )})
                 acciones.appendChild(buttonRemove);

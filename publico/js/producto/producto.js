@@ -1,55 +1,26 @@
-import { crearTabla } from "../modulo/crearTablaProducto";
-let productosEnMemoria;
-let productosEnMemoriaSinFiltrar;
-let productoSeleccionado
+import { crearTabla } from "../modulo/crearTablaProducto.js";
+import { productosEnMemoria, productosEnMemoriaSinFiltrar, setProductosEnMemoria, setProductosEnMemoriaSinFiltrar } from "./variablesGlobales.js";
+import { devolverBusquedaProducto, } from "../modulo/sincProducto.js";
 
 
 const npro = document.querySelector("#nProducto")
 
-async function devolverBusquedaProducto (busqueda){
-    mostrarCarga()
 
-    const f = new FormData();
-    let productos;
-    f.append("accion","busqueda")
-    f.append("busqueda", busqueda);
-    
-    
-    try {
-        const response = await fetch('../../app/controlador/controladorProductos.php', {
-            method: 'POST',
-            body: f
-        });
-        
-        if (response.ok) {
-            ocualtarCarga()
-            productos = await response.json();
-        } else {
-            ocualtarCarga()
-            throw new Error('Error al obtener la respuesta del servidor');
-        }
-    } catch (error) {
-        ocualtarCarga()
-        console.error('Error:', error);
-        // Manejar el error según sea necesario
-    }
-    return productos
-   }
 
    function convertirCheckboxesAObjeto() {
     // Seleccionar todos los hijos input[type=checkbox] dentro del elemento con id 'filter-box'
     const checkboxes = Array.from(document.querySelectorAll('#filter-box input[type="checkbox"]'));
     const checkboxArray = [];
 
-    checkboxesFiltrado = checkboxes.filter(x=>x.checked);
+    let checkboxesFiltrado = checkboxes.filter(x=>x.checked);
     checkboxesFiltrado.forEach(x=>{
         checkboxArray.push(x.id)
     })
     return checkboxArray;
 }
 
-function filtrar( bandera=true, filtro, memoria, memoriaSinFiltro){
-    memoria=memoriaSinFiltro;
+function filtrar( filtro, memoria){
+    
     let productosFiltrados = memoria.filter(x => {
         for (let i = 0; i < filtro.length; i++) {
             if (x.propiedades[filtro[i]]) {
@@ -61,13 +32,12 @@ function filtrar( bandera=true, filtro, memoria, memoriaSinFiltro){
         return true;
     }
     )
-    productosEnMemoria=productosFiltrados;
-    if(bandera){crearTabla();}
+    return productosFiltrados
 }
-function ordenar(bandera=true){
-
-    productosEnMemoria.sort((a, b) => {
         const orden = document.getElementById("orden").value;
+function ordenar( orden, memoria){
+    let x=memoria
+    x.sort((a, b) => {
         if (a[orden] < b[orden]) {
             return -1;
         }
@@ -77,63 +47,16 @@ function ordenar(bandera=true){
             return 0;
         }
     })
-    if(bandera){crearTabla();}
+    return x
 }
 
-async function borrarProducto(codigo, nombre){ 
-                 mostrarCarga()
-
-                const f = new FormData();
-                f.append("accion","borrar")
-                f.append("codigo", codigo);
-                let mensaje=-2;
-                let nombreProducto=nombre
-                
-                
-                try {
-                    const response = await fetch('../../app/controlador/controladorProductos.php', {
-                        method: 'POST',
-                        body: f
-                    });
-                    
-                    
-                    if (response.ok) {
-                        ocualtarCarga()
-                        let r= await response.json();
-                        mensaje = r.mensaje;
-
-                    } else {
-                        ocualtarCarga()
-
-                        throw new Error('Error al obtener la respuesta del servidor');
-                    }
-                } catch (error) {
-                    ocualtarCarga()
-                    console.error('Error:', error);
-                    // Manejar el error según sea necesario
-                }
-
-                if(mensaje==-2){
-                    errorMensaje.fire({text:"Error desconocido"})                   
-                    return;
-                }
-                if(mensaje==-1 || mensaje==0){
-                    errorMensaje.fire({text:"No se pudo Borrar el producto: "+nombreProducto})
-                    return;
-                }
-                if(mensaje==1){
-                    devolverBusquedaProducto(buscarElemento.value)
-                    okMensaje.fire({text:"El producto: "+nombreProducto+" se ha borrado"})
-                    return; 
-                }
-            }
-        
 
 
 
 
 
 
+const tabla = document.getElementById('product-table')
 
 const ordenElemento = document.querySelector("#orden")
 
@@ -143,15 +66,22 @@ const checkboxes = Array.from(document.querySelectorAll('#filter-box input[type=
 
 
 
-function eventoBuscar (){
+async function hacerTabla (busca="" ,b=false){
+    if(b){
+        setProductosEnMemoriaSinFiltrar(await devolverBusquedaProducto(busca))
+    }
     let orden = ordenElemento.value;
-    devolverBusquedaProducto(buscarElemento.value)
+    setProductosEnMemoria(productosEnMemoriaSinFiltrar)
+    setProductosEnMemoria(filtrar(convertirCheckboxesAObjeto(),productosEnMemoria))
+    setProductosEnMemoria(ordenar(orden,productosEnMemoria))
+
+    crearTabla(productosEnMemoria, tabla)
 }
-buscarElemento.addEventListener('keyup',eventoBuscar)
-ordenElemento.addEventListener("change", ordenar)
+buscarElemento.addEventListener('keyup',()=>hacerTabla(true,buscarElemento.value))
+ordenElemento.addEventListener("change", ()=>hacerTabla())
 
 checkboxes.forEach(x=>{
-    x.addEventListener("change",filtrar)
+    x.addEventListener("change",()=>hacerTabla())
 })
 
 
@@ -162,5 +92,5 @@ abrirpdf.addEventListener("click",()=>{abrirNuevoTab("app/vista/pdf/productoPDF.
 
 const buscarTodo = document.querySelector("#allProduct")
 buscarTodo.addEventListener("click", ()=> {
-    devolverBusquedaProducto("")
+    hacerTabla("",true)
 })

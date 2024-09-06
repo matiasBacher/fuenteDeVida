@@ -1,4 +1,4 @@
-import { categoriaEnMemoria, grabarCategoria } from "./variablesGlobales.js";
+import { categoriaEnMemoria } from "./variablesGlobales.js";
 import{ validarVacio, aplicarSoloNumerico} from "../modulo/validaciones.js"
 import {dibujarSelectCategorias} from "../modulo/dibujarSelectCategorias.js"
 import { modificarProducto } from "../modulo/sincProducto.js";
