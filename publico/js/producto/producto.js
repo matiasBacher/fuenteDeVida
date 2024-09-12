@@ -1,6 +1,7 @@
 import { crearTabla } from "../modulo/crearTablaProducto.js";
 import { productosEnMemoria, productosEnMemoriaSinFiltrar, setProductosEnMemoria, setProductosEnMemoriaSinFiltrar } from "./variablesGlobales.js";
-import { devolverBusquedaProducto, } from "../modulo/sincProducto.js";
+import { devolverBusquedaProducto } from "../modulo/sincProducto.js";
+export{hacerTabla}
 
 
 const npro = document.querySelector("#nProducto")
@@ -66,7 +67,7 @@ const checkboxes = Array.from(document.querySelectorAll('#filter-box input[type=
 
 
 
-async function hacerTabla (busca="" ,b=false){
+async function hacerTabla (b=true, busca=buscarElemento.value ){
     if(b){
         setProductosEnMemoriaSinFiltrar(await devolverBusquedaProducto(busca))
     }
@@ -77,11 +78,11 @@ async function hacerTabla (busca="" ,b=false){
 
     crearTabla(productosEnMemoria, tabla)
 }
-buscarElemento.addEventListener('keyup',()=>hacerTabla(true,buscarElemento.value))
-ordenElemento.addEventListener("change", ()=>hacerTabla())
+buscarElemento.addEventListener('keyup',()=>hacerTabla())
+ordenElemento.addEventListener("change", ()=>hacerTabla(false))
 
 checkboxes.forEach(x=>{
-    x.addEventListener("change",()=>hacerTabla())
+    x.addEventListener("change",()=>hacerTabla(false))
 })
 
 
@@ -92,5 +93,5 @@ abrirpdf.addEventListener("click",()=>{abrirNuevoTab("app/vista/pdf/productoPDF.
 
 const buscarTodo = document.querySelector("#allProduct")
 buscarTodo.addEventListener("click", ()=> {
-    hacerTabla("",true)
+    hacerTabla(undefined, "")
 })

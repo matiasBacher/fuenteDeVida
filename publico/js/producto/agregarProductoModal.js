@@ -4,6 +4,7 @@ import { cargarCategorias } from "../modulo/sincCat.js";
 import {dibujarSelectCategorias} from "../modulo/dibujarSelectCategorias.js"
 import { grabarProductos } from "../modulo/sincProducto.js";
 import { cargarInputProducto } from "../modulo/cargarInput.js";
+import { hacerTabla } from "./producto.js";
 
 
 var modalProduct = document.getElementById("aProducto");
@@ -24,7 +25,7 @@ openModalProducto.onclick = async function() {
 // Cerrar la ventana flotante cuando se hace clic en la "x"
 closeModalProduct.onclick = function() {
     cerrarModal(modalProduct)
-    eventoBuscar()
+    hacerTabla()
 
 }
 

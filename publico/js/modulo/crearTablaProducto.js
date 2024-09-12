@@ -1,6 +1,7 @@
 
 import { abrirModalModificarProducto } from "../producto/modificarProductoModal.js";
 import{borrarProducto} from "../modulo/sincProducto.js"
+import { hacerTabla } from "../producto/producto.js";
 export{crearTabla}
 function crearTabla(memoria,padre, funcionBorrar) {
 
@@ -106,18 +107,18 @@ function crearTabla(memoria,padre, funcionBorrar) {
                     title: "Deseas eliminar el producto: " + x.nombre + "?",
                 }).then(async (result) => {
                     if (result.isConfirmed) { 
-                        let m=borrarProducto(x.codigo, x.nombre)
+                        let m=await borrarProducto(x.codigo, x.nombre)
                         if(m==-2){
                             errorMensaje.fire({text:"Error desconocido"})                   
                             return;
                         }
-                        if(m==-1 || mensaje==0){
-                            errorMensaje.fire({text:"No se pudo Borrar el producto: "+nombreProducto})
+                        if(m==-1 || m==0){
+                            errorMensaje.fire({text:"No se pudo Borrar el producto: "+x.nombre})
                             return;
                         }
                         if(m==1){
-                            funcionBorrar()
-                            okMensaje.fire({text:"El producto: "+nombreProducto+" se ha borrado"})
+                            hacerTabla()
+                            okMensaje.fire({text:"El producto: "+x.nombre+" se ha borrado"})
                             return; 
                         }
                     }
