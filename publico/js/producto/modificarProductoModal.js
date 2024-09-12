@@ -1,3 +1,16 @@
+import { categoriaEnMemoria } from "./variablesGlobales.js";
+import{ validarVacio, aplicarSoloNumerico} from "../modulo/validaciones.js"
+import {dibujarSelectCategorias} from "../modulo/dibujarSelectCategorias.js"
+import { modificarProducto } from "../modulo/sincProducto.js";
+import { cargarInputProducto } from "../modulo/cargarInput.js";
+export {abrirModalModificarProducto}
+
+async function abrirModalModificarProducto(producto){
+    abrirModal(modalModifPro)
+    dibujarSelectCategorias(elemModifProd.categoria, categoriaEnMemoria);
+    cargarInputProducto(producto, elemModifProd)
+
+}
 
 let isValidModif=[false]
 const modalModifPro = document.getElementById('mProducto');
@@ -5,7 +18,7 @@ const closeModifPro = document.getElementById('McloseModalAddProduct');
 
 
 
-elemModifProd={
+let elemModifProd={
     codigo: document.getElementById('Mcodigo'),
     precio: document.getElementById('Mprecio'),
     nombre: document.getElementById('MnombreProducto'),
@@ -13,7 +26,7 @@ elemModifProd={
     categoria:  document.getElementById('Mcategoria'),
     propiedades: Array.from(document.querySelectorAll('#Mcaracteristicas input[type="checkbox"]'))
 }
-elemModifProdErr={
+let elemModifProdErr={
     codigo: document.getElementById('McodigoError'),
     precio: document.getElementById('MprecioError'),
     nombre: document.getElementById('MnombreProductoError'),
@@ -31,61 +44,36 @@ modifElemAValid.forEach(x=>{
     x.addEventListener("blur", f)
     arrayFunc.push(f)
 })
+aplicarSoloNumerico(elemModifProd.precio);
 
 closeModifPro.addEventListener("click", ()=>{
     cerrarModal(modalModifPro)
 })
 const MproductForm= document.getElementById("MproductoForm")
 const enviarModif = document.getElementById("MmodalAgregProdEnviar")
- enviarModif.addEventListener('click',  ()=>{
+ enviarModif.addEventListener('click',  async ()=>{
     validarTodo(arrayFunc)
-    if(isValidModif[0]){modificarProducto()}
- })
- function MdibujarSelect(){
-    hacerSelect(elemModifProd.categoria)
-}
- async function modificarProducto(){ //busca las categorias en la BD
-    mostrarCarga()
-
-    const f = new FormData(MproductForm);
-    let categorias;
-    f.append("accion", "actualizar");
-    f.append("codigo", productoSeleccionado.codigo)
-
-    try {
-        const response = await fetch('../../app/controlador/controladorProductos.php',
-            {method:'POST',
-            body: f}
-        );
-
-        if(response.ok){
-            respuesta = await response.json();
-            ocualtarCarga()
-        } else {
-            ocualtarCarga()
-            throw new Error('Error al obtener la respuesta del servidor')
-        }
-        } catch (error) {
-            ocualtarCarga
-            console.error('Error:', error);
-            // Manejar el error según sea necesario
-        }
-        if(respuesta.mensajeBorrado<0){
+    if(isValidModif[0]){
+        let m = await modificarProducto()
+ 
+ 
+        if(m.mensajeBorrado<0){
             errorMensaje.fire({text:"No se pudo Borrar el producto"})            
             return;
         }
-        if(respuesta.mensajeGrabado<1){
+        if(m.mensajeGrabado<1){
             errorMensaje.fire({text:"falla a grabar los productos"})
             return
         }
-        if(respuesta.mensajeGrabado==1){
+        if(m.mensajeGrabado==1){
             okMensaje.fire({text:"El producto se actualizo con exito"})
             cerrarModal(modalModifPro)
             eventoBuscar()
        }
+    }})
    
 
-        }
+        
 
 
 

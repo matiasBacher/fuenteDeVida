@@ -110,9 +110,9 @@
              modalAgregModif(true);
              modalAgregModif(false);
             ?>
-            <script src="publico/js/producto.js"></script>
-            <script src="publico/js/addCatModal.js"></script>
-            <script src="publico/js/agregarProductoModal.js"></script>
-            <script src="publico/js/modificarProductoModal.js"></script>
+            <script type="module" src="publico/js/producto/producto.js"></script>
+            <script type="module" src="publico/js/producto/addCatModal.js"></script>
+            <script type="module" src="publico/js/producto/agregarProductoModal.js"></script>
+            <script type="module" src="publico/js/producto/modificarProductoModal.js"></script>
  
 
