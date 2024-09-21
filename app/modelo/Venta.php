@@ -1,7 +1,9 @@
 <?php 
+namespace modelo;
+use modelo\DetalleVenta;
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/vendor/autoload.php");
-use doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 
 
@@ -10,12 +12,14 @@ use doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+
+
 #[ORM\Entity]
 #[ORM\Table(name: "ventas")]
 class Venta
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "IDENTITY")]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(name: "ID_VENTA", type: "integer")]
     private ?int $id = null;
 
@@ -41,16 +45,17 @@ class Venta
     #[ORM\JoinColumn(name: "ventaAnterior", referencedColumnName: "ID_VENTA", nullable: true, onDelete: "SET NULL")]
     private ?self $ventaAnterior = null;
 
-    #[ORM\OneToMany(mappedBy: "venta", targetEntity: DetalleDeVenta::class, cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(mappedBy: "venta", targetEntity: DetalleVenta::class, cascade: ["persist", "remove"])]
     private Collection $detalles;
 
     // Constructor
-    public function __construct(?array $detalles = null)
+    public function __construct(?string $metodoPago=null, ?array $detalles = null, 
+    ?\DateTime $fecha=null, ?\DateTime $hora=null, bool $errorVenta=false,  )
     {
-        $this->fecha = new \DateTime();  // Inicializa con la fecha actual
-        $this->hora = new \DateTime();   // Inicializa con la hora actual
-        $this->errorVenta = false;
-        $this->metodoPago = 'Efectivo';
+        $this->fecha = $fecha?? new \DateTime();  // Inicializa con la fecha actual
+        $this->hora = $hora?? new \DateTime();   // Inicializa con la hora actual
+        $this->errorVenta = $errorVenta;
+        $this->metodoPago = $metodoPago??'Efectivo';
         $this->detalles = new ArrayCollection();  // Inicializa la colección de detalles
 
         // Si se pasan detalles en el constructor, los añadimos a la colección
@@ -63,7 +68,7 @@ class Venta
 
     // Métodos para manejar la relación con DetalleDeVenta
 
-    public function addDetalle(DetalleDeVenta $detalle): self
+    public function addDetalle(DetalleVenta $detalle): self
     {
         if (!$this->detalles->contains($detalle)) {
             $this->detalles->add($detalle);
@@ -72,7 +77,7 @@ class Venta
         return $this;
     }
 
-    public function removeDetalle(DetalleDeVenta $detalle): self
+    public function removeDetalle(DetalleVenta $detalle): self
     {
         if ($this->detalles->contains($detalle)) {
             $this->detalles->removeElement($detalle);

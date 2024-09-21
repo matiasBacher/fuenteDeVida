@@ -1,17 +1,50 @@
 <?php
+namespace modelo;
 
-require_once($_SERVER['DOCUMENT_ROOT']."\app\modelo\propiedades.php");
+require_once($_SERVER['DOCUMENT_ROOT']."\app\modelo\Propiedades.php");
 
-class Producto implements JsonSerializable {
-    private $codigo;
-    private $nombre;
-    private $precioDeVenta;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+use modelo\Propiedades;
+#[ORM\Entity()]
+#[ORM\Table(name: "productos")]
+class Producto implements \JsonSerializable {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: 'ID_PRODUCTO', type: 'integer')]
+    private int $codigo;
+    #[ORM\Column(name: 'NOMBRE_PRODUCTO', type: 'string', length: 250, nullable: true)]
+    private ?string $nombre = null;
+
+    #[ORM\Column(name: 'PRECIODEVENTA_PRODUCTO', type: 'integer', nullable: true)]
+    private ?int $precioDeVenta = null;
+
+    #[ORM\Column(name: 'GANANCIA_PRODUCTO', type: 'integer', nullable: true)]
+    private ?int $gananciaProducto = null;
+
+
     private $categoria;
+    #[ORM\ManyToOne(targetEntity: categorias::class)]
+    #[ORM\JoinColumn(name: "ID_CATEGORIA", referencedColumnName: "ID_CATEGORIA", nullable: true)]
+    private ?categorias $cat=null;
+
+    #[ORM\Column(name: 'descripcion_producto', type: 'string', length: 255, nullable: true)]
     private $descripcion;
-    private $fechaCreacion;
+
+    #[ORM\Column(name: 'FECHA_CREACION_PRODUCTO', type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private \DateTime $fechaCreacion;
 
     private Propiedades $propiedades;
 
+    #[ORM\JoinTable(name: "propiedades_productos")] // Tabla intermedia
+    #[ORM\JoinColumn(name: "ID_PRODUCTO", referencedColumnName: "ID_PRODUCTO")]
+    #[ORM\InverseJoinColumn(name: "ID_PROPIEDADES", referencedColumnName: "ID_PROPIEDADES")]
+    #[ORM\ManyToMany(targetEntity: Propiedad::class)]
+    
+    private Collection $conjuntoPropiedades;
 
     
 
@@ -28,7 +61,7 @@ class Producto implements JsonSerializable {
         $this->categoria = $categoria;
         $this->propiedades = $propiedades ?? new Propiedades();
         $this->descripcion = $descripcion;
-        $this->fechaCreacion =$fechaCreacion;
+        $this->fechaCreacion =new \DateTime($fechaCreacion ?: 'now');
 
         
 
@@ -41,8 +74,7 @@ class Producto implements JsonSerializable {
             "categoria"=> $this->categoria,
             "propiedades"=> $this->propiedades,
             "descripcion"=> $this->descripcion,
-            "fechaCreacion"=> $this->fechaCreacion,
-        ];
+            'fechaCreacion' => $this->fechaCreacion->format('Y-m-d H:i:s'),        ];
     }
     
     // Métodos getter y setter
@@ -88,6 +120,6 @@ class Producto implements JsonSerializable {
         return $this->descripcion;
     }
     public function getFechaCreacion(){
-        return $this->fechaCreacion;
+        return $this->fechaCreacion->format('d-m-Y');
     }
 }

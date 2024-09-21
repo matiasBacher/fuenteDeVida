@@ -1,13 +1,14 @@
 <?php 
+use modelo\categorias;
 require_once($_SERVER['DOCUMENT_ROOT']."\app\config\conectioBd.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/categorias.php");
   class categoriasBD {
 
     private $conn;
-    private Categoria $buscar;
+    private categorias $buscar;
     private $categoriaEncontrada=[];
 
-    public function __construct(Categoria $buscar) {
+    public function __construct(categorias $buscar) {
         $this->buscar = $buscar;
         $this->conn = new mysqli(conectioBD::getServer(),conectioBD::getUser(),conectioBD::getPsw(),conectioBD::getBd());
     }
@@ -32,7 +33,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/categorias.php");
         $this->categoriaEncontrada=[];
         if($resultados->num_rows > 0){
             while($fila = $resultados->fetch_assoc()){
-                $filaObjeto=new Categoria($fila["id"],$fila["nombre"]) ;
+                $filaObjeto=new categorias($fila["id"],$fila["nombre"]) ;
                 $this->categoriaEncontrada[]=$filaObjeto;
             }
 
@@ -49,7 +50,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/categorias.php");
         $resultado = $this->conn->query($sql);
         if($resultado->num_rows > 0){
             $r= $resultado->fetch_assoc();
-            $this->categoriaEncontrada[]=new Categoria($r["id"],$r['nombre']);
+            $this->categoriaEncontrada[]=new categorias($r["id"],$r['nombre']);
            }
            else{
                return;
@@ -76,7 +77,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/categorias.php");
         $resultado = $this->conn->query($sql);
         if($resultado->num_rows > 0){
         $r= $resultado->fetch_assoc();
-        $this->categoriaEncontrada[]=new Categoria($r["id"],$r['nombre']);
+        $this->categoriaEncontrada[]=new categorias($r["id"],$r['nombre']);
         }
         else{
             return;

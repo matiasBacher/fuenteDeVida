@@ -1441,17 +1441,17 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v5.4.42",
-            "version_normalized": "5.4.42.0",
+            "version": "v5.4.44",
+            "version_normalized": "5.4.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "6f5f750692bd5a212e01a4f1945fd856bceef89e"
+                "reference": "4b3e7bf157b8b5a010865701d9106b5f0a9c99a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/6f5f750692bd5a212e01a4f1945fd856bceef89e",
-                "reference": "6f5f750692bd5a212e01a4f1945fd856bceef89e",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/4b3e7bf157b8b5a010865701d9106b5f0a9c99a8",
+                "reference": "4b3e7bf157b8b5a010865701d9106b5f0a9c99a8",
                 "shasum": ""
             },
             "require": {
@@ -1489,7 +1489,7 @@
                 "symfony/messenger": "^4.4|^5.0|^6.0",
                 "symfony/var-dumper": "^4.4|^5.0|^6.0"
             },
-            "time": "2024-07-10T06:02:18+00:00",
+            "time": "2024-09-13T16:57:39+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1521,7 +1521,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v5.4.42"
+                "source": "https://github.com/symfony/cache/tree/v5.4.44"
             },
             "funding": [
                 {
@@ -2598,17 +2598,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v5.4.43",
-            "version_normalized": "5.4.43.0",
+            "version": "v5.4.44",
+            "version_normalized": "5.4.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "62f96e1cfd4cf518882a36bfedcf1fe4093c1299"
+                "reference": "7025b964f123bbf1896d7563db6ec7f1f63e918a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/62f96e1cfd4cf518882a36bfedcf1fe4093c1299",
-                "reference": "62f96e1cfd4cf518882a36bfedcf1fe4093c1299",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7025b964f123bbf1896d7563db6ec7f1f63e918a",
+                "reference": "7025b964f123bbf1896d7563db6ec7f1f63e918a",
                 "shasum": ""
             },
             "require": {
@@ -2625,7 +2625,7 @@
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
             },
-            "time": "2024-08-11T17:40:32+00:00",
+            "time": "2024-09-16T14:36:56+00:00",
             "bin": [
                 "Resources/bin/yaml-lint"
             ],
@@ -2656,7 +2656,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v5.4.43"
+                "source": "https://github.com/symfony/yaml/tree/v5.4.44"
             },
             "funding": [
                 {

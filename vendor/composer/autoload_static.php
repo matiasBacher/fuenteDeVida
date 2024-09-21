@@ -18,6 +18,10 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
     );
 
     public static $prefixLengthsPsr4 = array (
+        'm' => 
+        array (
+            'modelo\\' => 7,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -67,6 +71,10 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
     );
 
     public static $prefixDirsPsr4 = array (
+        'modelo\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/modelo',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -194,10 +202,6 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
         ),
     );
 
-    public static $fallbackDirsPsr0 = array (
-        0 => __DIR__ . '/../..' . '/app',
-    );
-
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -215,7 +219,6 @@ class ComposerStaticInitac2d307f4ed514763a8119f3523066bb
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitac2d307f4ed514763a8119f3523066bb::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitac2d307f4ed514763a8119f3523066bb::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr0 = ComposerStaticInitac2d307f4ed514763a8119f3523066bb::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInitac2d307f4ed514763a8119f3523066bb::$classMap;
 
         }, null, ClassLoader::class);

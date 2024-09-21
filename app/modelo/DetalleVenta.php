@@ -1,12 +1,12 @@
 <?php
-
+namespace modelo;
 require_once($_SERVER["DOCUMENT_ROOT"]."/vendor/autoload.php");
 
-use doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "detalledeventas")]
-class DetalleDeVenta
+class DetalleVenta
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,11 +23,15 @@ class DetalleDeVenta
     #[ORM\JoinColumn(name: "ID_VENTA", referencedColumnName: "ID_VENTA", nullable: false, onDelete: "CASCADE")]
     private ?Venta $venta = null;
 
-    #[ORM\ManyToOne(targetEntity: Producto::class)]
-    #[ORM\JoinColumn(name: "ID_LOTE", referencedColumnName: "ID_PRODUCTO", nullable: false)]
-    private ?Producto $producto = null;
+    // #[ORM\ManyToOne(targetEntity: Producto::class)]
+    // #[ORM\JoinColumn(name: "ID_LOTE", referencedColumnName: "ID_PRODUCTO", nullable: false)]
+    // private ?Producto $producto = null;
 
     // Getters y setters
+    public function __construct(int $cantidad=1, int $idProducto){
+        $this->cantidad=$cantidad;
+        $this->idLote=$idProducto;
+    }
 
     public function getIdVenta(): int
     {
