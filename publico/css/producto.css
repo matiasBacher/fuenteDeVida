@@ -40,8 +40,6 @@
     display: block;      
 }
 
-
-
 .product-list table {
     width: 100%;
     border-collapse: collapse;
@@ -90,9 +88,11 @@
 .buttons {
     text-align: center;
 }
+
 .product-list {
     min-height: 500px;
 }
+
 .badge {
     padding: 0.35em 0.65em;
     display: inline-block;
