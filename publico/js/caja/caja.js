@@ -1,13 +1,15 @@
 import{devolverBusquedaProducto}  from "../modulo/sincProducto.js"; 
-import { hacerTabla } from "../producto/producto.js";
+import { tablaDeProducto } from "./tablaDeProducto.js";
+
 let productoMemoria = [];
 
 const buscador = document.querySelector ("#buscador");
 
+const tablaProducto = document.querySelector ("#product-table");
+
 buscador.addEventListener('keyup', async () => {
     productoMemoria = await devolverBusquedaProducto(buscador.value)
-    
-    
+    tablaDeProducto (productoMemoria,tablaProducto)
 } )
 
 

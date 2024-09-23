@@ -12,13 +12,12 @@
     <!-- Mostrar productos encontrados -->
     <div class="product-list">
         <h2>Productos</h2>
-        <table>
+        <table id="tablaDeCaja">
             <thead>
                 <tr>
                     <th>Código</th>
                     <th>Producto</th>
-                    <th>Categoría</th>
-                    <th>Cantidad</th>
+                    <th>Categoría</th>                    
                     <th>Precio Unitario</th>
                     <th>Acciones</th>
                 </tr>
@@ -27,13 +26,7 @@
             <tbody id="product-table">
                         <!-- Aquí se pueden añadir filas con productos -->
                         <tr>
-                            <!-- <td colspan="7">Escriba algo en buscador</td> -->
-                            <td>1</td>
-                            <td>maiz</td>
-                            <td>cereales</td>
-                            <td>100</td>
-                            <td>20</td>
-                            <td><button class="button">agregar</button></td>
+                           <td colspan="7">Escriba algo en buscador</td>                            
                         </tr>
                     </tbody>        
         </table>
