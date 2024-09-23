@@ -1,4 +1,5 @@
 <?php
+use modelo\Producto;
 require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/Venta.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/DetalleVenta.php");
@@ -14,7 +15,9 @@ if(isset ($_POST["accion"])){
         $detallesventa = []; 
         foreach($detalleVentaJson as $detalle){
 
-            $detallesventa[]=new DetalleVenta( $detalle->cantidad, $detalle->id) ;
+            $detallesventa[]=new DetalleVenta(
+            $detalle->cantidad, 
+            $entityManager->find(Producto::class, $detalle->id)) ;
         }
 
         $venta= new Venta($_POST["metodo"], $detallesventa);
@@ -22,34 +25,40 @@ if(isset ($_POST["accion"])){
             $entityManager->persist($venta);
         }
         catch(Exception $e) {
-            return json_encode([
+            echo json_encode([
                 "mensaje"=>-2
-            ]);    
+            ]); 
+            exit();
+
         }
         try{
             $entityManager->flush();
         }
         catch(Exception $e){
-            return json_encode(
+            echo json_encode(
                 [
                     "mensaje"=>-1
                 ]
                 );
+                exit();
         } 
-            return json_encode([
+            echo json_encode([
                 "mensaje"=>1
             ]);
+            exit();
         }
     }
     if($_POST["accion"]=="registrarModificacionVenta"){
-        $ventaAnterior=$entityManager->find(Venta::class,$_Post["idVentaModificar"]);
+        $ventaAnterior=$entityManager->find(Venta::class,$_POST["idVentaModificar"]);
         $ventaAnterior->setErrorVenta(true);         
 
         $detalleVentaJson = json_decode($_POST["detalleVenta"]);
         $detallesventa = []; 
         foreach($detalleVentaJson as $detalle){
 
-            $detallesventa[]=new DetalleVenta( $detalle->cantidad, $detalle->id) ;
+            $detallesventa[]=new DetalleVenta( 
+                $detalle->cantidad,
+                $entityManager->find(Producto::class, $detalle->id)) ;
         }
 
         $venta= new Venta($_POST["metodo"], $detallesventa);
@@ -62,29 +71,34 @@ if(isset ($_POST["accion"])){
 
         }
         catch(Exception $e) {
-            return json_encode([
+            echo json_encode([
                 "mensaje"=>-2
-            ]);    
+            ]);
+            exit();
         }
         try{
             $entityManager->flush();
         }
         catch(Exception $e){
-            return json_encode(
+            echo json_encode(
                 [
                     "mensaje"=>-1
                 ]
                 );
+                exit();
         } 
-            return json_encode([
+            echo json_encode([
                 "mensaje"=>1
             ]);
+            exit();
         }
     if($_POST["accion"]=="consultarVentas"){
         $ventas=$entityManager->getRepository(Venta::class)->findBy([
             "errorVenta"=>false,
         ]);
-        return json_encode($ventas); 
+        echo json_encode($ventas);
+        exit();
+
     }
     if($_POST["accion"]=="consultarVentasCorregidas"){
         $ultimaVenta=$entityManager->find(Venta::class, $_POST["ultimo"]);
@@ -95,5 +109,6 @@ if(isset ($_POST["accion"])){
             $puntero=$puntero->getVentaAnterior();
 
         }
-        return json_encode($ventasAnteriores);
+        echo json_encode($ventasAnteriores);
+        exit();
     }

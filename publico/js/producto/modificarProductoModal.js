@@ -3,6 +3,7 @@ import{ validarVacio, aplicarSoloNumerico} from "../modulo/validaciones.js"
 import {dibujarSelectCategorias} from "../modulo/dibujarSelectCategorias.js"
 import { modificarProducto } from "../modulo/sincProducto.js";
 import { cargarInputProducto } from "../modulo/cargarInput.js";
+import { abrirModal,cerrarModal } from "../modulo/mensajesYCargas.js";
 export {abrirModalModificarProducto}
 
 async function abrirModalModificarProducto(producto){

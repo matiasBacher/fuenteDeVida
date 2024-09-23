@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "detalledeventas")]
-class DetalleVenta
+class DetalleVenta implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
+    #[ORM\Column(name: "ID_DETALLe", type: "integer")]
+    private int $id;
     #[ORM\Column(name: "ID_VENTA", type: "integer")]
     private int $idVenta;
 
@@ -23,14 +25,29 @@ class DetalleVenta
     #[ORM\JoinColumn(name: "ID_VENTA", referencedColumnName: "ID_VENTA", nullable: false, onDelete: "CASCADE")]
     private ?Venta $venta = null;
 
-    // #[ORM\ManyToOne(targetEntity: Producto::class)]
-    // #[ORM\JoinColumn(name: "ID_LOTE", referencedColumnName: "ID_PRODUCTO", nullable: false)]
-    // private ?Producto $producto = null;
+    #[ORM\Column(name: "precioFecha", type:"integer", nullable:false, options:["unsigned" => true])]
+    private int $precio; 
+
+    #[ORM\ManyToOne(targetEntity: Producto::class)]
+    #[ORM\JoinColumn(name: "ID_LOTE", referencedColumnName: "ID_PRODUCTO")]
+    private ?Producto $producto = null;
 
     // Getters y setters
-    public function __construct(int $cantidad=1, int $idProducto){
+    public function __construct(int $cantidad=1, Producto $producto){
         $this->cantidad=$cantidad;
-        $this->idLote=$idProducto;
+        $this->producto=$producto;
+        $this->precio=$producto->getPrecioDeVenta();
+    }
+    public function jsonSerialize(){
+        return[
+            "id"=> $this->getID(),
+            "precio"=> $this->getPrecio(),
+            "cantidad"=> $this->getCantidad(),
+            "producto"=> $this->getProducto(),
+        ];
+    }
+    public function getID(){
+        return $this->id;
     }
 
     public function getIdVenta(): int
@@ -81,4 +98,8 @@ class DetalleVenta
         $this->producto = $producto;
         return $this;
     }
+
+public function getPrecio():int {
+    return $this->precio;
+}
 }

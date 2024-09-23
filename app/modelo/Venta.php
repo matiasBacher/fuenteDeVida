@@ -14,9 +14,10 @@ use Doctrine\Common\Collections\Collection;
 
 
 
+
 #[ORM\Entity]
 #[ORM\Table(name: "ventas")]
-class Venta
+class Venta implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
@@ -41,11 +42,11 @@ class Venta
     #[ORM\Column(name: "motivoCorreccion", type: "string", length: 250, nullable: true)]
     private ?string $motivoCorreccion = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\ManyToOne(targetEntity: self::class, fetch:"EAGER")]
     #[ORM\JoinColumn(name: "ventaAnterior", referencedColumnName: "ID_VENTA", nullable: true, onDelete: "SET NULL")]
     private ?self $ventaAnterior = null;
 
-    #[ORM\OneToMany(mappedBy: "venta", targetEntity: DetalleVenta::class, cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(mappedBy: "venta", targetEntity: DetalleVenta::class, cascade: ["persist", "remove"], fetch: "EAGER")]
     private Collection $detalles;
 
     // Constructor
@@ -87,7 +88,18 @@ class Venta
         }
         return $this;
     }
-
+    public function jsonSerialize(){
+        return [
+            "id"=> $this->getId(),
+            "detalles"=> $this->getDetalles(),
+            "fecha"=> $this->getFecha(),
+            "hora"=> $this->getHora(),
+            "tieneCorrecciones"=>$this->tieneCorreccion(),
+            "motivoCorreccion"=>$this->getMotivoCorreccion(),
+            "metodoPago"=>$this->getMetodoPago(),
+            "total"=>$this->getTotal(),
+        ];
+    } 
     public function getDetalles(): Collection
     {
         return $this->detalles;
@@ -175,5 +187,15 @@ class Venta
     {
         $this->ventaAnterior = $ventaAnterior;
         return $this;
+    }
+    public function tieneCorreccion(){
+        return $this->ventaAnterior===null;
+    }
+    public function getTotal(){
+        $total = 0;
+        foreach($this->detalles->getIterator() as $detalle){
+            $total+=$detalle->getPrecio();
+        }
+        return $total; 
     }
 }
