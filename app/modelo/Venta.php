@@ -1,6 +1,7 @@
 <?php 
 namespace modelo;
 use modelo\DetalleVenta;
+use modelo\MedioPago;
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/vendor/autoload.php");
 use Doctrine\ORM\Mapping as ORM;
@@ -32,9 +33,9 @@ class Venta implements \JsonSerializable
 
     #[ORM\Column(name: "HORA_VENTA", type: "time", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTime $hora;
-
-    #[ORM\Column(name: "METODODEPAGO_VENTA", type: "string", length: 250)]
-    private string $metodoPago;
+    #[ORM\ManyToOne(targetEntity: MedioPago::class)]
+    #[ORM\JoinColumn(name: 'mediopago_id', referencedColumnName: 'id', nullable: false)]
+    private MedioPago $medioPago;
 
     #[ORM\Column(name: "ERROR_VENTA", type: "boolean")]
     private bool $errorVenta;
