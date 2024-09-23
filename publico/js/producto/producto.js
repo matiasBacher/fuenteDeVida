@@ -2,6 +2,8 @@ import { crearTabla } from "../modulo/crearTablaProducto.js";
 import { productosEnMemoria, productosEnMemoriaSinFiltrar, setProductosEnMemoria, setProductosEnMemoriaSinFiltrar } from "./variablesGlobales.js";
 import { devolverBusquedaProducto } from "../modulo/sincProducto.js";
 export{hacerTabla}
+import {mostrarCarga, ocualtarCarga } from "../modulo/mensajesYCargas.js";
+import { abrirNuevoTab } from "../main.js";
 
 
 const npro = document.querySelector("#nProducto")

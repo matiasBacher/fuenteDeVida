@@ -1,6 +1,7 @@
 import { categoriaEnMemoria, grabarCategoria } from "./variablesGlobales.js";
-import { cargarCategorias, actualizarCategoria, eliminarCategoria, insertarcategorias} from "../modulo/sincCat.js";
+import { cargarCategorias,  insertarcategorias} from "../modulo/sincCat.js";
 import { dibujarCategorias } from "../modulo/dibujarCategorias.js";
+import {okMensaje, errorMensaje, preguntaMensaje, cerrarModal  } from "../modulo/mensajesYCargas.js";
 
 
 // Obtener los elementos del DOM

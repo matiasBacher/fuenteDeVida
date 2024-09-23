@@ -1,6 +1,7 @@
 <?php
 
-class Propiedades implements JsonSerializable  {
+namespace modelo;
+class Propiedades implements \JsonSerializable  {
     private bool $esDiuretico = false;
     private bool $sinSodio = false;
     private bool $esNatural = false;

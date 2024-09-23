@@ -1,5 +1,5 @@
 export{cargarCategorias, actualizarCategoria, eliminarCategoria, insertarcategorias}
-
+import { mostrarCarga,ocualtarCarga } from "./mensajesYCargas.js";
 async function cargarCategorias(){ //busca las categorias en la BD
     mostrarCarga()
     const f = new FormData();
@@ -7,7 +7,7 @@ async function cargarCategorias(){ //busca las categorias en la BD
     f.append("accion", "buscarTodo");
 
     try {
-        const response = await fetch('../../app/controlador/controladorCategorias.php',
+        const response = await fetch('app/controlador/controladorCategorias.php',
             {method:'POST',
             body: f}
         );
