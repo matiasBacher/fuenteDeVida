@@ -18,7 +18,7 @@
                     <th>Código</th>
                     <th>Producto</th>
                     <th>Categoría</th>
-                    <th>Cantidad/Peso</th>
+                    <th>Cantidad</th>
                     <th>Precio Unitario</th>
                     <th>Acciones</th>
                 </tr>
@@ -27,8 +27,13 @@
             <tbody id="product-table">
                         <!-- Aquí se pueden añadir filas con productos -->
                         <tr>
-                            <td colspan="7">Escriba algo en buscador</td>
-                         
+                            <!-- <td colspan="7">Escriba algo en buscador</td> -->
+                            <td>1</td>
+                            <td>maiz</td>
+                            <td>cereales</td>
+                            <td>100</td>
+                            <td>20</td>
+                            <td><button class="button">agregar</button></td>
                         </tr>
                     </tbody>        
         </table>
@@ -51,44 +56,47 @@
             </thead>
             <tbody id="listaCarrito"></tbody>
         </table>
-        <label>Total: $<span id="totalCarrito">0.00</span></label>
+        <label class="totalCarrito">Total: $<span id="totalCarrito">0.00</span></label>
     </div>
 
     <!-- Método de pago -->
     <div class="metodo-pago">
-        <select id="orden">
-            <option value="Efectivo">Efectivo</option>
-            <option value="Tarjeta de Débito">Tarjeta de Débito</option>
-            <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-            <option value="QR">QR</option>
-        </select>
+        <div class= "mdp"> <p> Medio de pago: </p></div>
+            <select id="orden">       
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                <option value="QR">QR</option>
+            </select>
         <button class="cobrar">Cobrar</button>
     </div>
 </div>
 
 <!-- Modal para resumen de compra -->
-<div id="modal-resumen" class="modal">
-    <div class="modal-contenido">
-        <h2>Resumen de la Compra</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody id="resumen-compra"></tbody>
-        </table>
-        <div>
-            <p>Total: $<span id="resumen-total"></span></p>
-            <p>Medio de pago: <span id="resumen-metodo-pago"></span></p>
-        </div>
-        <div class="acciones">
-            <button id="registrar">Registrar</button>
-            <button id="registrar-imprimir">Registrar e Imprimir</button>
-            <button id="cancelar">Cancelar</button>
+ <div class="fondoModal">
+    <div class="modal-content" id="modal-resumen">
+        <div class="modal-list">
+            <h2>Resumen de la Compra</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-compra"></tbody>
+            </table>
+            <div>
+                <p>Total: $<span id="resumen-total"></span></p>
+                <p> Medio de pago: <span id="resumen-metodo-pago"></span></p>
+            </div>
+            <div class="acciones">
+                <button class= "button" id="registrar">Registrar</button>
+                <button class= "button" id="registrar-imprimir">Registrar e Imprimir</button>
+                <button class= "button" id="cancelar">Cancelar</button>
+            </div>
         </div>
     </div>
 </div>

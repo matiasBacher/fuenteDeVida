@@ -130,10 +130,18 @@
 }
 
 
+.totalCarrito{
+    margin-left: 4px;
+}
+
 /*--------------------------metodo de pago--------------------------*/
+.mdp {
+    height: 2px;
+    margin-left: 4px;
+}
 
 .metodo-pago select {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-right: 20px;
@@ -157,4 +165,58 @@
 .cobrar:hover {
     filter: brightness(150%);
     transform: scale(1.02);
+}
+
+
+/*--------------------------Modal para resumen de compra--------------------------*/
+
+.modal-list table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 20px;
+    caption-side: bottom;
+    color: #000000;
+    text-align:left;
+    letter-spacing: 1px;
+}
+
+.modal-list thead, .modal-list tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    box-sizing: border-box;
+}
+
+.modal-list th, .modal-list td, .cart th, .cart td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.modal-list tr:nth-of-type(2n+1){
+    background-color: rgb(145, 168, 150);
+}
+.modal-list tr:nth-of-type(2n) {
+    background-color: rgb(124, 148, 128);
+}
+
+.modal-list th, .modal-list td {
+    border: 1px solid #000000;
+    padding: 8px;  
+}
+
+.modal-list tr:hover{
+    background-color:#86d694 ;
+}
+
+.modal-list th {
+    background-color: #226304;
+    text-align: left;
+    color: #ffffff;
+}
+
+#resumen-compra{
+    overflow-y:scroll;
+    max-height: 800px;
+    display: block;
 }
