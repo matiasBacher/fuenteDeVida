@@ -1,4 +1,5 @@
 export {grabarProductos, modificarProducto, borrarProducto, devolverBusquedaProducto}
+import {mostrarCarga, ocualtarCarga  } from "./mensajesYCargas.js";
 async function grabarProductos(form){
     mostrarCarga()
 

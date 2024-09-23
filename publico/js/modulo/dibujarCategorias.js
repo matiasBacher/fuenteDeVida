@@ -1,3 +1,5 @@
+import { actualizarCategoria, eliminarCategoria, cargarCategorias} from "./sincCat.js";
+import { categoriaEnMemoria, grabarCategoria } from "../producto/variablesGlobales.js";
 export {dibujarCategorias }
 function dibujarCategorias(padre, memoria){
     padre.innerHTML="";
@@ -26,8 +28,8 @@ for(let i=0; i<memoria.length; i++){
         .then(async (r)=>{
             if (r.isConfirmed){
                let m=await actualizarCategoria(id, r.value)
-               categoriaEnMemoria=await cargarCategorias()
-               dibujarCategorias()
+               grabarCategoria(await cargarCategorias())
+               dibujarCategorias(padre, categoriaEnMemoria)
                if(m==-1){
                 errorMensaje.fire({text:`La categoría ${r.value} ya existe`})
                 return;
@@ -69,8 +71,8 @@ for(let i=0; i<memoria.length; i++){
                     errorMensaje.fire({text:`No se pudo eliminar ${nombre}`})         
                 }
                 else if(m==1){
-                    categoriaEnMemoria=await cargarCategorias();
-                    dibujarCategorias();
+                    grabarCategoria(await cargarCategorias());
+                    dibujarCategorias(padre, categoriaEnMemoria);
                     okMensaje.fire({text:`La Categoria "${nombre}" fue eliminada`})
                     }
         

@@ -1,5 +1,6 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/productos.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/Producto.php");
+use modelo\Producto;
 require_once($_SERVER["DOCUMENT_ROOT"]."/app/config/conectioBD.php");
 final class insertarProducto
 {

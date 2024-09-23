@@ -45,7 +45,7 @@ session_start();
 
             <div class="container">
                 <script src="publico/js/sweetalert2.all.min.js"></script>
-                <script src="/publico/js/main.js"></script>
+                <script type="module" src="/publico/js/main.js"></script>
                 <?php 
                     require_once($_SERVER['DOCUMENT_ROOT']."/app/vista/".$pagina.".php");
                 ?>
