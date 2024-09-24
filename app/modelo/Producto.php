@@ -72,7 +72,7 @@ class Producto implements \JsonSerializable {
             "nombre"=> $this->nombre,
             "precio"=> $this->precioDeVenta,
             "categoria"=> $this->categoria,
-            "propiedades"=> $this->propiedades,
+            "propiedades"=> $this->propiedades??$this->conjuntoPropiedades,
             "descripcion"=> $this->descripcion,
             'fechaCreacion' => $this->fechaCreacion->format('Y-m-d H:i:s'),        ];
     }
