@@ -1,4 +1,5 @@
 <?php
+use modelo\MedioPago;
 use modelo\Producto;
 require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/Venta.php");
@@ -20,7 +21,7 @@ if(isset ($_POST["accion"])){
             $entityManager->find(Producto::class, $detalle->id)) ;
         }
 
-        $venta= new Venta($_POST["metodo"], $detallesventa);
+        $venta= new Venta($entityManager->find(MedioPago::class, $_POST["metodo"]), $detallesventa);
         try{
             $entityManager->persist($venta);
         }
@@ -93,9 +94,22 @@ if(isset ($_POST["accion"])){
             exit();
         }
     if($_POST["accion"]=="consultarVentas"){
-        $ventas=$entityManager->getRepository(Venta::class)->findBy([
-            "errorVenta"=>false,
-        ]);
+        $filtro=json_decode($_POST["filtro"], false);
+        $ventas=$entityManager->getRepository(Venta::class)->createQueryBuilder("v")
+        ->where("v.errorVenta = false")
+        ->andWhere("v.total <= :maxT")
+        ->andWhere("v.total >= :minT")
+        ->andWhere("v.fecha <= :fin")
+        ->andWhere("v.fecha >= :principio")
+        ->andWhere("v.medioPago IN (:medioPago)")
+        ->setParameters([
+            "minT"=>$filtro->minimo,
+            "maxT"=>$filtro->maximo,
+            "principio"=>$filtro->inicio,
+            "fin"=>$filtro->final,
+            "medioPago"=>$filtro->mediosDePago])
+        ->getQuery()
+        ->getResult();
         echo json_encode($ventas);
         exit();
 

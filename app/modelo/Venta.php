@@ -1,11 +1,13 @@
 <?php 
 namespace modelo;
 use modelo\DetalleVenta;
+use modelo\MedioPago;
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/vendor/autoload.php");
 use Doctrine\ORM\Mapping as ORM;
 
 
+require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 
 
 
@@ -32,9 +34,9 @@ class Venta implements \JsonSerializable
 
     #[ORM\Column(name: "HORA_VENTA", type: "time", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTime $hora;
-
-    #[ORM\Column(name: "METODODEPAGO_VENTA", type: "string", length: 250)]
-    private string $metodoPago;
+    #[ORM\ManyToOne(targetEntity: MedioPago::class)]
+    #[ORM\JoinColumn(name: 'METODODEPAGO_VENTA', referencedColumnName: 'id', nullable: false)]
+    private MedioPago $medioPago;
 
     #[ORM\Column(name: "ERROR_VENTA", type: "boolean")]
     private bool $errorVenta;
@@ -49,14 +51,17 @@ class Venta implements \JsonSerializable
     #[ORM\OneToMany(mappedBy: "venta", targetEntity: DetalleVenta::class, cascade: ["persist", "remove"], fetch: "EAGER")]
     private Collection $detalles;
 
+    #[ORM\Column("total",type:"integer")]
+    private int $total;
+
     // Constructor
-    public function __construct(?string $metodoPago=null, ?array $detalles = null, 
+    public function __construct(MedioPago $metodoPago, ?array $detalles = null, 
     ?\DateTime $fecha=null, ?\DateTime $hora=null, bool $errorVenta=false,  )
     {
         $this->fecha = $fecha?? new \DateTime();  // Inicializa con la fecha actual
         $this->hora = $hora?? new \DateTime();   // Inicializa con la hora actual
         $this->errorVenta = $errorVenta;
-        $this->metodoPago = $metodoPago??'Efectivo';
+        $this->metodoPago = $metodoPago;
         $this->detalles = new ArrayCollection();  // Inicializa la colección de detalles
 
         // Si se pasan detalles en el constructor, los añadimos a la colección
@@ -65,6 +70,7 @@ class Venta implements \JsonSerializable
                 $this->addDetalle($detalle);
             }
         }
+        $this->total = $this->getTotal();
     }
 
     // Métodos para manejar la relación con DetalleDeVenta
@@ -91,13 +97,13 @@ class Venta implements \JsonSerializable
     public function jsonSerialize(){
         return [
             "id"=> $this->getId(),
-            "detalles"=> $this->getDetalles(),
-            "fecha"=> $this->getFecha(),
+            "detalles"=> $this->getDetalles()->toArray(),
+            "fecha"=> $this->getFecha()->format("Y-m-d"),
             "hora"=> $this->getHora(),
             "tieneCorrecciones"=>$this->tieneCorreccion(),
             "motivoCorreccion"=>$this->getMotivoCorreccion(),
             "metodoPago"=>$this->getMetodoPago(),
-            "total"=>$this->getTotal(),
+            "total"=>$this->getTotalEnFecha(),
         ];
     } 
     public function getDetalles(): Collection
@@ -147,12 +153,12 @@ class Venta implements \JsonSerializable
 
     public function getMetodoPago(): string
     {
-        return $this->metodoPago;
+        return $this->medioPago->getNombre();
     }
 
-    public function setMetodoPago(string $metodoPago): self
+    public function setMetodoPago(MedioPago $metodoPago)
     {
-        $this->metodoPago = $metodoPago;
+        $this->medioPago= $metodoPago;
         return $this;
     }
 
@@ -197,5 +203,8 @@ class Venta implements \JsonSerializable
             $total+=$detalle->getPrecio();
         }
         return $total; 
+    }
+    public function getTotalEnFecha(){
+        return $this->total;
     }
 }

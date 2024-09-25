@@ -1,9 +1,10 @@
 
 import { mostrarCarga, ocualtarCarga, errorMensaje } from "./mensajesYCargas.js";
 export{consultarVentas, altaVenta, consultarVentasCorregidas, registrarModVenta}
-async function consultarVentas(){
+async function consultarVentas(filtro){
 const f = new FormData();
 f.append("accion", "consultarVentas" )
+f.append("filtro", JSON.stringify(filtro))
 let mensaje;
 let ventas;
 mostrarCarga()
@@ -15,7 +16,7 @@ try{
     })
     if(r.ok){
         ocualtarCarga();
-        ventas= await r.text();
+        ventas= await r.json();
         return ventas
     }
     else{
