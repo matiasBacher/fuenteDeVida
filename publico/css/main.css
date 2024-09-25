@@ -49,7 +49,9 @@ body {
     color: black;
     transform: scale(1.10);
 }
-
+.menuSeleccionado{
+    border-bottom: solid 3px ;
+}
 .container {
     margin-top: 20px;
     background-color: rgb(145, 168, 150);
