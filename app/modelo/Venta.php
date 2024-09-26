@@ -34,6 +34,7 @@ class Venta implements \JsonSerializable
 
     #[ORM\Column(name: "HORA_VENTA", type: "time", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTime $hora;
+
     #[ORM\ManyToOne(targetEntity: MedioPago::class)]
     #[ORM\JoinColumn(name: 'METODODEPAGO_VENTA', referencedColumnName: 'id', nullable: false)]
     private MedioPago $medioPago;
@@ -55,13 +56,13 @@ class Venta implements \JsonSerializable
     private int $total;
 
     // Constructor
-    public function __construct(MedioPago $metodoPago, ?array $detalles = null, 
+    public function __construct(MedioPago $medioPago, ?array $detalles = null, 
     ?\DateTime $fecha=null, ?\DateTime $hora=null, bool $errorVenta=false,  )
     {
         $this->fecha = $fecha?? new \DateTime();  // Inicializa con la fecha actual
         $this->hora = $hora?? new \DateTime();   // Inicializa con la hora actual
         $this->errorVenta = $errorVenta;
-        $this->metodoPago = $metodoPago;
+        $this->medioPago = $medioPago;
         $this->detalles = new ArrayCollection();  // Inicializa la colección de detalles
 
         // Si se pasan detalles en el constructor, los añadimos a la colección

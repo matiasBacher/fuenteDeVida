@@ -1,7 +1,7 @@
 <?php
 final class conectioBD 
 {
-    static private $server = "localhost";
+    static private $server = "localhost:3307";
     static private $user = "root";
     static private $psw = "";
     static private $bd = "fvpr2";

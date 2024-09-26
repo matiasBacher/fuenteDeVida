@@ -12,6 +12,8 @@ function tablaDeProducto(productos, padre){
     <td>${producto.precio}</td>
     <td><button class="button">agregar</button></td>
 `;
+    fila.querySelector(".button").objeto=producto;
+
     padre.appendChild(fila)
 });
 

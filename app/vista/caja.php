@@ -1,5 +1,8 @@
-<body>
+<?php
+use  modelo\MedioPago;
 
+$arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->findAll();
+?>
 <div class="container">
     <!-- Buscador de productos -->
     <div class="search-bar">
@@ -40,8 +43,7 @@
                 <tr>
                     <th>Código</th>
                     <th>Producto</th>
-                    <th>Categoría</th>
-                    <th>Cantidad/Peso</th>
+                    <th>Precio</th>
                     <th>Cantidad</th>
                     <th>Total</th>
                     <th>Acciones</th>
@@ -49,24 +51,27 @@
             </thead>
             <tbody id="listaCarrito"></tbody>
         </table>
-        <label class="totalCarrito">Total: $<span id="totalCarrito">0.00</span></label>
+        <label class="totalCarrito">Total: $<span id="totalCarrito" class="total">0.00</span></label>
     </div>
 
     <!-- Método de pago -->
     <div class="metodo-pago">
         <div class= "mdp"> <p> Medio de pago: </p></div>
-            <select id="orden">       
-                <option value="Efectivo">Efectivo</option>
-                <option value="Tarjeta de Débito">Tarjeta de Débito</option>
-                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-                <option value="QR">QR</option>
+            <select id="orden">
+            <?php foreach($arrayMedioPagos as $medioPago):?>       
+                <option value='<?=
+                "[{$medioPago->getId()},\"{$medioPago->getNombre()}\"]"
+                ?>'>
+                    <?=$medioPago->getNombre()?>
+                </option>
+            <?php endforeach;?>
             </select>
-        <button class="cobrar">Cobrar</button>
+        <button id="cobrar" class="button">Cobrar</button>
     </div>
 </div>
 
 <!-- Modal para resumen de compra -->
- <div class="fondoModal">
+ <div class="fondoModal" id="resumenVenta">
     <div class="modal-content" id="modal-resumen">
         <div class="modal-list">
             <h2>Resumen de la Compra</h2>

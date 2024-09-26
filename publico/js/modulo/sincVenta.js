@@ -47,8 +47,8 @@ async function altaVenta(metodoPago, detalleVenta ){
 
         if(r.ok){
             ocualtarCarga();
-            mensaje= await r.json().mensaje;
-            return mensaje;
+            mensaje= await r.json();
+            return mensaje.mensaje;
         }
         else{
             ocualtarCarga()
@@ -117,7 +117,7 @@ async function consultarVentasCorregidas(idVentaConsultar){
         }
         else{
             ocualtarCarga();
-            errorMensaje.fire({Text:"error al colsultar las ventas"});
+            errorMensaje.fire({tit:"error al colsultar las ventas"});
         }
     }
         catch{

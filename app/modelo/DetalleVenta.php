@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class DetalleVenta implements \JsonSerializable
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue()]
     #[ORM\Column(name: "ID_DETALLe", type: "integer")]
     private int $id;
     #[ORM\Column(name: "ID_VENTA", type: "integer")]
