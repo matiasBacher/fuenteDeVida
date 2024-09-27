@@ -66,10 +66,13 @@ $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->
                 </option>
             <?php endforeach;?>
             </select>
-        <button id="cobrar" class="button">Cobrar</button>
+        <button id="<?=!isset($modicarActivado)?"cobrar":"registrarModificacion"?>" class="button">
+            <?=!isset($modicarActivado)?"Cobrar":"registrar"?>
+        </button>
     </div>
 </div>
-
+<?php
+if(!isset($modicarActivado)):?>
 <!-- Modal para resumen de compra -->
  <div class="fondoModal" id="resumenVenta">
     <div class="modal-content" id="modal-resumen">
@@ -98,6 +101,7 @@ $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->
         </div>
     </div>
 </div>
+<?php endif?>
 
 <script type="module" src="publico/js/caja/caja.js"></script>
 </body>

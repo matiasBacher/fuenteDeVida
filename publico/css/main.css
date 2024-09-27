@@ -1,6 +1,7 @@
 *{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
+    scrollbar-width:thin
 }
 *::-webkit-scrollbar {
     width: 4px;
@@ -12,7 +13,6 @@
   *::-webkit-scrollbar-thumb {
     background-color: blue;
     border-radius: 20px;
-    border: 3px solid orange;
     width: 12px;
   }
 body {
