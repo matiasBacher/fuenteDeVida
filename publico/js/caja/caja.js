@@ -115,6 +115,7 @@ buscador.addEventListener('keyup', async () => {
         }
     })
 
+    //registrar venta
     botonRegistrarVenta.addEventListener("click", async ()=>{
        let mensaje = await altaVenta(JSON.parse(selectMedioPago.value)[0], productoCarrito)
        console.log(mensaje)

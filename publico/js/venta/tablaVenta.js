@@ -11,6 +11,7 @@ function  tablaVentas(ventas){
 function hacerCuadroVenta(venta){
     let cuadroVenta = document.createElement("div")
     cuadroVenta.classList.add("ventaCuadro")
+    cuadroVenta.venta=venta
 
     let contenedorEncabezadoVenta= document.createElement("div")
     contenedorEncabezadoVenta.classList.add("contenedorEncabezado")

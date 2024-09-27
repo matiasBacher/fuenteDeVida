@@ -3,7 +3,7 @@ use  modelo\MedioPago;
 
 $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->findAll();
 ?>
-<div class="container">
+<div class="<?=!isset($modificarActivo)?"container":"modal-content"?>">
     <!-- Buscador de productos -->
     <div class="search-bar">
         <form class="form" method="POST" action="">
@@ -66,13 +66,13 @@ $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->
                 </option>
             <?php endforeach;?>
             </select>
-        <button id="<?=!isset($modicarActivado)?"cobrar":"registrarModificacion"?>" class="button">
-            <?=!isset($modicarActivado)?"Cobrar":"registrar"?>
+        <button id="<?=!isset($modificarActivo)?"cobrar":"registrarModificacion"?>" class="button">
+            <?=!isset($modificarActivo)?"Cobrar":"registrar"?>
         </button>
     </div>
 </div>
 <?php
-if(!isset($modicarActivado)):?>
+if(!isset($modificarActivo)):?>
 <!-- Modal para resumen de compra -->
  <div class="fondoModal" id="resumenVenta">
     <div class="modal-content" id="modal-resumen">

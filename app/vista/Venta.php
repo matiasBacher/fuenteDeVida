@@ -59,5 +59,13 @@ $paso=intdiv(($precioMaximo-$precioMinimo), 100)
     </div>
     <div id="ventas">
     </div>
+    <div id="modalModificarVenta" class="fondoModal">
+        <?php
+            
+            $modificarActivo=true;
+
+            require($_SERVER['DOCUMENT_ROOT']."/app/vista/Venta");
+        ?>
+    </div>
 </div>
 <script type="module" src="publico/js/venta/venta.js"></script>
