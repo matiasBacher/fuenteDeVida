@@ -113,7 +113,6 @@ if(isset ($_POST["accion"])){
         ->getQuery()
         ->getResult();
         echo json_encode($ventas);
-        exit();
 
     }
     if($_POST["accion"]=="consultarVentasCorregidas"){
