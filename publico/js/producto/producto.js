@@ -1,11 +1,12 @@
 import { crearTabla } from "../modulo/crearTablaProducto.js";
-import { productosEnMemoria, productosEnMemoriaSinFiltrar, setProductosEnMemoria, setProductosEnMemoriaSinFiltrar } from "./variablesGlobales.js";
+import { productosEnMemoria, productosEnMemoriaSinFiltrar, setProductosEnMemoria, setProductosEnMemoriaSinFiltrar, grabarCategoria } from "./variablesGlobales.js";
 import { devolverBusquedaProducto } from "../modulo/sincProducto.js";
 export{hacerTabla}
 import {mostrarCarga, ocualtarCarga } from "../modulo/mensajesYCargas.js";
 import { abrirNuevoTab } from "../main.js";
+import{cargarCategorias} from "../modulo/sincCat.js"
 
-
+grabarCategoria(await cargarCategorias())
 const npro = document.querySelector("#nProducto")
 
 
@@ -79,6 +80,7 @@ async function hacerTabla (b=true, busca=buscarElemento.value ){
     setProductosEnMemoria(ordenar(orden,productosEnMemoria))
 
     crearTabla(productosEnMemoria, tabla)
+    npro.textContent=productosEnMemoria.length
 }
 buscarElemento.addEventListener('keyup',()=>hacerTabla())
 ordenElemento.addEventListener("change", ()=>hacerTabla(false))

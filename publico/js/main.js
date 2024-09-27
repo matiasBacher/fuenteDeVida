@@ -1,4 +1,4 @@
-
+import { preguntaMensaje } from "./modulo/mensajesYCargas.js"
 export{abrirNuevoTab}
 const botonCerrarSeccion = document.getElementById("logOutCont")
 botonCerrarSeccion.addEventListener("click", ()=>{

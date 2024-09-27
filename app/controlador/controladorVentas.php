@@ -18,12 +18,13 @@ if(isset ($_POST["accion"])){
 
             $detallesventa[]=new DetalleVenta(
             $detalle->cantidad, 
-            $entityManager->find(Producto::class, $detalle->id)) ;
+            $entityManager->find(Producto::class, $detalle->codigo)) ;
         }
 
         $venta= new Venta($entityManager->find(MedioPago::class, $_POST["metodo"]), $detallesventa);
         try{
             $entityManager->persist($venta);
+            
         }
         catch(Exception $e) {
             echo json_encode([
@@ -38,7 +39,8 @@ if(isset ($_POST["accion"])){
         catch(Exception $e){
             echo json_encode(
                 [
-                    "mensaje"=>-1
+                    "mensaje"=>-1,
+                    "error"=>$e->getMessage()
                 ]
                 );
                 exit();
@@ -111,7 +113,6 @@ if(isset ($_POST["accion"])){
         ->getQuery()
         ->getResult();
         echo json_encode($ventas);
-        exit();
 
     }
     if($_POST["accion"]=="consultarVentasCorregidas"){

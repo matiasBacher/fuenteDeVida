@@ -2,11 +2,18 @@
 require_once($_SERVER['DOCUMENT_ROOT']."\bootstrap.php");
 $pagina = "";
 
+#en futuro hacer la variable dinamica por medio del tipo usuario
+$paginaDisponible=[
+                    "producto",
+                    "caja",
+                    "venta"
+];
+
 session_start();
            if (!isset($_SESSION["usuario"])) {
             $pagina="login";}
             elseif (!isset($_GET["p"])) {
-            $pagina="producto";
+            $pagina=$paginaDisponible[0];
             }
             else{
                 $pagina = $_GET["p"];
@@ -30,14 +37,10 @@ session_start();
         <div class="wrapper">
         
             <div class="menu">            
-                <a class="top menuSeleccionado" href="#">Proveedores</a>
-                <a class="top" href="#">Inventario</a>
-                <a class="top" href="#">Productos</a>
-                <a class="top" href="#">Pedidos</a>
-                <a class="top" href="#">Ventas</a>
-                <a class="top" href="#">Caja</a>
-                <a class="top" href="#">Devoluciones</a>
-                <a class="top" href="#">Cliente</a>            
+                <?php 
+                foreach($paginaDisponible as $p):?>
+                    <a class="top<?=$pagina==$p?" menuSeleccionado":""?>" href="index.php?p=<?=$p?>"><?=$p?></a>
+                <?php endforeach?>
                 <a id="logOutCont" class="top" href="#">
                     <?php include("publico/img/iconos/box-arrow-left.svg")?>
                     <span>cerrar</span>

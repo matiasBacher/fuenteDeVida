@@ -11,6 +11,7 @@ function  tablaVentas(ventas){
 function hacerCuadroVenta(venta){
     let cuadroVenta = document.createElement("div")
     cuadroVenta.classList.add("ventaCuadro")
+    cuadroVenta.venta=venta
 
     let contenedorEncabezadoVenta= document.createElement("div")
     contenedorEncabezadoVenta.classList.add("contenedorEncabezado")
@@ -18,17 +19,17 @@ function hacerCuadroVenta(venta){
     let numVenta = document.createElement("div")
     numVenta.classList.add("numVenta")
     numVenta.classList.add("encabezadoVenta")
-    numVenta.innerText=venta.id
+    numVenta.innerHTML=`<b>Nº Venta:</b> ${venta.id}`
 
     let fecha = document.createElement("div")
     fecha.classList.add("fechaVenta")
     fecha.classList.add("encabezadoVenta")
-    fecha.innerText=venta.fecha
+    fecha.innerHTML=`<b>Fecha:</b> ${venta.fecha}`
 
     let medioPago = document.createElement("div")
     medioPago.classList.add("medioPagoVenta")
     medioPago.classList.add("encabezadoVenta")
-    medioPago.innerText=venta.metodoPago
+    medioPago.innerHTML=`<b>Medio pago:</b> ${venta.metodoPago}`
 
     contenedorEncabezadoVenta.appendChild(numVenta)
     contenedorEncabezadoVenta.appendChild(fecha)
@@ -37,7 +38,7 @@ function hacerCuadroVenta(venta){
     let contenedorTotal = document.createElement("div")
     contenedorTotal.classList.add("contenedorTotal")
     let textoTotal = document.createElement("p")
-    textoTotal.innerText=venta.total
+    textoTotal.innerHTML=`<b>Total:</b> $${venta.total}`
     contenedorTotal.appendChild(textoTotal)
 
     const contenedorBotones = document.createElement("div")

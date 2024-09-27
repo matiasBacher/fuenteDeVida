@@ -1,8 +1,21 @@
 *{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
+    scrollbar-width:thin;
+    scrollbar-gutter: stable;
 }
+*::-webkit-scrollbar {
+    width: 4px;
+    position: absolute;
+    overflow: visible;
 
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 20px;
+    width: 12px;
+  }
 body {
     font-family: Arial, sans-serif;
     margin: 0;

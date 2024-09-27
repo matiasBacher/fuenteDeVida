@@ -8,7 +8,7 @@ class MedioPago
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer',  name:"id")]
+    #[ORM\Column(type: 'integer',  name:"id", )]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 250, name:"nombre")]
