@@ -30,7 +30,7 @@ session_start();
         <div class="wrapper">
         
             <div class="menu">            
-                <a class="top" href="#">Proveedores</a>
+                <a class="top menuSeleccionado" href="#">Proveedores</a>
                 <a class="top" href="#">Inventario</a>
                 <a class="top" href="#">Productos</a>
                 <a class="top" href="#">Pedidos</a>

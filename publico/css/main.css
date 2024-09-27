@@ -50,7 +50,8 @@ body {
     transform: scale(1.10);
 }
 .menuSeleccionado{
-    border-bottom: solid 3px ;
+    border-bottom: solid 3px ; 
+    
 }
 .container {
     margin-top: 20px;

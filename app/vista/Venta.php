@@ -11,10 +11,9 @@ $precioMinimo = $entityManager->getRepository(entityName: Venta::class)
 
 $paso=intdiv(($precioMaximo-$precioMinimo), 100)
 ?>
-<div>
-    <div id="filtrosVentasCont">
+<body>
         <div class="filtroVenta">
-            <div class="tituloFiltroVenta"><h1>Fecha</h1></div>
+            <div class="tituloFiltroVenta"><h2>Fecha</h2></div>
             <div>
                 <div class="elementoFiltro">
                     <label for="desde">desde</label>
@@ -27,7 +26,7 @@ $paso=intdiv(($precioMaximo-$precioMinimo), 100)
             </div>
         </div>
         <div class="filtroVenta">
-            <div class="tituloFiltroVenta">Medio Pago</div>
+            <div class="tituloFiltroVenta"> <h2> Medio Pago</h2></div>
             <?php foreach($arrayMedioPagos as $m):?>
                 <div class="elementoFiltro">
                     <div class="comSwitch">
@@ -54,10 +53,7 @@ $paso=intdiv(($precioMaximo-$precioMinimo), 100)
                     max="<?=$precioMaximo?>" value="<?=$precioMaximo?>" step="<?=$paso?>">
                 </div>
             </div>
-
-
-    </div>
-    <div id="ventas">
-    </div>
-</div>
+            <div id="ventas">
+        </div>
+</body>
 <script type="module" src="publico/js/venta/venta.js"></script>
