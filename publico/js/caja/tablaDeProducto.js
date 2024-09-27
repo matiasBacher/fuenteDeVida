@@ -10,7 +10,7 @@ function tablaDeProducto(productos, padre){
     <td>${producto.nombre}</td>
     <td>${producto.categoria}</td>
     <td>${producto.precio}</td>
-    <td><button class="button">agregar</button></td>
+    <td><button class="button">Agregar</button></td>
 `;
     fila.querySelector(".button").objeto=producto;
 

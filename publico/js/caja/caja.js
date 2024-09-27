@@ -126,10 +126,10 @@ buscador.addEventListener('keyup', async () => {
        tablaDeProducto(productoMemoria, tablaProducto)
        ponerTotales()
        if(mensaje==1){
-            okMensaje.fire({text:"venta registrada"})
+            okMensaje.fire({text:"Venta registrada"})
        }
        else{
-        errorMensaje.fire({text:"venta no registrada"})
+        errorMensaje.fire({text:"Venta no registrada"})
        }
 
     }
