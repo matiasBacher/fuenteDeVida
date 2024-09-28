@@ -21,7 +21,7 @@ function tablaCarrito( padre, carritoMemoria){
 
             let botonQuitar = document.createElement("button")
             botonQuitar.classList.add("button", "button-remove")
-            botonQuitar.innerText="quitar"
+            botonQuitar.innerText="Quitar"
             botonQuitar.objeto=producto
             
             tr.appendChild(hacerCelda(botonQuitar))

@@ -75,7 +75,7 @@ $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->
 if(!isset($modificarActivo)):?>
 <!-- Modal para resumen de compra -->
  <div class="fondoModal" id="resumenVenta">
-    <div class="modal-content" id="modal-resumen">
+    <div class="modal-contentCaja" id="modal-resumen">
         <div class="modal-list">
             <h2>Resumen de la Compra</h2>
             <table>
@@ -90,8 +90,8 @@ if(!isset($modificarActivo)):?>
                 <tbody id="resumen-compra"></tbody>
             </table>
             <div>
-                <p>Total: $<span id="resumen-total"></span></p>
-                <p> Medio de pago: <span id="resumen-metodo-pago"></span></p>
+                <p id="totalResumen">Total a Pagar: $<span id="resumen-total"></span></p>
+                <p id="totalResumen"> Medio de pago: <span id="resumen-metodo-pago"></span></p>
             </div>
             <div class="acciones">
                 <button class= "button" id="registrar">Registrar</button>
