@@ -62,10 +62,11 @@ if(isset ($_POST["accion"])){
 
             $detallesventa[]=new DetalleVenta( 
                 $detalle->cantidad,
-                $entityManager->find(Producto::class, $detalle->id)) ;
+                $entityManager->find(Producto::class, $detalle->codigo)) ;
         }
+        $medioPago=$entityManager->find(MedioPago::class, intval($_POST["metodo"]));
 
-        $venta= new Venta($_POST["metodo"], $detallesventa);
+        $venta= new Venta($medioPago, $detallesventa);
         $venta->setVentaAnterior($ventaAnterior);
         $venta->setMotivoCorreccion($_POST["motivoCorreccionVenta"]);
         try{

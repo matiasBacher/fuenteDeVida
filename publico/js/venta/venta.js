@@ -1,5 +1,6 @@
 import{consultarVentas} from "../../../publico/js/modulo/sincVenta.js"
 import { tablaVentas } from "./tablaVenta.js"
+export{recargarTabla}
 const rangoMinimo = document.getElementById("rangoMinimo")
 const rangoMaximo = document.getElementById("rangoMaximo")
 

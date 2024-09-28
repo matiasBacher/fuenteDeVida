@@ -82,7 +82,7 @@ async function registrarModVenta(idVentaMod, metodoPagoNew, detalleVentaNew, Raz
 
         if(r.ok){
             ocualtarCarga();
-            mensaje= await r.json().mensaje;
+            mensaje= await r.json()
             return mensaje;
         }
         else{
