@@ -24,7 +24,7 @@ if(isset ($_POST["accion"])){
         echo json_encode($repuesta);
     }
     if($_POST["accion"]== "actualizar") {
-        $codigo=$_POST["codigo"];
+        $codigo=intval($_POST["codigo"]);
         $mensajeBorrado=controladorProductos::borrarProducto($codigo);
        if($mensajeBorrado==1) {
             controladorProductos::setProductoAGrabar($_POST);

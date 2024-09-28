@@ -6,6 +6,7 @@ import { grabarProductos } from "../modulo/sincProducto.js";
 import { cargarInputProducto } from "../modulo/cargarInput.js";
 import { hacerTabla } from "./producto.js";
 import { abrirModal,cerrarModal } from "../modulo/mensajesYCargas.js";
+import { okMensaje, errorMensaje } from "../modulo/mensajesYCargas.js";
 
 var modalProduct = document.getElementById("aProducto");
 var openModalProducto = document.getElementById("openModalProduct");

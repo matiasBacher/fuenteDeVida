@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."\app\modelo\propiedades.php");
 require_once($_SERVER['DOCUMENT_ROOT']."\app\BD\buscadorProductos.php");
 require_once($_SERVER['DOCUMENT_ROOT']."\app\BD\insertarProducto.php");
 use modelo\Producto;
+use modelo\Propiedades;
 final class controladorProductos 
 {
     private static $prodoductosEncontrados = [];

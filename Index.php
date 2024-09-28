@@ -4,16 +4,16 @@ $pagina = "";
 
 #en futuro hacer la variable dinamica por medio del tipo usuario
 $paginaDisponible=[
-                    "producto",
-                    "caja",
-                    "venta"
+                    ["producto","Productos"],
+                    ["caja","Caja"],
+                    ["venta","Ventas"]
 ];
 
 session_start();
            if (!isset($_SESSION["usuario"])) {
             $pagina="login";}
             elseif (!isset($_GET["p"])) {
-            $pagina=$paginaDisponible[0];
+            $pagina=$paginaDisponible[0][0];
             }
             else{
                 $pagina = $_GET["p"];
@@ -39,7 +39,8 @@ session_start();
             <div class="menu">            
                 <?php 
                 foreach($paginaDisponible as $p):?>
-                    <a class="top<?=$pagina==$p?" menuSeleccionado":""?>" href="index.php?p=<?=$p?>"><?=$p?></a>
+                    <a class="top<?=$pagina==$p[0]?" menuSeleccionado":""?>" 
+                    href="index.php?p=<?=$p[0]?>"><?=$p[1]?></a>
                 <?php endforeach?>
                 <a id="logOutCont" class="top" href="#">
                     <?php include("publico/img/iconos/box-arrow-left.svg")?>

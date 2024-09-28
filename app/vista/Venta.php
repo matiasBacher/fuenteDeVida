@@ -63,8 +63,9 @@ $paso=intdiv(($precioMaximo-$precioMinimo), 100)
             
             $modificarActivo=true;
 
-            require($_SERVER['DOCUMENT_ROOT']."/app/vista/Venta");
+            include_once($_SERVER['DOCUMENT_ROOT']."/app/vista/caja.php");
         ?>
     </div>
 </div>
 <script type="module" src="publico/js/venta/venta.js"></script>
+

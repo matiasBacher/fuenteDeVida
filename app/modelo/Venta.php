@@ -105,6 +105,7 @@ class Venta implements \JsonSerializable
             "motivoCorreccion"=>$this->getMotivoCorreccion(),
             "metodoPago"=>$this->getMetodoPago(),
             "total"=>$this->getTotalEnFecha(),
+            "idMedioPago"=>$this->medioPago->getId(),
         ];
     } 
     public function getDetalles(): Collection

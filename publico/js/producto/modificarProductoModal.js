@@ -3,8 +3,10 @@ import{ validarVacio, aplicarSoloNumerico} from "../modulo/validaciones.js"
 import {dibujarSelectCategorias} from "../modulo/dibujarSelectCategorias.js"
 import { modificarProducto } from "../modulo/sincProducto.js";
 import { cargarInputProducto } from "../modulo/cargarInput.js";
-import { abrirModal,cerrarModal } from "../modulo/mensajesYCargas.js";
+import { abrirModal,cerrarModal, okMensaje, errorMensaje } from "../modulo/mensajesYCargas.js";
+import { hacerTabla } from "./producto.js";
 export {abrirModalModificarProducto}
+
 
 async function abrirModalModificarProducto(producto){
     abrirModal(modalModifPro)
@@ -45,6 +47,13 @@ modifElemAValid.forEach(x=>{
     x.addEventListener("blur", f)
     arrayFunc.push(f)
 })
+function validarTodo(funciones) {
+        
+    arrayFunc.forEach(x=>{
+        x()
+    })
+
+}
 aplicarSoloNumerico(elemModifProd.precio);
 
 closeModifPro.addEventListener("click", ()=>{
@@ -55,7 +64,7 @@ const enviarModif = document.getElementById("MmodalAgregProdEnviar")
  enviarModif.addEventListener('click',  async ()=>{
     validarTodo(arrayFunc)
     if(isValidModif[0]){
-        let m = await modificarProducto()
+        let m = await modificarProducto(MproductForm, parseInt(MproductForm.codigo.value))
  
  
         if(m.mensajeBorrado<0){
@@ -69,7 +78,7 @@ const enviarModif = document.getElementById("MmodalAgregProdEnviar")
         if(m.mensajeGrabado==1){
             okMensaje.fire({text:"El producto se actualizo con exito"})
             cerrarModal(modalModifPro)
-            eventoBuscar()
+            hacerTabla()
        }
     }})
    

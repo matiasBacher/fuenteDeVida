@@ -59,10 +59,10 @@ $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->
         <div class= "mdp"> <p> Medio de pago: </p></div>
             <select id="orden">
             <?php foreach($arrayMedioPagos as $medioPago):?>       
-                <option value='<?=
-                "[{$medioPago->getId()},\"{$medioPago->getNombre()}\"]"
+                <option value='<?=!isset($modificarActivo)?
+                "[{$medioPago->getId()},\"{$medioPago->getNombre()}\"]":$medioPago->getId();
                 ?>'>
-                    <?=$medioPago->getNombre()?>
+                    <?=strtoupper($medioPago->getNombre())?>
                 </option>
             <?php endforeach;?>
             </select>
@@ -102,6 +102,13 @@ if(!isset($modificarActivo)):?>
     </div>
 </div>
 <?php endif?>
+<?php
+    if(!isset($modificarActivo)){?>
+        <script type="module" src="publico/js/caja/caja.js"></script>
+    <?php }
+    else{?>
+    <script type="module" src="publico/js/venta/modificarVenta.js"></script>
 
-<script type="module" src="publico/js/caja/caja.js"></script>
-</body>
+
+    <?php }
+    

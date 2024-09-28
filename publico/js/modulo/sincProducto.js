@@ -41,6 +41,7 @@ async function modificarProducto(formulario, codigo){ //busca las categorias en 
     let categorias;
     f.append("accion", "actualizar");
     f.append("codigo", codigo)
+    let respuesta;
 
     try {
         const response = await fetch('../../app/controlador/controladorProductos.php',
