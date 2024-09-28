@@ -46,7 +46,8 @@ if(isset ($_POST["accion"])){
                 exit();
         } 
             echo json_encode([
-                "mensaje"=>1
+                "mensaje"=>1,
+                "venta"=>$venta
             ]);
             exit();
         }

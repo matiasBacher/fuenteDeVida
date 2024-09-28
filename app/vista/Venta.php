@@ -47,11 +47,14 @@ $paso=intdiv(($precioMaximo-$precioMinimo), 100)
                         <label for="rangoMnimo">Minimo</label>
                         <input type="range" name="rangoMinimo" id="rangoMinimo" min="<?=$precioMinimo?>" 
                         max="<?=$precioMaximo?>" value="<?=$precioMinimo?>" step="<?=$paso?>">
+                        <span class="mostradorRango"></span>
+
                     </div>
                     <div class="elementoFiltro">
                         <label for="rangoMaximo">Maximo</label>
                         <input type="range" name="rangoMaximo" id="rangoMaximo"min="<?=$precioMinimo?>" 
                         max="<?=$precioMaximo?>" value="<?=$precioMaximo?>" step="<?=$paso?>">
+                        <span class="mostradorRango"></span>
                     </div>
                 </div>
         </div>            

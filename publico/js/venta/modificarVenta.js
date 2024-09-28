@@ -1,6 +1,6 @@
 import { quitar, selectorCantidad, eventoBuscar, agregar } from "../caja/metodosCompartidos.js";
 import { tablaCarrito } from "../caja/carrito.js"
-import { abrirModal } from "../modulo/mensajesYCargas.js"
+import { abrirModal, cerrarModal } from "../modulo/mensajesYCargas.js"
 
 
 let ventaCargada
@@ -18,6 +18,11 @@ const carrito =document.querySelector("#listaCarrito")
 const selectMedioPago = document.querySelector("#orden")
 
 const DOMVentas = document.querySelector("#ventas")
+const botonCerrarModal= document.querySelector("#closeModalModificarVenta")
+
+botonCerrarModal.addEventListener("click", ()=>{
+    cerrarModal(modalVentaModificar)
+})
 
 const modalVentaModificar= document.querySelector("#modalModificarVenta")
 DOMVentas.addEventListener("click", (e)=>{
@@ -40,6 +45,7 @@ DOMVentas.addEventListener("click", (e)=>{
         selectMedioPago.value=ventaCargada.idMedioPago
     }
 })
+
 
 
 

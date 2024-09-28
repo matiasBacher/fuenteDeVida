@@ -48,17 +48,17 @@ async function altaVenta(metodoPago, detalleVenta ){
         if(r.ok){
             ocualtarCarga();
             mensaje= await r.json();
-            return mensaje.mensaje;
+            return mensaje;
         }
         else{
             ocualtarCarga()
-            mensaje= -3;
+            mensaje.mensaje= -3;
             return mensaje;
         }
     }
     catch{
             ocualtarCarga()
-            mensaje= -3;
+            mensaje.mensaje= -3;
             return mensaje;
     }
 }

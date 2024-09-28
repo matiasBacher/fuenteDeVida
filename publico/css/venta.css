@@ -4,7 +4,9 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
-    max-width: 100% ;
+    max-width: 100%;
+    flex-wrap: wrap;
+
 }
 
 .filtroVenta {
@@ -12,10 +14,14 @@
     background-color: rgb(135, 177, 144);
     border-radius: 8px;
     padding: 10px;
-    width: 300px;
+    min-width: 300px;
+    /* width: 30%; */
     height: 200px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #000000;
+    flex-grow: 1;
+    margin: 0px 5px;
+
 }
 
 .filtroVenta:hover {
@@ -81,7 +87,11 @@ input[type="range"]::-webkit-slider-thumb {
     background: #28a745;
     cursor: pointer;  
 }
-
+.mostradorRango{
+    width: 10em;
+    display: inline-block;
+    text-align: left;
+}
 input[type="range"]:hover {
     background: #7ea087;
 }
@@ -100,6 +110,7 @@ input[type="range"]:hover {
 .contenedorVentas{
     display: flex;
     flex-direction: column;
+
 }
 
 /* Media queries para diseño responsivo */

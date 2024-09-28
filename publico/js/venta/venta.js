@@ -9,7 +9,17 @@ const fechaHasta= document.getElementById("fechaHasta")
 const mediosPago = Array.from(document.querySelectorAll(".switch>input"))
 
 
+//mostrar valor de rango
+function mostrarValorRango(rango){
+    let mostrador= rango.parentElement.querySelector(".mostradorRango")
+    mostrador.textContent = rango.value
+    rango.addEventListener("input",()=>{
 
+    mostrador.textContent = rango.value
+    })
+}
+mostrarValorRango(rangoMinimo)
+mostrarValorRango(rangoMaximo)
 
 
 let filtros={

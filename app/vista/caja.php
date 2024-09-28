@@ -4,11 +4,15 @@ use  modelo\MedioPago;
 $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->findAll();
 ?>
 <div class="<?=!isset($modificarActivo)?"container":"modal-content"?>">
+<?php if(isset($modificarActivo)):?>
+    <span class="close" id="closeModalModificarVenta">&times;</span>
+<?php endif;?>
+
     <!-- Buscador de productos -->
     <div class="search-bar">
         <form class="form" method="POST" action="">
             <input type="text" name="producto" id="buscador" placeholder="Buscar producto..." required>
-            <button class="button" name="allProduct">Buscar</button>
+            <!-- <button class="button" name="allProduct">Buscar</button> -->
         </form>
     </div>
 
@@ -65,7 +69,15 @@ $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->
                     <?=strtoupper($medioPago->getNombre())?>
                 </option>
             <?php endforeach;?>
+     
+
             </select>
+            <?php if(isset($modificarActivo)):?>
+                <div id="motivoCambio">
+                    <h2>Motivo de Modificación</h2>
+                    <textarea name="motivoCorreccion" id="motivoCorreccion"></textarea>
+                </div>
+            <?php endif;?>
         <button id="<?=!isset($modificarActivo)?"cobrar":"registrarModificacion"?>" class="button">
             <?=!isset($modificarActivo)?"Cobrar":"registrar"?>
         </button>
@@ -95,7 +107,7 @@ if(!isset($modificarActivo)):?>
             </div>
             <div class="acciones">
                 <button class= "button" id="registrar">Registrar</button>
-                <button class= "button" id="registrar-imprimir">Registrar e Imprimir</button>
+                <button class= "button" id="imprimir-registrar">Imprimir y Registrar</button>
                 <button class= "button" id="cancelar">Cancelar</button>
             </div>
         </div>
