@@ -4,10 +4,10 @@ use modelo\Venta;
 
 $arrayMedioPagos = $entityManager->getRepository(entityName: MedioPago::class)->findAll();
 $precioMaximo = $entityManager->getRepository(entityName: Venta::class)
-                ->findOneBy(criteria: [],orderBy: ["total" => 'DESC'])->getTotalEnFecha();
+                ->findOneBy(criteria: ["errorVenta"=>false],orderBy: ["total" => 'DESC'])->getTotalEnFecha();
 
 $precioMinimo = $entityManager->getRepository(entityName: Venta::class)
-                ->findOneBy(criteria: [],orderBy: ["total" => 'ASC'])->getTotalEnFecha();
+                ->findOneBy(criteria: ["errorVenta"=>false],orderBy: ["total" => 'ASC'])->getTotalEnFecha();
 
 $paso=intdiv(($precioMaximo-$precioMinimo), 100)
 ?>

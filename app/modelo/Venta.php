@@ -13,7 +13,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
+use Doctrine\Common\Util\ClassUtils;
 
 
 
@@ -97,7 +97,10 @@ class Venta implements \JsonSerializable
     }
     public function jsonSerialize(){
         return [
-            "id"=> $this->getId(),
+            "id"=> $this->tieneCorreccion()?
+                    $this->getVentaOriginal()->getId():
+                    $this->getId(),
+            "idVerdadero"=>$this->getId(),
             "detalles"=> $this->getDetalles()->toArray(),
             "fecha"=> $this->getFecha()->format("Y-m-d"),
             "hora"=> $this->getHora(),
@@ -106,6 +109,7 @@ class Venta implements \JsonSerializable
             "metodoPago"=>$this->getMetodoPago(),
             "total"=>$this->getTotalEnFecha(),
             "idMedioPago"=>$this->medioPago->getId(),
+            "ventaAnterior"=>$this->getVentaAnterior(),
         ];
     } 
     public function getDetalles(): Collection
@@ -197,7 +201,7 @@ class Venta implements \JsonSerializable
         return $this;
     }
     public function tieneCorreccion(){
-        return $this->ventaAnterior===null;
+        return $this->ventaAnterior!==null;
     }
     public function getTotal(){
         $total = 0;
@@ -209,4 +213,15 @@ class Venta implements \JsonSerializable
     public function getTotalEnFecha(){
         return $this->total;
     }
+
+    function getVentaOriginal(){
+        if(!$this->tieneCorreccion()){
+            return $this;
+        }
+        else{
+           return $this->getVentaAnterior()->getVentaOriginal();
+        }
+
+    }
+
 }

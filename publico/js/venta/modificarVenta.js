@@ -68,22 +68,32 @@ selectorCantidad(carrito, ponerTotales)
 eventoBuscar(productoMemoria,tablaProducto,buscador)
 
 botonModificar.addEventListener("click", async ()=>{
-    let mensaje= await registrarModVenta(ventaCargada.id, selectMedioPago.value, 
-                                    productoCarrito, textAreaMotivoModificacion.value )
-    mensaje=mensaje.mensaje
-    productoCarrito.length=0
-    productoMemoria.length=0
+    if(productoCarrito.length>=1){
+        if(!textAreaMotivoModificacion.value.trim()==""){
+            let mensaje= await registrarModVenta(ventaCargada.id, selectMedioPago.value, 
+                                            productoCarrito, textAreaMotivoModificacion.value )
+            mensaje=mensaje.mensaje
+            productoCarrito.length=0
+            productoMemoria.length=0
 
-    if(mensaje==1){
-        okMensaje.fire({text:"se modifico la venta con exito"})
-        cerrarModal(modalVentaModificar)
-        recargarTabla()
+            if(mensaje==1){
+                okMensaje.fire({text:"se modifico la venta con exito"})
+                cerrarModal(modalVentaModificar)
+                recargarTabla()
 
+            }
+            else{
+                errorMensaje.fire({text:"no se pudo modificar la venta"})
+                cerrarModal(modalVentaModificar)
+                }
+        }
+        else{
+            errorMensaje.fire({text:"Por favor especifique el motivo de la modificación"})
+        }
     }
     else{
-        errorMensaje.fire({text:"no se pudo modificar la venta"})
-        cerrarModal(modalVentaModificar)
-        }
-
+    errorMensaje.fire({text:"Por favor ponga por lo menos un producto en el carrito"})
+        
+    }
     })
     
