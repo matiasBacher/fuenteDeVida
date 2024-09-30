@@ -1,3 +1,4 @@
+
 export{tablaVentas}
 function  tablaVentas(ventas){
     let contenedorVentas=document.createElement("div")
@@ -54,8 +55,14 @@ function hacerCuadroVenta(venta){
     // botonConsultar.addEventListener("click", (venta))
     botonConsultar.textContent="consultar"
 
+    const botonImprimir = document.createElement("button")
+    botonImprimir.classList.add("button", "button-imprimir")
+    botonImprimir.textContent="Imprimir mensaje"
+    
+
     contenedorBotones.appendChild(botonModificar)
     contenedorBotones.appendChild(botonConsultar)
+    contenedorBotones.appendChild(botonImprimir)
 
 
     cuadroVenta.appendChild(contenedorEncabezadoVenta)

@@ -1,6 +1,8 @@
 import{consultarVentas} from "../../../publico/js/modulo/sincVenta.js"
 import { tablaVentas } from "./tablaVenta.js"
-export{recargarTabla}
+export{recargarTabla, DOMVentas}
+import { eventoImprimir } from "./imprimirVenta.js"
+import { imprimirVenta } from "../modulo/imprimirVenta.js"
 const rangoMinimo = document.getElementById("rangoMinimo")
 const rangoMaximo = document.getElementById("rangoMaximo")
 
@@ -74,3 +76,4 @@ elementoFiltro.forEach(x => {
     
 });
 recargarTabla()
+eventoImprimir()

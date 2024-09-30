@@ -19,7 +19,7 @@ function imprimirVenta(venta){
         detalle.codigo=x.producto.codigo
         detalle.nombre=x.producto.nombre
         detalle.precio=x.precio
-        detalle.total=x.total
+        detalle.total=x.cantidad*x.precio
 
         productos.push(detalle)
     })
@@ -32,7 +32,7 @@ function imprimirVenta(venta){
                     <title>Imprimir Venta</title>
                 </head>
                 <body>
-                    <h1>Numero Ticket${venta.id!==undefined?venta.id:"Venta No Registrada"}</h1>
+                    <h1>Numero Ticket: ${venta.id!==undefined?venta.id:"Venta No Registrada"}</h1>
                     <table>
                         <thead>
                             <tr>
@@ -46,7 +46,7 @@ function imprimirVenta(venta){
                             ${DOMTablaResumen.outerHTML}
                         </tbody>
                     </table>
-                    <h1>Total:${venta.precio*venta.cantidad}<h1>
+                    <h1>Total: $${venta.total}<h1>
                 </body>
             </html>`
 
