@@ -1,10 +1,11 @@
 <?php
 final class conectioBD 
 {
-    static private $server = "localhost";
+    static private $server = "localhost:3307";
+
     static private $user = "root";
     static private $psw = "";
-    static private $bd = "fvrp2";
+    static private $bd = "fvpr2";
 
         // Getters para las propiedades estáticas privadas
         public static function getServer() {

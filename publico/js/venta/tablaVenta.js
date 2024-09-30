@@ -57,7 +57,7 @@ function hacerCuadroVenta(venta){
 
     const botonImprimir = document.createElement("button")
     botonImprimir.classList.add("button", "button-imprimir")
-    botonImprimir.textContent="Imprimir mensaje"
+    botonImprimir.textContent="Imprimir venta"
     
 
     contenedorBotones.appendChild(botonModificar)
