@@ -186,3 +186,199 @@ input[type="range"]:hover {
 .ventaCuadro button {
     margin-left: 5px;
 }
+
+/*------------------ Estilos para la modificacion de las ventas ------------------ */
+
+/* Estilos para el buscador*/
+.search-bar {
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    max-width: 1000px;    
+    }
+
+.search-bar input {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.search-bar select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.form{
+    width:550px;
+}
+
+/* Estilos para la parte del producto */
+
+.modal-content{
+    max-width: 700px;
+    padding: 15px;
+}
+
+.product-list table {
+    width: 100%;
+    height: 150px;
+    border-collapse: collapse;
+    padding: 20px;
+    caption-side: bottom;
+    color: #000000;
+    text-align:left;
+    letter-spacing: 1px;
+    height: 232px;
+}
+
+.product-list thead, .product-list tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    box-sizing: border-box;
+}
+
+.product-list th, .product-list td, .cart th, .cart td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.product-list tr:nth-of-type(2n+1){
+    background-color: rgb(145, 168, 150);
+}
+.product-list tr:nth-of-type(2n) {
+    background-color: rgb(124, 148, 128);
+}
+
+.product-list th, .product-list td {
+    border: 1px solid #000000;
+    padding: 8px;  
+}
+
+.product-list tr:hover{
+    background-color:#86d694 ;
+}
+
+.product-list th {
+    background-color: #226304;
+    text-align: left;
+    color: #ffffff;
+}
+
+#product-table{
+    overflow-y:scroll;
+    max-height: 232px;
+    display: block;
+}
+
+/* Estilos para la parte del carrito */
+
+
+
+.carrito-list table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 20px;
+    caption-side: bottom;
+    color: #000000;
+    text-align:left;
+    letter-spacing: 1px;
+}
+.carrito-list thead, .carrito-list tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    box-sizing: border-box;
+}
+
+.carrito-list tr:nth-of-type(2n+1){
+    background-color: rgb(145, 168, 150);
+}
+.carrito-list tr:nth-of-type(2n) {
+    background-color: rgb(124, 148, 128);
+}
+
+.carrito-list th, .product-list td {
+    border: 1px solid #000000;
+    padding: 8px;  
+}
+
+.carrito-list tr:hover{
+    background-color:#86d694 ;
+}
+
+.carrito-list th {
+    background-color: #226304;
+    text-align: left;
+    color: #ffffff;
+}
+
+#listaCarrito{
+    overflow-y:scroll;
+    max-height: 400px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.selectorCantidad {
+    max-width: 25%;
+    border-radius: 8px;
+    font-size: 20px;
+    margin-left: 30%;
+}
+
+.totalCarrito{
+    margin-left: 65%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input [type="number"]{
+    width: 20px;
+    }
+
+/* Estilos para medio de pago */
+.mdp {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.metodo-pago select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.cobrar{
+    background-color: #226304;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.cobrar:hover {
+    filter: brightness(150%);
+    transform: scale(1.02);
+}
+
+/* Estilos para motivo de modificacion*/
+
+#motivoCorreccion{
+    width: 450px;
+    height: 50px;
+}
