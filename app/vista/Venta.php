@@ -70,6 +70,16 @@ $paso=intdiv(($precioMaximo-$precioMinimo), 100)
             include_once($_SERVER['DOCUMENT_ROOT']."/app/vista/caja.php");
         ?>
     </div>
+    <div class="fondoModal" id="modalConsultarModVentas">
+       <div class="modalContent">
+        <span class="close" id="closeModalConsultarVenta">&times;</span>
+        <div id="contenedorConsulVenta">
+        </div>
+
+       </div> 
+    </div>
 </div>
+<script type="module" src="publico/js/venta/consultaRegistro.js"></script>
+
 <script type="module" src="publico/js/venta/venta.js"></script>
 

@@ -110,6 +110,8 @@ class Venta implements \JsonSerializable
             "total"=>$this->getTotalEnFecha(),
             "idMedioPago"=>$this->medioPago->getId(),
             "ventaAnterior"=>$this->getVentaAnterior(),
+            "esActual"=>!$this->getErrorVenta(),
+            "esOriginal"=>!$this->tieneCorreccion()
         ];
     } 
     public function getDetalles(): Collection

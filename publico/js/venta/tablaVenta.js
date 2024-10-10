@@ -1,15 +1,17 @@
 
 export{tablaVentas}
-function  tablaVentas(ventas){
+function  tablaVentas(ventas,opciones){
+    let op={identificador:false, tieneID:true, modificar:true, consultar:true, imprimir:true, razonModificacion:false}
+    op={...op, ...opciones}
     let contenedorVentas=document.createElement("div")
     contenedorVentas.classList.add("contenedorVentas")
 
-    ventas.forEach(x=>contenedorVentas.appendChild(hacerCuadroVenta(x)))
+    ventas.forEach(x=>contenedorVentas.appendChild(hacerCuadroVenta(x,op)))
 
     return contenedorVentas
 
 }
-function hacerCuadroVenta(venta){
+function hacerCuadroVenta(venta, opciones){
     let cuadroVenta = document.createElement("div")
     cuadroVenta.classList.add("ventaCuadro")
     cuadroVenta.venta=venta
@@ -32,7 +34,7 @@ function hacerCuadroVenta(venta){
     medioPago.classList.add("encabezadoVenta")
     medioPago.innerHTML=`<b>Medio pago:</b> ${venta.metodoPago}`
 
-    contenedorEncabezadoVenta.appendChild(numVenta)
+    if(opciones.tieneID)contenedorEncabezadoVenta.appendChild(numVenta)
     contenedorEncabezadoVenta.appendChild(fecha)
     contenedorEncabezadoVenta.appendChild(medioPago)
 
@@ -51,7 +53,7 @@ function hacerCuadroVenta(venta){
     botonModificar.textContent="🖊"
 
     const botonConsultar = document.createElement("button")
-    botonConsultar.classList.add("button")
+    botonConsultar.classList.add("button", "button-consultar")
     // botonConsultar.addEventListener("click", (venta))
     botonConsultar.textContent="consultar"
 
@@ -60,9 +62,29 @@ function hacerCuadroVenta(venta){
     botonImprimir.textContent="Imprimir venta"
     
 
-    contenedorBotones.appendChild(botonModificar)
-    contenedorBotones.appendChild(botonConsultar)
-    contenedorBotones.appendChild(botonImprimir)
+    if(opciones.modificar)contenedorBotones.appendChild(botonModificar)
+    if(opciones.consultar)contenedorBotones.appendChild(botonConsultar)
+    if(opciones.imprimir)contenedorBotones.appendChild(botonImprimir)
+
+        if(opciones.identificador && (venta.esActual || venta.esOriginal)){
+            let identificador=document.createElement("div")
+            identificador.innerHTML=
+            `<span class="identificadorVenta ${
+                venta.esActual?"ventaActual":
+                venta.esOriginal?"ventaOriginal":""}"
+                >
+                    ${  venta.esActual?"Ultima Modificación":venta.esOriginal?"Original":""
+                    }</span>`
+                cuadroVenta.appendChild(identificador)
+        }
+
+    if(opciones.razonModificacion && venta.motivoCorreccion!=null){
+        let razonModificacion=document.createElement("div")
+        razonModificacion.innerHTML=
+        `<h3 class="tituloRazon">Razon Modificacion</html>
+        <p class="cuerpoRazon">${venta.motivoCorreccion}` 
+        cuadroVenta.appendChild(razonModificacion)
+    }
 
 
     cuadroVenta.appendChild(contenedorEncabezadoVenta)
