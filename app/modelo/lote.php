@@ -183,6 +183,40 @@ public function restarCantidad($cantidad){
     public function setPocoStock(){
         $this->buscarEstadoinv("poco Stock");
     }
+    public function setConStock(){
+        $this->buscarEstadoinv("con Stock");
+    }
+    /**
+     * Get the value of proveedor
+     */ 
+    public function getProveedor()
+    {
+        return $this->proveedor;
+    }
 
+    /**
+     * Set the value of proveedor
+     *
+     * @return  self
+     */ 
+    public function setProveedor($proveedor)
+    {
+        $this->proveedor = $proveedor;
 
+        return $this;
+    }
+
+    public function jsonSerialize(){
+        return[
+            "id"=>$this->getId(),
+            "cantidad"=>$this->getCantidad(),
+            "vencimiento"=>$this->getVencimiento(),
+            "ingreso"=>$this->getIngreso(),
+            "producto"=>$this->getProducto(),
+            "provedor"=>$this->getProveedor(),
+            
+        ];
+    }
 }
+
+
