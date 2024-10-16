@@ -46,7 +46,9 @@ class Producto implements \JsonSerializable {
     
     private Collection $conjuntoPropiedades;
 
-    
+    #[ORM\OneToMany(mappedBy: "productos",targetEntity: Lote::class, cascade: [remove], fetch:  "EAGER" )]
+    private Collection $lotes;
+
 
     
 

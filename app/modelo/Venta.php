@@ -225,5 +225,6 @@ class Venta implements \JsonSerializable
         }
 
     }
+    
 
 }

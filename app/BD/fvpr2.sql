@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2024 a las 00:25:34
+-- Servidor: 127.0.0.1:3307
+-- Tiempo de generación: 16-10-2024 a las 19:28:14
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Versión de PHP: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -60,8 +60,11 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`ID_CATEGORIA`, `NOMBRE_CATEGORIA`) VALUES
-(0, 'frutas secas'),
-(1, 'condimentos ');
+(28, 'cereales'),
+(3, 'condimento '),
+(36, 'educorante'),
+(29, 'frutas secas'),
+(1, 'ningun0');
 
 -- --------------------------------------------------------
 
@@ -80,12 +83,8 @@ CREATE TABLE `clientes` (
 --
 -- Estructura de tabla para la tabla `correccionventas`
 --
-
-CREATE TABLE `correccionventas` (
-  `VEN_ID_VENTA` int(11) NOT NULL,
-  `ID_VENTA` int(11) NOT NULL,
-  `MOTIVO_CORRECIONVENTA` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Error leyendo la estructura de la tabla fvpr2.correccionventas: #1932 - Table 'fvpr2.correccionventas' doesn't exist in engine
+-- Error leyendo datos de la tabla fvpr2.correccionventas: #1064 - Algo está equivocado en su sintax cerca 'FROM `fvpr2`.`correccionventas`' en la linea 1
 
 -- --------------------------------------------------------
 
@@ -109,8 +108,91 @@ CREATE TABLE `detalledecompras` (
 CREATE TABLE `detalledeventas` (
   `ID_VENTA` int(11) NOT NULL,
   `ID_LOTE` int(11) NOT NULL,
-  `CANTIDAD_DETALLEVENTA` int(11) DEFAULT NULL
+  `CANTIDAD_DETALLEVENTA` int(11) DEFAULT NULL,
+  `precioFecha` int(10) UNSIGNED NOT NULL,
+  `ID_DETALLe` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalledeventas`
+--
+
+INSERT INTO `detalledeventas` (`ID_VENTA`, `ID_LOTE`, `CANTIDAD_DETALLEVENTA`, `precioFecha`, `ID_DETALLe`) VALUES
+(30, 2, 1, 9000, 11),
+(32, 2, 5, 9000, 15),
+(33, 1, 3, 500, 16),
+(33, 2, 1, 9000, 17),
+(34, 67, 6, 9001, 18),
+(35, 1, 4, 1300, 19),
+(35, 2, 1, 9000, 20),
+(35, 3, 1, 8000, 21),
+(35, 4, 1, 9000, 22),
+(36, 4, 26, 9000, 23),
+(37, 3, 4, 8000, 24),
+(37, 2, 4, 9000, 25),
+(37, 1, 3, 1300, 26),
+(38, 4, 17, 9000, 27),
+(39, 1, 1, 1300, 28),
+(39, 2, 1, 9000, 29),
+(40, 33335555, 7, 7000, 30),
+(41, 33335555, 6, 7000, 31),
+(42, 33335555, 5, 7000, 32),
+(44, 2, 1, 9000, 33),
+(46, 5, 2, 7000, 34),
+(48, 1, 2, 1300, 35),
+(50, 4, 2, 9000, 36),
+(51, 2, 4, 9000, 37),
+(52, 1, 3, 1300, 38),
+(53, 3, 4, 8000, 39),
+(54, 3, 3, 8000, 40),
+(55, 3, 4, 8000, 41),
+(56, 1, 1, 1300, 42),
+(56, 2, 1, 9000, 43),
+(57, 1, 1, 1300, 44),
+(57, 2, 1, 9000, 45),
+(58, 1, 4, 1300, 46),
+(59, 1, 1, 1300, 47),
+(59, 2, 1, 9000, 48),
+(59, 3, 1, 8000, 49),
+(60, 1, 1, 1300, 50),
+(60, 2, 1, 9000, 51),
+(60, 3, 1, 8000, 52),
+(61, 1, 1, 1300, 53),
+(61, 2, 1, 9000, 54),
+(62, 1, 1, 1300, 55),
+(63, 2, 1, 9000, 56),
+(65, 2, 5, 9000, 58),
+(66, 5, 4, 7000, 59),
+(67, 1, 3, 1300, 60),
+(67, 2, 1, 9000, 61),
+(68, 67, 7, 9001, 62),
+(69, 1, 4, 1300, 63),
+(69, 2, 1, 9000, 64),
+(69, 3, 1, 8000, 65),
+(69, 4, 1, 9000, 66),
+(70, 1, 4, 1300, 67),
+(70, 2, 1, 9000, 68),
+(70, 3, 1, 8000, 69),
+(70, 4, 1, 9000, 70),
+(71, 4, 26, 9000, 71),
+(72, 3, 4, 8000, 72),
+(72, 2, 4, 9000, 73),
+(72, 1, 4, 1300, 74),
+(73, 1, 1, 1300, 75),
+(74, 2, 3, 9000, 76),
+(75, 1, 1, 1300, 77),
+(76, 1, 1, 1300, 78),
+(77, 4, 18, 9000, 79),
+(78, 1, 2, 1300, 80),
+(78, 2, 1, 9000, 81),
+(79, 1, 3, 1300, 82),
+(79, 2, 3, 9000, 83),
+(80, 34567890, 3, 3456, 84),
+(80, 1, 1, 1300, 85),
+(81, 34567890, 3, 3456, 86),
+(81, 4, 1, 9000, 87),
+(82, 1, 1, 1300, 88),
+(82, 4, 1, 9000, 89);
 
 -- --------------------------------------------------------
 
@@ -153,6 +235,17 @@ CREATE TABLE `domicilios` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estadoinventariolote`
+--
+
+CREATE TABLE `estadoinventariolote` (
+  `id` int(11) NOT NULL COMMENT 'Primary Key',
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estadosdepagos`
 --
 
@@ -186,6 +279,17 @@ CREATE TABLE `estadosrcepciones` (
   `ID_PEDIDO` int(11) NOT NULL,
   `FECHA_ESTADORECEPCION` date NOT NULL,
   `ESTADO_ESTADORECEPCION` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estadovencimiento`
+--
+
+CREATE TABLE `estadovencimiento` (
+  `id` int(11) NOT NULL COMMENT 'Primary Key',
+  `nombre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -248,8 +352,30 @@ CREATE TABLE `lotes` (
   `ID_PRODUCTO` int(11) NOT NULL,
   `ID_PROVEEDOR` int(11) DEFAULT NULL,
   `FECHAVENCIMEINTO_LOTE` date NOT NULL,
-  `CANTIDAD_LOTE` int(11) NOT NULL
+  `CANTIDAD_LOTE` int(11) NOT NULL,
+  `fechaIngreso` datetime NOT NULL,
+  `idEstadoInventario` int(11) NOT NULL DEFAULT 1,
+  `idEstadoVencimiento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mediopago`
+--
+
+CREATE TABLE `mediopago` (
+  `id` int(11) NOT NULL COMMENT 'Primary Key',
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mediopago`
+--
+
+INSERT INTO `mediopago` (`id`, `nombre`) VALUES
+(1, 'efectivo'),
+(2, 'transferencia');
 
 -- --------------------------------------------------------
 
@@ -279,24 +405,36 @@ CREATE TABLE `productos` (
   `ID_CATEGORIA` int(11) DEFAULT NULL,
   `NOMBRE_PRODUCTO` varchar(250) DEFAULT NULL,
   `PRECIODEVENTA_PRODUCTO` int(11) DEFAULT NULL,
-  `GANANCIA_PRODUCTO` int(11) DEFAULT NULL
+  `GANANCIA_PRODUCTO` int(11) DEFAULT NULL,
+  `descripcion_producto` varchar(255) DEFAULT NULL,
+  `FECHA_CREACION_PRODUCTO` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`ID_PRODUCTO`, `ID_CATEGORIA`, `NOMBRE_PRODUCTO`, `PRECIODEVENTA_PRODUCTO`, `GANANCIA_PRODUCTO`) VALUES
-(1, 0, 'mani 100gr', 125, NULL),
-(2, 1, 'oregano 100gr', NULL, NULL),
-(3, 0, 'avellana 100gr', 600, NULL),
-(4, 1, 'sesamo 200gr', 500, NULL),
-(5, 1, 'curry ', 3000, NULL),
-(6, 0, 'nueces 100gr', 400, NULL),
-(7, 0, 'bellotas 100gr', 250, NULL),
-(8, 1, 'sal del himalaya', 300, NULL),
-(9, 1, 'provenzal', 900, NULL),
-(10, 0, 'nuez brasil 100gr', 500, NULL);
+INSERT INTO `productos` (`ID_PRODUCTO`, `ID_CATEGORIA`, `NOMBRE_PRODUCTO`, `PRECIODEVENTA_PRODUCTO`, `GANANCIA_PRODUCTO`, `descripcion_producto`, `FECHA_CREACION_PRODUCTO`) VALUES
+(1, 36, 'castanas', 1300, NULL, '0', '2024-09-28 00:30:27'),
+(2, 29, 'banana seca', 9000, NULL, '0', '2024-07-30 23:14:10'),
+(3, 29, 'nueces brasil', 8000, NULL, '0', '2024-07-30 19:33:05'),
+(4, 29, 'mani', 9000, NULL, '0', '2024-07-30 19:34:59'),
+(5, 28, 'alfagor maizena', 7000, NULL, '', '2024-09-28 00:38:07'),
+(67, 3, 'romero', 9000, NULL, '', '2024-09-30 16:30:58'),
+(3778876, 29, 'bananas disecadas', 5000, NULL, '', '2024-08-01 20:56:21'),
+(33335555, 28, 'almendras', 7000, NULL, '', '2024-07-31 19:14:02'),
+(34567890, 28, 'avena', 3456, NULL, '', '2024-09-30 16:30:08'),
+(36789430, 29, 'Pistachos Tostados', 4567, NULL, '', '2024-07-31 19:17:36'),
+(37081908, 28, 'avena', 900, NULL, '', '2024-07-31 18:09:42'),
+(37087655, 3, 'sesamo', 4555, NULL, '', '2024-07-31 18:32:40'),
+(37098760, 3, 'provensal', 900, NULL, '', '2024-07-31 18:10:42'),
+(37643464, 29, 'Castaña De Cajú', 3000, NULL, '', '2024-07-31 19:21:23'),
+(37888777, 29, 'mani japones', 3000, NULL, '', '2024-07-31 18:28:42'),
+(37897521, 28, 'Mix De Cereales Con Pasas Y Manzana', 534, NULL, '', '2024-07-31 19:16:00'),
+(37898765, 29, 'MixGarrapiñada De Maní', 37654, NULL, '', '2024-07-31 19:20:06'),
+(37987654, 29, 'Castañas De Para', 7000, NULL, '', '2024-07-31 19:18:45'),
+(44540000, 3, 'sal', 300, NULL, '', '2024-08-01 23:00:29'),
+(45677778, 29, 'Almendras Tostadas Y Saladas', 7000, NULL, '', '2024-07-31 19:15:00');
 
 -- --------------------------------------------------------
 
@@ -336,12 +474,26 @@ CREATE TABLE `propiedades_productos` (
 --
 
 INSERT INTO `propiedades_productos` (`ID_PROPIEDADES`, `ID_PRODUCTO`) VALUES
-(1, 6),
-(1, 7),
-(3, 8),
-(4, 4),
-(4, 6),
-(5, 1);
+(1, 4),
+(1, 37643464),
+(1, 37898765),
+(1, 37987654),
+(3, 1),
+(3, 5),
+(3, 36789430),
+(3, 44540000),
+(4, 3),
+(4, 67),
+(4, 37081908),
+(5, 2),
+(5, 67),
+(5, 3778876),
+(5, 33335555),
+(5, 34567890),
+(5, 37081908),
+(5, 37087655),
+(5, 37897521),
+(5, 37987654);
 
 -- --------------------------------------------------------
 
@@ -353,8 +505,7 @@ CREATE TABLE `proveedores` (
   `ID_PROVEEDOR` int(11) NOT NULL,
   `ID_DOMICILIO` int(11) DEFAULT NULL,
   `CUIL_PROVEEDOR` int(11) DEFAULT NULL,
-  `NOMBRE_PROVEEDOR` varchar(250) NOT NULL,
-  `APELIIDO_PROVEEDOR` varchar(250) NOT NULL,
+  `razonSocial` varchar(250) NOT NULL,
   `TEL_PROVEEDOR` int(11) NOT NULL,
   `EMAIL_PROVEEDOR` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -394,15 +545,71 @@ CREATE TABLE `remplazados` (
 CREATE TABLE `ventas` (
   `ID_VENTA` int(11) NOT NULL,
   `NUMEROFACTURAVENTAS` int(11) DEFAULT NULL,
-  `VEN_ID_VENTA` int(11) DEFAULT NULL,
-  `COR_ID_VENTA` int(11) DEFAULT NULL,
-  `COR_VEN_ID_VENTA` int(11) DEFAULT NULL,
-  `COR2_ID_VENTA` int(11) DEFAULT NULL,
-  `FECHA_VENTA` date NOT NULL,
-  `HORA_VENTA` time NOT NULL,
-  `METODODEPAGO_VENTA` varchar(250) NOT NULL,
-  `ERROR_VENTA` decimal(1,0) NOT NULL
+  `FECHA_VENTA` date NOT NULL DEFAULT current_timestamp(),
+  `HORA_VENTA` time NOT NULL DEFAULT current_timestamp(),
+  `METODODEPAGO_VENTA` int(11) DEFAULT 1,
+  `ERROR_VENTA` tinyint(1) NOT NULL DEFAULT 0,
+  `motivoCorreccion` varchar(250) DEFAULT NULL,
+  `ventaAnterior` int(11) DEFAULT NULL,
+  `total` int(10) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`ID_VENTA`, `NUMEROFACTURAVENTAS`, `FECHA_VENTA`, `HORA_VENTA`, `METODODEPAGO_VENTA`, `ERROR_VENTA`, `motivoCorreccion`, `ventaAnterior`, `total`) VALUES
+(30, NULL, '2024-09-27', '00:09:38', 1, 1, NULL, NULL, 9000),
+(32, NULL, '2024-09-27', '01:47:52', 1, 1, NULL, NULL, 9000),
+(33, NULL, '2024-09-27', '01:53:51', 1, 1, NULL, NULL, 9500),
+(34, NULL, '2024-09-28', '06:00:24', 1, 1, NULL, NULL, 9001),
+(35, NULL, '2024-09-28', '06:07:36', 2, 1, NULL, NULL, 27300),
+(36, NULL, '2024-09-28', '18:33:55', 2, 1, NULL, NULL, 9000),
+(37, NULL, '2024-09-28', '19:29:21', 2, 1, NULL, NULL, 18300),
+(38, NULL, '2024-09-28', '19:32:13', 1, 1, NULL, NULL, 9000),
+(39, NULL, '2024-09-28', '19:39:20', 1, 1, NULL, NULL, 10300),
+(40, NULL, '2024-09-28', '19:55:49', 1, 0, NULL, NULL, 7000),
+(41, NULL, '2024-09-28', '19:56:30', 1, 0, NULL, NULL, 7000),
+(42, NULL, '2024-09-28', '19:56:54', 1, 0, NULL, NULL, 7000),
+(43, NULL, '2024-09-28', '20:00:38', 1, 1, NULL, NULL, 0),
+(44, NULL, '2024-09-28', '20:05:18', 1, 0, NULL, NULL, 9000),
+(45, NULL, '2024-09-28', '20:05:18', 1, 1, NULL, NULL, 0),
+(46, NULL, '2024-09-28', '20:07:32', 1, 1, NULL, NULL, 7000),
+(47, NULL, '2024-09-28', '20:07:33', 1, 1, NULL, NULL, 0),
+(48, NULL, '2024-09-28', '20:11:21', 1, 0, NULL, NULL, 1300),
+(49, NULL, '2024-09-28', '20:11:21', 1, 1, NULL, NULL, 0),
+(50, NULL, '2024-09-28', '20:14:39', 1, 0, NULL, NULL, 9000),
+(51, NULL, '2024-09-28', '20:16:20', 1, 0, NULL, NULL, 9000),
+(52, NULL, '2024-09-28', '20:17:03', 1, 0, NULL, NULL, 1300),
+(53, NULL, '2024-09-28', '20:19:31', 1, 0, NULL, NULL, 8000),
+(54, NULL, '2024-09-28', '20:19:57', 1, 0, NULL, NULL, 8000),
+(55, NULL, '2024-09-28', '20:22:17', 1, 0, NULL, NULL, 8000),
+(56, NULL, '2024-09-28', '20:24:14', 1, 0, NULL, NULL, 10300),
+(57, NULL, '2024-09-28', '20:26:59', 1, 0, NULL, NULL, 10300),
+(58, NULL, '2024-09-28', '20:35:14', 1, 0, NULL, NULL, 1300),
+(59, NULL, '2024-09-28', '20:38:41', 1, 0, NULL, NULL, 18300),
+(60, NULL, '2024-09-28', '20:39:39', 1, 0, NULL, NULL, 18300),
+(61, NULL, '2024-09-28', '20:42:01', 1, 0, NULL, NULL, 10300),
+(62, NULL, '2024-09-28', '20:45:47', 1, 0, NULL, NULL, 1300),
+(63, NULL, '2024-09-28', '22:10:23', 1, 0, 'aaaa', 30, 9000),
+(65, NULL, '2024-09-28', '22:12:38', 1, 0, 'qqq', 32, 9000),
+(66, NULL, '2024-09-28', '22:14:46', 1, 0, 'qqq', 46, 7000),
+(67, NULL, '2024-09-28', '22:22:31', 1, 0, '2', 33, 10300),
+(68, NULL, '2024-09-28', '22:24:21', 1, 0, '', 34, 9001),
+(69, NULL, '2024-09-28', '22:27:26', 2, 0, 'q', 35, 27300),
+(70, NULL, '2024-09-28', '22:29:28', 2, 0, 'q', 35, 27300),
+(71, NULL, '2024-09-29', '00:34:05', 2, 0, '', 36, 9000),
+(72, NULL, '2024-09-29', '00:40:44', 2, 0, 'modifique las nueces ', 37, 18300),
+(73, NULL, '2024-09-29', '00:42:22', 1, 0, 'se agrego productos', 45, 1300),
+(74, NULL, '2024-09-29', '00:45:47', 1, 0, 'agregar productos', 43, 9000),
+(75, NULL, '2024-09-29', '00:47:02', 1, 0, 'agregar pro', 49, 1300),
+(76, NULL, '2024-09-29', '00:48:14', 1, 0, '', 47, 1300),
+(77, NULL, '2024-09-29', '00:51:07', 1, 0, 'prueba', 38, 9000),
+(78, NULL, '2024-09-29', '00:51:52', 1, 0, '2', 39, 10300),
+(79, NULL, '2024-09-30', '20:59:04', 1, 0, NULL, NULL, 10300),
+(80, NULL, '2024-09-30', '21:33:50', 2, 1, NULL, NULL, 4756),
+(81, NULL, '2024-09-30', '21:38:16', 2, 0, NULL, NULL, 12456),
+(82, NULL, '2024-09-30', '21:40:34', 2, 0, 'no quiere avena', 80, 10300);
 
 --
 -- Índices para tablas volcadas
@@ -429,7 +636,8 @@ ALTER TABLE `cajeros_ventas`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`ID_CATEGORIA`),
-  ADD UNIQUE KEY `CATEGORIAS_PK` (`ID_CATEGORIA`);
+  ADD UNIQUE KEY `CATEGORIAS_PK` (`ID_CATEGORIA`),
+  ADD UNIQUE KEY `nombre_unique` (`NOMBRE_CATEGORIA`);
 
 --
 -- Indices de la tabla `clientes`
@@ -438,15 +646,6 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`CUIL_CLIENTE`),
   ADD UNIQUE KEY `CLIENTES_PK` (`CUIL_CLIENTE`),
   ADD KEY `RELATION_174_FK` (`ID_DOMICILIO`);
-
---
--- Indices de la tabla `correccionventas`
---
-ALTER TABLE `correccionventas`
-  ADD PRIMARY KEY (`VEN_ID_VENTA`,`ID_VENTA`),
-  ADD UNIQUE KEY `CORRECCIONVENTAS_PK` (`VEN_ID_VENTA`,`ID_VENTA`),
-  ADD KEY `CORRECIONDEVENTA_FK` (`ID_VENTA`),
-  ADD KEY `VENTACORREGIDA_FK` (`VEN_ID_VENTA`);
 
 --
 -- Indices de la tabla `detalledecompras`
@@ -460,9 +659,8 @@ ALTER TABLE `detalledecompras`
 -- Indices de la tabla `detalledeventas`
 --
 ALTER TABLE `detalledeventas`
-  ADD PRIMARY KEY (`ID_VENTA`),
-  ADD UNIQUE KEY `DETALLEDEVENTAS_PK` (`ID_VENTA`),
-  ADD KEY `LOTES_DETALLEDEVENTAS_FK` (`ID_LOTE`);
+  ADD KEY `ID_DETALLe` (`ID_DETALLe`),
+  ADD KEY `ID_VENTA` (`ID_VENTA`);
 
 --
 -- Indices de la tabla `detallesdepago`
@@ -488,6 +686,13 @@ ALTER TABLE `domicilios`
   ADD KEY `LOCALIDADES_DOMICILIOS_FK` (`ID_LOCALIDAD`);
 
 --
+-- Indices de la tabla `estadoinventariolote`
+--
+ALTER TABLE `estadoinventariolote`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
 -- Indices de la tabla `estadosdepagos`
 --
 ALTER TABLE `estadosdepagos`
@@ -507,6 +712,12 @@ ALTER TABLE `estadosenviopedidos`
 ALTER TABLE `estadosrcepciones`
   ADD PRIMARY KEY (`ID_PEDIDO`),
   ADD UNIQUE KEY `ESTADOSRCEPCIONES_PK` (`ID_PEDIDO`);
+
+--
+-- Indices de la tabla `estadovencimiento`
+--
+ALTER TABLE `estadovencimiento`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `facturacompras`
@@ -550,6 +761,12 @@ ALTER TABLE `lotes`
   ADD UNIQUE KEY `LOTES_PK` (`ID_LOTE`),
   ADD KEY `RELATION_193_FK` (`ID_PRODUCTO`),
   ADD KEY `LOTES_PROVEEDORES_FK` (`ID_PROVEEDOR`);
+
+--
+-- Indices de la tabla `mediopago`
+--
+ALTER TABLE `mediopago`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `pedidos`
@@ -616,20 +833,55 @@ ALTER TABLE `remplazados`
 --
 ALTER TABLE `ventas`
   ADD PRIMARY KEY (`ID_VENTA`),
-  ADD UNIQUE KEY `VENTAS_PK` (`ID_VENTA`),
   ADD KEY `VENTAS_FACTURAVENTAS_FK2` (`NUMEROFACTURAVENTAS`),
-  ADD KEY `CORRECIONDEVENTA_FK2` (`VEN_ID_VENTA`,`COR_ID_VENTA`),
-  ADD KEY `VENTACORREGIDA_FK2` (`COR_VEN_ID_VENTA`,`COR2_ID_VENTA`);
+  ADD KEY `ventaAnterior` (`ventaAnterior`),
+  ADD KEY `METODODEPAGO_VENTA` (`METODODEPAGO_VENTA`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `ID_CATEGORIA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT de la tabla `detalledeventas`
+--
+ALTER TABLE `detalledeventas`
+  MODIFY `ID_DETALLe` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+
+--
+-- AUTO_INCREMENT de la tabla `estadoinventariolote`
+--
+ALTER TABLE `estadoinventariolote`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
+
+--
+-- AUTO_INCREMENT de la tabla `estadovencimiento`
+--
+ALTER TABLE `estadovencimiento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
+
+--
+-- AUTO_INCREMENT de la tabla `mediopago`
+--
+ALTER TABLE `mediopago`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `propiedades`
 --
 ALTER TABLE `propiedades`
   MODIFY `ID_PROPIEDADES` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `ID_VENTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- Restricciones para tablas volcadas
@@ -639,21 +891,13 @@ ALTER TABLE `propiedades`
 -- Filtros para la tabla `cajeros_ventas`
 --
 ALTER TABLE `cajeros_ventas`
-  ADD CONSTRAINT `cajeros_ventas_ibfk_1` FOREIGN KEY (`CUIT_CAJERO`) REFERENCES `cajeros` (`CUIT_CAJERO`),
-  ADD CONSTRAINT `cajeros_ventas_ibfk_2` FOREIGN KEY (`ID_VENTA`) REFERENCES `ventas` (`ID_VENTA`);
+  ADD CONSTRAINT `cajeros_ventas_ibfk_1` FOREIGN KEY (`CUIT_CAJERO`) REFERENCES `cajeros` (`CUIT_CAJERO`);
 
 --
 -- Filtros para la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`ID_DOMICILIO`) REFERENCES `domicilios` (`ID_DOMICILIO`);
-
---
--- Filtros para la tabla `correccionventas`
---
-ALTER TABLE `correccionventas`
-  ADD CONSTRAINT `correccionventas_ibfk_1` FOREIGN KEY (`ID_VENTA`) REFERENCES `ventas` (`ID_VENTA`),
-  ADD CONSTRAINT `correccionventas_ibfk_2` FOREIGN KEY (`VEN_ID_VENTA`) REFERENCES `ventas` (`ID_VENTA`);
 
 --
 -- Filtros para la tabla `detalledecompras`
@@ -666,20 +910,13 @@ ALTER TABLE `detalledecompras`
 -- Filtros para la tabla `detalledeventas`
 --
 ALTER TABLE `detalledeventas`
-  ADD CONSTRAINT `detalledeventas_ibfk_1` FOREIGN KEY (`ID_VENTA`) REFERENCES `ventas` (`ID_VENTA`),
-  ADD CONSTRAINT `detalledeventas_ibfk_2` FOREIGN KEY (`ID_LOTE`) REFERENCES `lotes` (`ID_LOTE`);
+  ADD CONSTRAINT `detalledeventas_ibfk_1` FOREIGN KEY (`ID_VENTA`) REFERENCES `ventas` (`ID_VENTA`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `detallesdepago`
 --
 ALTER TABLE `detallesdepago`
   ADD CONSTRAINT `detallesdepago_ibfk_1` FOREIGN KEY (`ID_PEDIDO`) REFERENCES `estadosdepagos` (`ID_PEDIDO`);
-
---
--- Filtros para la tabla `devoluciones`
---
-ALTER TABLE `devoluciones`
-  ADD CONSTRAINT `devoluciones_ibfk_1` FOREIGN KEY (`ID_VENTA`) REFERENCES `ventas` (`ID_VENTA`);
 
 --
 -- Filtros para la tabla `domicilios`
@@ -715,7 +952,6 @@ ALTER TABLE `facturacompras`
 -- Filtros para la tabla `facturasventas`
 --
 ALTER TABLE `facturasventas`
-  ADD CONSTRAINT `facturasventas_ibfk_1` FOREIGN KEY (`ID_VENTA`) REFERENCES `ventas` (`ID_VENTA`),
   ADD CONSTRAINT `facturasventas_ibfk_2` FOREIGN KEY (`CUIL_CLIENTE`) REFERENCES `clientes` (`CUIL_CLIENTE`);
 
 --
@@ -778,9 +1014,9 @@ ALTER TABLE `remplazados`
 -- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventaAnterior` FOREIGN KEY (`ventaAnterior`) REFERENCES `ventas` (`ID_VENTA`),
   ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`NUMEROFACTURAVENTAS`) REFERENCES `facturasventas` (`NUMEROFACTURAVENTAS`),
-  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`VEN_ID_VENTA`,`COR_ID_VENTA`) REFERENCES `correccionventas` (`VEN_ID_VENTA`, `ID_VENTA`),
-  ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`COR_VEN_ID_VENTA`,`COR2_ID_VENTA`) REFERENCES `correccionventas` (`VEN_ID_VENTA`, `ID_VENTA`);
+  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`METODODEPAGO_VENTA`) REFERENCES `mediopago` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
