@@ -54,13 +54,13 @@ elemAgreProd["nombre"].addEventListener("blur", validarNombre);
     function validarNombre() {
 
 
-        validarVacio('nombre', elemAgreProd, elemAgreProdErr, "complete el nombre", true, isValid)
+        validarVacio('nombre', elemAgreProd, elemAgreProdErr, "Complete el nombre.", true, isValid)
     }
 
     // Validación de la categoría
     elemAgreProd["categoria"].addEventListener("blur", validarCategoria)
     function validarCategoria() {
-        validarVacio('categoria', elemAgreProd, elemAgreProdErr, "elija una categoría",false, isValid)
+        validarVacio('categoria', elemAgreProd, elemAgreProdErr, "Elija una categoría.",false, isValid)
     }
 
         
@@ -76,7 +76,7 @@ elemAgreProd["nombre"].addEventListener("blur", validarNombre);
    }
 )
     function validarCodigo() {
-        validarVacio('codigo', elemAgreProd, elemAgreProdErr, "complete el codigo", true, isValid)
+        validarVacio('codigo', elemAgreProd, elemAgreProdErr, "Complete el codigo.", true, isValid)
     }
     
 
@@ -88,7 +88,7 @@ elemAgreProd["nombre"].addEventListener("blur", validarNombre);
      })
     precio.addEventListener("blur", validarPrecio)
     function validarPrecio() {
-        validarVacio('precio', elemAgreProd, elemAgreProdErr, "complete el precio",false, isValid)
+        validarVacio('precio', elemAgreProd, elemAgreProdErr, "Complete el precio.",false, isValid)
     }
     
 
@@ -110,16 +110,16 @@ document.getElementById('modalAgregProdEnviar').addEventListener('click', async 
     if(isValid[0]){
        let m= await grabarProductos(formularioGrabar)
     if(m==1){
-        okMensaje.fire({text:"EL PRODUCTO FUE AGREGADO"})
+        okMensaje.fire({text:"EL PRODUCTO FUE AGREGADO."})
         cargarInputProducto("", elemAgreProd)
         return
     }
     else if(m==0){
-        errorMensaje.fire({text:"Codigo del producto repetido"})
+        errorMensaje.fire({text:"Codigo del producto repetido."})
         return
     }
     else{
-        Swal.fire({text:"Codigo del producto repetido"})
+        Swal.fire({text:"Codigo del producto repetido."})
         return
     }
     }

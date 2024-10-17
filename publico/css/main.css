@@ -63,7 +63,7 @@ body {
     transform: scale(1.10);
 }
 .menuSeleccionado{
-    border-bottom: solid 3px ; 
+    border-bottom: solid 5px #faab00; 
     
 }
 .container {
@@ -121,7 +121,8 @@ body {
 }
 
 input:checked + .slider {
-    background-color: #28a745;
+    background-color: #faab00;
+
 }
 /* Fin de los estilos para los interruptores */
 
@@ -130,6 +131,7 @@ input:checked + .slider {
     border-radius: 20px;
     width: 49px;
     height: 23px;
+    border: 2px black solid;
 }
 
 .slider.round:before {
@@ -153,8 +155,8 @@ input:checked + .slider:before {
 }
 
 .button {
-    background-color: #226304;
-    color: white;
+    background-color: #faab00;
+    color: rgb(0, 0, 0);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -165,7 +167,7 @@ input:checked + .slider:before {
     transition: background-color 0.3s, transform 0.3s ease;
     border-radius: 8px;
     font-size: 16px;
-
+    border: black 2px solid;
 }
 
 .button:hover {
@@ -179,7 +181,9 @@ input:checked + .slider:before {
     font-size: large;
     margin: 0px;
     margin-right: 10px;
+    font-weight: 800;
 }
+
 .button-remove {
 
     background-color: #d32a2a;
@@ -210,7 +214,8 @@ input:checked + .slider:before {
     position: relative;
     text-align: center;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 8px;
+    min-height: 400px;
 }
 .modal-content-child{
     margin: 50px;
@@ -314,6 +319,7 @@ input:checked + .slider:before {
         background-color: red;
         box-sizing: border-box;
         margin-left: auto;
+        border: 2px solid black;
     }
     /* #btnLogOut {
     
@@ -321,5 +327,3 @@ input:checked + .slider:before {
     #logOutCont .icono{
         margin-right: 5px;
     }
-
-    

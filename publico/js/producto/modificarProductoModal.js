@@ -43,7 +43,7 @@ modifElemAValid.forEach(x=>{
     let corregir=x.name=="nombre"
     let f= ()=>{
         validarVacio(nombre, elemModifProd, elemModifProdErr, 
-        "Por favor complete el campo", corregir, isValidModif)}
+        "Por favor complete el campo.", corregir, isValidModif)}
     x.addEventListener("blur", f)
     arrayFunc.push(f)
 })
@@ -68,15 +68,15 @@ const enviarModif = document.getElementById("MmodalAgregProdEnviar")
  
  
         if(m.mensajeBorrado<0){
-            errorMensaje.fire({text:"No se pudo Borrar el producto"})            
+            errorMensaje.fire({text:"No se pudo Borrar el producto."})            
             return;
         }
         if(m.mensajeGrabado<1){
-            errorMensaje.fire({text:"falla a grabar los productos"})
+            errorMensaje.fire({text:"Falla a grabar los productos."})
             return
         }
         if(m.mensajeGrabado==1){
-            okMensaje.fire({text:"El producto se actualizo con exito"})
+            okMensaje.fire({text:"El producto se actualizo con exito."})
             cerrarModal(modalModifPro)
             hacerTabla()
        }

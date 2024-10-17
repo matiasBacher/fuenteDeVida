@@ -55,7 +55,7 @@ function hacerCuadroVenta(venta, opciones){
     const botonConsultar = document.createElement("button")
     botonConsultar.classList.add("button", "button-consultar")
     // botonConsultar.addEventListener("click", (venta))
-    botonConsultar.textContent="consultar"
+    botonConsultar.textContent="Consultar"
 
     const botonImprimir = document.createElement("button")
     botonImprimir.classList.add("button", "button-imprimir")

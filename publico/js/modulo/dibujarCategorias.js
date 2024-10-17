@@ -31,15 +31,15 @@ for(let i=0; i<memoria.length; i++){
                grabarCategoria(await cargarCategorias())
                dibujarCategorias(padre, categoriaEnMemoria)
                if(m==-1){
-                errorMensaje.fire({text:`La categoría ${r.value} ya existe`})
+                errorMensaje.fire({text:`La categoría ${r.value} ya existe.`})
                 return;
             }
             if(m==0){
-                errorMensaje.fire({text:`No se pudo actualizar la categoria ${nombre}`})         
+                errorMensaje.fire({text:`No se pudo actualizar la categoria ${nombre}.`})         
                 return;
             }
             if(m==1){
-                okMensaje.fire({text:`La Categoria "${nombre}" fue actualizada por ${r.value}`})
+                okMensaje.fire({text:`La Categoria "${nombre}" fue actualizada por ${r.value}.`})
                 return;
                 }}
             
@@ -65,15 +65,15 @@ for(let i=0; i<memoria.length; i++){
             if (result.isConfirmed) { 
                 let m=await eliminarCategoria(id,nombre)
                 if(m==-1){
-                    errorMensaje.fire({text:`No se pudieron actualizar los productos con categoria ${nombre}`})
+                    errorMensaje.fire({text:`No se pudieron actualizar los productos con categoria ${nombre}.`})
                 }
                 else if(m==0){
-                    errorMensaje.fire({text:`No se pudo eliminar ${nombre}`})         
+                    errorMensaje.fire({text:`No se pudo eliminar ${nombre}.`})         
                 }
                 else if(m==1){
                     grabarCategoria(await cargarCategorias());
                     dibujarCategorias(padre, categoriaEnMemoria);
-                    okMensaje.fire({text:`La Categoria "${nombre}" fue eliminada`})
+                    okMensaje.fire({text:`La Categoria "${nombre}" fue eliminada.`})
                     }
         
 

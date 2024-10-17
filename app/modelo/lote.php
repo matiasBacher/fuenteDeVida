@@ -141,7 +141,7 @@ public function addCantidad(int $cantidad){
     if($cantidad>=0){
     $this->cantidad+=$cantidad;}
     else{
-        throw new Exception("ponga una cantidad positiva");
+        throw new Exception("Ponga una cantidad positiva.");
     }
 }
 public function restarCantidad($cantidad){
@@ -149,7 +149,7 @@ public function restarCantidad($cantidad){
         $this->cantidad-=$cantidad;
     }
     else{
-        throw new Exception("no se puede restar por debajo de cero");
+        throw new Exception("No se puede restar por debajo de cero.");
     }
 }
 
@@ -201,14 +201,14 @@ public function restarCantidad($cantidad){
 
     }
     public function setVencimientoLargo(){
-        $this->definirEstadoVencimiento("vencimiento largo");
+        $this->definirEstadoVencimiento("Vencimiento largo.");
     }
     public function setPorVencer(){
-        $this->definirEstadoVencimiento("por vencer");
+        $this->definirEstadoVencimiento("Por vencer.");
     }
     public function setVencido(){
         
-        $this->definirEstadoVencimiento("vencido");
+        $this->definirEstadoVencimiento("Vencido.");
        
     }
     public function comprobarVencimiento(){

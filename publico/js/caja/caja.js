@@ -54,10 +54,10 @@ botonImprimir.addEventListener("click", async ()=>{
         tablaDeProducto(productoMemoria, tablaProducto)
         ponerTotales()
         if(mensaje==1){
-             okMensaje.fire({text:"Venta registrada"})
+             okMensaje.fire({text:"Venta registrada."})
         }
         else{
-         errorMensaje.fire({text:"Venta no registrada"})
+         errorMensaje.fire({text:"Venta no registrada."})
         }
         imprimirVenta(venta)
 })
@@ -76,7 +76,7 @@ DomRegistrar.addEventListener("click", ()=>{
         tablaResumen(DOMTablaResumen,productoCarrito)
     }
     else{
-        errorMensaje.fire({text:"Por favor ponga por lo menos un producto en el carrito"})
+        errorMensaje.fire({text:"Por favor ponga por lo menos un producto en el carrito."})
     }
     })
 
@@ -109,10 +109,10 @@ quitar(carrito, productoCarrito, ponerTotales)
        tablaDeProducto(productoMemoria, tablaProducto)
        ponerTotales()
        if(mensaje.mensaje==1){
-            okMensaje.fire({text:"Venta registrada"})
+            okMensaje.fire({text:"Venta registrada."})
        }
        else{
-        errorMensaje.fire({text:"Venta no registrada"})
+        errorMensaje.fire({text:"Venta no registrada."})
        }
 
     }

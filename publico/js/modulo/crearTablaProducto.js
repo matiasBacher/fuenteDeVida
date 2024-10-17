@@ -19,7 +19,7 @@ function crearTabla(memoria,padre, funcionBorrar) {
         let celda = document.createElement('td');
         celda.className = 'productoNoEncontrado';
         celda.colSpan = 7;
-        celda.textContent = 'No se encontraron productos';
+        celda.textContent = 'No se encontraron productos.';
         fila.appendChild(celda);
         filas.push(fila);
     } else {
@@ -109,7 +109,7 @@ function crearTabla(memoria,padre, funcionBorrar) {
                     if (result.isConfirmed) { 
                         let m=await borrarProducto(x.codigo, x.nombre)
                         if(m==-2){
-                            errorMensaje.fire({text:"Error desconocido"})                   
+                            errorMensaje.fire({text:"Error desconocido."})                   
                             return;
                         }
                         if(m==-1 || m==0){
@@ -118,7 +118,7 @@ function crearTabla(memoria,padre, funcionBorrar) {
                         }
                         if(m==1){
                             hacerTabla()
-                            okMensaje.fire({text:"El producto: "+x.nombre+" se ha borrado"})
+                            okMensaje.fire({text:"El producto: "+x.nombre+" se ha borrado."})
                             return; 
                         }
                     }
