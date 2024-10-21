@@ -10,11 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 class EstadoVencimiento implements \JsonSerializable{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy:"AUTO")]
-    #[ORM\Column(name: "id", type:"intenger")]
+    #[ORM\Column(name: "id", type:"integer")]
     private int $id;
 
     #[ORM\Column(name: "nombre", type: "string")]
-    private int $nombre;
+    private string $nombre;
     function jsonSerialize(){
         return [
             "nombre"=>$this->nombre,
@@ -22,6 +22,9 @@ class EstadoVencimiento implements \JsonSerializable{
             ];
     }
 
+    function __construct($nombre){
+        $this->nombre=$nombre;
+    }
 
     /**
      * Get the value of nombre

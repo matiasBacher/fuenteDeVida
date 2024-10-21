@@ -46,8 +46,8 @@ class Producto implements \JsonSerializable {
     
     private Collection $conjuntoPropiedades;
 
-    #[ORM\OneToMany(mappedBy: "productos",targetEntity: Lote::class, cascade: [remove], fetch:  "EAGER" )]
-    private Collection $lotes;
+    #[ORM\OneToMany(mappedBy: "producto",targetEntity: Lote::class, cascade: ["remove"], fetch:  "EAGER", )]
+    private ?Collection $lotes=null;
 
 
     
@@ -68,17 +68,27 @@ class Producto implements \JsonSerializable {
         
 
     }
-    public function jsonSerialize(){
-        return [
-            "codigo"=> $this->codigo,
-            "nombre"=> $this->nombre,
-            "precio"=> $this->precioDeVenta,
-            "categoria"=> $this->categoria,
-            "propiedades"=> $this->propiedades??$this->conjuntoPropiedades,
-            "descripcion"=> $this->descripcion,
-            'fechaCreacion' => $this->fechaCreacion->format('Y-m-d H:i:s'),        ];
+    public function jsonSerialize(): array{
+        $datos=$this->getDatosBasicos();
+        $datos["lote"]=$this->getLotes()!=null?$this->getLotes()->toArray():null;
+        return $datos;
     }
     
+    public function getDatosBasicos(){
+                 
+        return
+                [ 
+                            "codigo"=> $this->codigo,
+                            "nombre"=> $this->nombre,
+                            "precio"=> $this->precioDeVenta,
+                            "categoria"=> $this->categoria,
+                            "cat"=> $this->getCat(),
+                            "propiedades"=> $this->propiedades??$this->conjuntoPropiedades,
+                            "descripcion"=> $this->descripcion,
+                            'fechaCreacion' => $this->fechaCreacion->format('Y-m-d H:i:s'),        
+                ];
+
+    }
     // Métodos getter y setter
     public function getCodigo() {
         return $this->codigo;
@@ -123,5 +133,45 @@ class Producto implements \JsonSerializable {
     }
     public function getFechaCreacion(){
         return $this->fechaCreacion->format('d-m-Y');
+    }
+
+    /**
+     * Get the value of lotes
+     */ 
+    public function getLotes()
+    {
+        return $this->lotes;
+    }
+
+    /**
+     * Set the value of lotes
+     *
+     * @return  self
+     */ 
+    public function setLotes($lotes)
+    {
+        $this->lotes = $lotes;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cat
+     */ 
+    public function getCat()
+    {
+        return $this->cat;
+    }
+
+    /**
+     * Set the value of cat
+     *
+     * @return  self
+     */ 
+    public function setCat($cat)
+    {
+        $this->cat = $cat;
+
+        return $this;
     }
 }

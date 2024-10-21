@@ -2,6 +2,7 @@
 import { abrirModalModificarProducto } from "../producto/modificarProductoModal.js";
 import{borrarProducto} from "../modulo/sincProducto.js"
 import { hacerTabla } from "../producto/producto.js";
+import { preguntaMensaje, okMensaje } from "./mensajesYCargas.js";
 export{crearTabla}
 function crearTabla(memoria,padre, funcionBorrar) {
 

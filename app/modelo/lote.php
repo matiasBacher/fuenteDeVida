@@ -15,12 +15,12 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 #[ORM\Table(name: "lotes")]
 
 class Lote implements \JsonSerializable{
-    #[ORM\id]
+    #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(name:"ID_LOTE", type: "integer")]
-    private int $id;
+    private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Producto::class, inversedBy: "lote")]
+    #[ORM\ManyToOne(targetEntity: Producto::class, inversedBy: "lotes")]
     #[ORM\JoinColumn(name: 'ID_PRODUCTO', referencedColumnName:'ID_PRODUCTO', nullable:false)]
     private Producto $producto;
 
@@ -194,8 +194,10 @@ public function restarCantidad($cantidad){
         global $entityManager;
         $estadoVencimiento = $entityManager->getRepository(EstadoVencimiento::class)
         ->findOneBy(["nombre"=>$estado]);
+        if($estadoVencimiento)$this->setEstadoVencimiento($estadoVencimiento);
+        else $this->setEstadoVencimiento(new EstadoVencimiento($estado));
 
-        $this->setEstadoVencimiento($estadoVencimiento);
+        
 
 
 
@@ -269,7 +271,8 @@ public function restarCantidad($cantidad){
             "cantidad"=>$this->getCantidad(),
             "vencimiento"=>$this->getVencimiento(),
             "ingreso"=>$this->getIngreso(),
-            "producto"=>$this->getProducto(),
+            "producto"=>$this->getProducto()->getDatosBasicos(),
+                            
             "provedor"=>$this->getProveedor(),
             
         ];
