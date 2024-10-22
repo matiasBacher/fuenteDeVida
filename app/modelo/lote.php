@@ -273,7 +273,8 @@ public function restarCantidad($cantidad){
             "ingreso"=>$this->getIngreso(),
             "producto"=>$this->getProducto()->getDatosBasicos(),
                             
-            "provedor"=>$this->getProveedor(),
+            "proveedor"=>$this->getProveedor(),
+            "estadoVencimiento"=>$this->getEstadoVencimiento(),
             
         ];
     }

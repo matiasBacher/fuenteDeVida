@@ -18,7 +18,7 @@ const npro = document.querySelector("#nProducto")
 
     let checkboxesFiltrado = checkboxes.filter(x=>x.checked);
     checkboxesFiltrado.forEach(x=>{
-        checkboxArray.push(x.id)
+        checkboxArray.push(x.value)
     })
     return checkboxArray;
 }
@@ -26,14 +26,7 @@ const npro = document.querySelector("#nProducto")
 function filtrar( filtro, memoria){
     
     let productosFiltrados = memoria.filter(x => {
-        for (let i = 0; i < filtro.length; i++) {
-            if (x.propiedades[filtro[i]]) {
-            }
-            else{
-                return false
-            }
-        }
-        return true;
+       return filtro.every(e=>x.propiedades.includes(e))
     }
     )
     return productosFiltrados

@@ -83,7 +83,7 @@ class ControladorLoteClass{
 
 
 
-                $ordenProducto=$this->objeto->orden->ordeProductos;
+                $ordenProducto=$this->objeto->orden->ordenProductos ;
                 $ordenLotes=$this->objeto->orden->ordenLotes;
 
                 $mensaje="";

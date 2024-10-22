@@ -12,8 +12,11 @@
         #[ORM\Column(name:"ID_PROPIEDADES", type:"integer")]
         private int $id;
 
-        #[ORM\Column(name: "NOMBRE_PROPIEDADES", type:" type: 'string', length: 250,")]
+        #[ORM\Column(name: "NOMBRE_PROPIEDADES", type:"string", length: 250)]
         private string $nombre;
+
+        #[ORM\Column(name: "descripcion", type:"string", length: 250  )]
+        private ?string $descripcion=null;
 
         public function __construct($nombre){
             $this->nombre=$nombre;
@@ -29,4 +32,24 @@
             $this->nombre=$nombre;
         }
 
+
+        /**
+         * Get the value of descripcion
+         */ 
+        public function getDescripcion()
+        {
+                return $this->descripcion;
+        }
+
+        /**
+         * Set the value of descripcion
+         *
+         * @return  self
+         */ 
+        public function setDescripcion($descripcion)
+        {
+                $this->descripcion = $descripcion;
+
+                return $this;
+        }
     }

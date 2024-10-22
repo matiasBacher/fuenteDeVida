@@ -19,7 +19,7 @@ function cargarInputProducto(carga, elementos){
         elementos.descripcion.value=carga.descripcion
         elementos.categoria.value=carga.categoria=="ninguno"?"":carga.categoria
         elementos.propiedades.forEach(x=>{
-            x.checked=carga.propiedades[x.name]
+            x.checked=carga.propiedades.includes(x.value)
         })
         }
     }

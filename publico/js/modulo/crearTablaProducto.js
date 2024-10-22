@@ -51,31 +51,31 @@ function crearTabla(memoria,padre, funcionBorrar) {
 
             // Creamos y asignamos la celda de las propiedades del producto
             let propiedades = document.createElement('td');
-            if (x.propiedades.esDiuretico) {
+            if (x.propiedades.includes( "esDiuretico" )) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeAzul';
                 span.textContent = 'Diuretico';
                 propiedades.appendChild(span);
             }
-            if (x.propiedades.sinSodio) {
+            if (x.propiedades.includes( "sinSodio" )) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeRojo';
                 span.textContent = 'Bajo Sodio';
                 propiedades.appendChild(span);
             }
-            if (x.propiedades.esNatural) {
+            if (x.propiedades.includes( "esNatural" )) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeVerde';
                 span.textContent = 'Es Natural';
                 propiedades.appendChild(span);
             }
-            if (x.propiedades.sinTacc) {
+            if (x.propiedades.includes( "sinTacc" )) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeNaranja';
                 span.textContent = 'Sin TACC';
                 propiedades.appendChild(span);
             }
-            if (x.propiedades.aptoDiabetico) {
+            if (x.propiedades.includes( "aptoDiabetico" )) {
                 let span = document.createElement('span');
                 span.className = 'badge badgeNegro';
                 span.textContent = 'Apto Diabetico';
