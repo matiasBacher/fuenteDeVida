@@ -32,7 +32,7 @@ function imprimirVenta(venta){
                     <title>Imprimir Venta</title>
                 </head>
                 <body>
-                    <h1>Numero Ticket: ${venta.id!==undefined?venta.id:"Venta No Registrada"}</h1>
+                    <h1>Numero Ticket: ${venta.id!==undefined?venta.id:"Venta No Registrada."}</h1>
                     <table>
                         <thead>
                             <tr>

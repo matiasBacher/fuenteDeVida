@@ -71,7 +71,7 @@ $paso=intdiv(($precioMaximo-$precioMinimo), 100)
         ?>
     </div>
     <div class="fondoModal" id="modalConsultarModVentas">
-       <div class="modalContent">
+       <div class="modal-content">
         <span class="close" id="closeModalConsultarVenta">&times;</span>
         <div id="contenedorConsulVenta">
         </div>

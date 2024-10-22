@@ -21,7 +21,7 @@ try{
     }
     else{
         ocualtarCarga();
-        errorMensaje.fire({Text:"error al colsultar las ventas"});
+        errorMensaje.fire({Text:"Error al colsultar las ventas."});
     }
 }
     catch(e){
@@ -117,12 +117,12 @@ async function consultarVentasCorregidas(idVentaConsultar){
         }
         else{
             ocualtarCarga();
-            errorMensaje.fire({tit:"error al colsultar las ventas"});
+            errorMensaje.fire({tit:"Error al colsultar las ventas."});
         }
     }
         catch{
             ocualtarCarga();
-            errorMensaje.fire({Text:"error al colsultar las ventas"});
+            errorMensaje.fire({Text:"Error al colsultar las ventas."});
         }
         return ventas;
     }

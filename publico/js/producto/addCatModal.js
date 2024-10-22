@@ -47,10 +47,10 @@ addBtn.onclick = function () {
     }
 
     else if (m == 0) {
-        errorMensaje.fire({text:"error al cargar los datos en la base de datos"})        
+        errorMensaje.fire({text:"Error al cargar los datos en la base de datos."})        
     }
     else if (m == 1) {
-        okMensaje.fire({text:`La categoria "${nombreCategoria}" fue cargada correctamente`})
+        okMensaje.fire({text:`La categoria "${nombreCategoria}" fue cargada correctamente.`})
         // Limpiar el campo de entrada
         newCategory.value = "";
     }

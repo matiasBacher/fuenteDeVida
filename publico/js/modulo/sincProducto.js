@@ -19,7 +19,7 @@ async function grabarProductos(form){
             ocualtarCarga()
             respuesta = await response.json();
         } else {
-            throw new Error('Error al obtener la respuesta del servidor')
+            throw new Error('Error al obtener la respuesta del servidor.')
             ocualtarCarga()
 
         }
@@ -54,7 +54,7 @@ async function modificarProducto(formulario, codigo){ //busca las categorias en 
             ocualtarCarga()
         } else {
             ocualtarCarga()
-            throw new Error('Error al obtener la respuesta del servidor')
+            throw new Error('Error al obtener la respuesta del servidor.')
         }
         } catch (error) {
             ocualtarCarga
@@ -90,7 +90,7 @@ async function modificarProducto(formulario, codigo){ //busca las categorias en 
            } else {
                ocualtarCarga()
 
-               throw new Error('Error al obtener la respuesta del servidor');
+               throw new Error('Error al obtener la respuesta del servidor.');
            }
        } catch (error) {
            ocualtarCarga()
@@ -122,7 +122,7 @@ async function modificarProducto(formulario, codigo){ //busca las categorias en 
             productos = await response.json();
         } else {
             ocualtarCarga()
-            throw new Error('Error al obtener la respuesta del servidor');
+            throw new Error('Error al obtener la respuesta del servidor.');
         }
     } catch (error) {
         ocualtarCarga()

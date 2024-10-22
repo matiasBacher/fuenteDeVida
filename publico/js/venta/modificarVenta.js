@@ -77,22 +77,22 @@ botonModificar.addEventListener("click", async ()=>{
             productoMemoria.length=0
 
             if(mensaje==1){
-                okMensaje.fire({text:"se modifico la venta con exito"})
+                okMensaje.fire({text:"Se modifico la venta con exito."})
                 cerrarModal(modalVentaModificar)
                 recargarTabla()
 
             }
             else{
-                errorMensaje.fire({text:"no se pudo modificar la venta"})
+                errorMensaje.fire({text:"No se pudo modificar la venta."})
                 cerrarModal(modalVentaModificar)
                 }
         }
         else{
-            errorMensaje.fire({text:"Por favor especifique el motivo de la modificación"})
+            errorMensaje.fire({text:"Por favor especifique el motivo de la modificación."})
         }
     }
     else{
-    errorMensaje.fire({text:"Por favor ponga por lo menos un producto en el carrito"})
+    errorMensaje.fire({text:"Por favor ponga por lo menos un producto en el carrito."})
         
     }
     })
