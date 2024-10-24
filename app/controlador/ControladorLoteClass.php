@@ -4,9 +4,9 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/Lote.php");
 
-use modelo\Lote;
-use modelo\Proveedor;
-use modelo\Producto;
+use modelo\Lote as Lote;
+use modelo\Proveedor as Proveedor;
+use modelo\Producto as Producto;
 
 class ControladorLoteClass{
     private string $accion;
@@ -87,25 +87,22 @@ class ControladorLoteClass{
                 $ordenLotes=$this->objeto->orden->ordenLotes;
 
                 $mensaje="";
-                $productos=$entityManager->getRepository(Producto::class)
-                ->createQueryBuilder("p")
-                ->innerJoin(Lote::class, "l")
-                ->where(is_numeric($busqueda)?
-                "p.codigo = :busqueda":"p.nombre like :busqueda")
+                $productos=$entityManager->createQuery(
+                    "SELECT p, l  FROM modelo\Producto p  JOIN p.lotes l 
+                    WHERE p.codigo = :busqueda". 
 
-                ->andWhere("l.vencimiento <= :venMax")
-                ->andWhere("l.vencimiento >= :venMin")
+                    (isset($filtro['venMax'])?"AND l.vencimiento <= :venMax":" ").
 
-                ->andWhere("l.ingreso <= :ingMax")
-                ->andWhere("l.ingreso >= :ingMin")
-                
-                ->orderBy("p.$ordenProducto","asc")
-                ->addOrderBy("l.$ordenLotes")
+                    "AND l.vencimiento >= :venMin 
+                    AND l.ingreso <= :ingMax 
+                    AND l.ingreso >= :ingMin 
+                    ORDER BY p.{$ordenProducto} asc, l.{$ordenLotes} ASC"
+)
 
                 ->setParameters($filtro
                     )
 
-                ->getQuery()
+                
                 ->getResult();
 
                 if(count($productos)<=0){

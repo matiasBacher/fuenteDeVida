@@ -14,7 +14,7 @@ export class filaLote extends HTMLTableRowElement{
         })
     }
     _dispararEvento(nombre){
-        evento= new CustomEvent(nombre,{
+       const evento= new CustomEvent(nombre,{
             detail:{
                 lote:this.lote
             },
@@ -26,8 +26,10 @@ export class filaLote extends HTMLTableRowElement{
 
     definirLote(lote){
         this.lote=lote
+        this.estadoVencimiento=this.lote.estadoVencimiento
+
         this.render()
-        this.estadoVencimiento
+        
 
     }
     connectedCallback(){
@@ -72,7 +74,7 @@ export class filaLote extends HTMLTableRowElement{
           this.innerHTML= /*html*/
           
             `<td>${lote.id}</td>
-            <td>${lote.proveedor.nombre}</td>
+            <td>${lote.proveedor.razonSocial}</td>
             <td>${lote.ingreso}</td>
             <td>${lote.vencimiento}</td>
             <td>${lote.cantidad}</td>

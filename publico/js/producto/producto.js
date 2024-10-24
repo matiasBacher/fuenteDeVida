@@ -61,7 +61,7 @@ const buscarElemento = document.querySelector("#buscarProducto");
 
 const checkboxes = Array.from(document.querySelectorAll('#filter-box input[type="checkbox"]'))
 
-
+var temporizadorProducto
 
 async function hacerTabla (b=true, busca=buscarElemento.value ){
     if(b){
@@ -75,7 +75,18 @@ async function hacerTabla (b=true, busca=buscarElemento.value ){
     crearTabla(productosEnMemoria, tabla)
     npro.textContent=productosEnMemoria.length
 }
-buscarElemento.addEventListener('keyup',()=>hacerTabla())
+buscarElemento.addEventListener('keyup',()=>{
+    if(temporizadorProducto){
+        console.log("des")
+        clearTimeout(temporizadorProducto)
+
+    }
+    
+        console.log("act")
+        temporizadorProducto=setTimeout(hacerTabla,1000)
+    
+}
+)
 ordenElemento.addEventListener("change", ()=>hacerTabla(false))
 
 checkboxes.forEach(x=>{

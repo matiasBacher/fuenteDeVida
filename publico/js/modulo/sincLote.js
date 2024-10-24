@@ -20,12 +20,14 @@ export async function consultaLote(objeto){
             ordenProductos:"codigo",
         },
         filtros:{
-            busqueda:1,
-            venMax:new Date().toISOString().split("T")[0],
+           
+
             venMin: "1970-01-01",
             ingMax: new Date().toISOString().split("T")[0],
             ingMin: "1970-01-01",
-        }, ...objeto
+            busqueda:1, 
+        },
+         ...objeto
 
     }
     return await base("consulta",objetoAEnviar)
@@ -59,7 +61,7 @@ async function base(accion, objeto){
 
 
         }
-    return respuesta
+    return mensaje
 
 
 }

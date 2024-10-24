@@ -15,7 +15,6 @@ async function abrirModalModificarProducto(producto){
 
 }
 
-let isValidModif=[false]
 const modalModifPro = document.getElementById('mProducto');
 const closeModifPro = document.getElementById('McloseModalAddProduct');
 
@@ -36,6 +35,10 @@ let elemModifProdErr={
     categoria:  document.getElementById('McategoriaError'),
 }
 let modifElemAValid=[ elemModifProd.precio, elemModifProd.nombre, elemModifProd.categoria]
+const isValidModif = {}
+modifElemAValid.forEach((x)=>{
+    isValidModif[x.name]=false; 
+})
 
 let arrayFunc = []
 modifElemAValid.forEach(x=>{
@@ -63,7 +66,7 @@ const MproductForm= document.getElementById("MproductoForm")
 const enviarModif = document.getElementById("MmodalAgregProdEnviar")
  enviarModif.addEventListener('click',  async ()=>{
     validarTodo(arrayFunc)
-    if(isValidModif[0]){
+    if(Object.values(isValidModif).every(x=>x)){
         let m = await modificarProducto(MproductForm, parseInt(MproductForm.codigo.value))
  
  

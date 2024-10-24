@@ -10,7 +10,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."\bootstrap.php");
 #selector opciones segun el valor de accion
 if(isset ($_POST["accion"])){
     if($_POST["accion"]=="busqueda") {
-        $busqueda=$_POST["busqueda"];
+        $busqueda=is_numeric($_POST["busqueda"])
+                    ?$_POST["busqueda"]:
+                    "%{$_POST["busqueda"]}%";
 
         if($busqueda==""){
             $productos= $entityManager->getRepository(Producto::class)->findAll();
