@@ -105,10 +105,10 @@ class ControladorLoteClass{
                 $mensaje="";
                 $productos=$entityManager->getRepository(Producto::class)
                 ->createQueryBuilder("p")
-                ->where(is_numeric($busqueda)?"p.codigo = ?":"p.nombre = ?")
-                ->setParameter($busqueda)
+                ->where(is_numeric($busqueda)?"p.codigo = :n":"p.nombre LIKE :n")
+                ->setParameter("n", $busqueda)
                 ->getQuery()
-                ->getArrayResult();
+                ->getResult();
 
 
 
@@ -127,21 +127,23 @@ class ControladorLoteClass{
 
 
                 foreach($productos as $p){
-                    $
-                    $lotes = $p->getLotes()->filter(function($x){
+                    
+                    
+                    $lotes = $p->getLotes()->filter(function($x) use ($filtro){
                         return (
+
                             ($x->getVencimiento() >= new DateTime($filtro['venMin'])) 
                             and (isset($filtro["venMax"])
                                     ?($x->getVencimiento() >= new DateTime($filtro['venMax']))
                                     :true) 
-                            and ($x->getIngreso() >= new DateTime($filtro['ingMin']))
-                            and ($x->getIngreso() <= new DateTime($filtro['ingMax']))
+                            and ($x->getIngreso() <= new DateTime($filtro['ingMin']))
+                            and ($x->getIngreso() >= new DateTime($filtro['ingMax']))
 
                         );
                     }
                     );
                     $arrayOrd = $lotes->toArray();
-                    usort($arrayOrd,function($a,$b){
+                    usort($arrayOrd,function($a,$b) use ($ordenLotes){
                         
                         switch($ordenLotes){
                             case "nombre":
@@ -156,14 +158,17 @@ class ControladorLoteClass{
                                 $ComparadorA=$a->getIngreso();
                                 $ComparadorB=$b->getIngreso();
                                 break;
-
-
-                            
-                            
+                            default:
+                                $ComparadorA=$a->getId();
+                                $ComparadorB=$b->getId();
+                                break;
+                            }
+                            return $ComparadorA==$ComparadorB?0
+                                :($ComparadorA<$ComparadorB?1:-1);
                         }
+                    );
 
-                    })
-                    $p->setLotes()
+                    $p->setLotes(new ArrayCollection($arrayOrd));
                 }
 
 

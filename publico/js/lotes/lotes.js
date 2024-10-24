@@ -4,5 +4,5 @@ import { consultaLote } from "../modulo/sincLote.js"
 
 
 const contenedor= document.querySelector("contenedor-cuadro-productos-lotes")
-let respuesta= await consultaLote({busqueda: 1})
+let respuesta= await consultaLote({busqueda: "m"})
 contenedor.productos=respuesta.resultadoBusqueda
