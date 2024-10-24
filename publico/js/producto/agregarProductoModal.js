@@ -107,7 +107,7 @@ const formularioGrabar = document.getElementById("productoForm")
 
 document.getElementById('modalAgregProdEnviar').addEventListener('click', async ()=>{
     validarTodo([validarCategoria,validarCodigo,validarNombre,validarPrecio])
-    if(Object.values(isValidModif).every(x=>x)){
+    if(Object.values(isValid).every(x=>x)){
        let m= await grabarProductos(formularioGrabar)
     if(m==1){
         okMensaje.fire({text:"EL PRODUCTO FUE AGREGADO."})

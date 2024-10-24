@@ -15,18 +15,17 @@ export async function modificarLote(objeto){
 
 export async function consultaLote(objeto){
         let objetoAEnviar={
-        orden:{
+        
             ordenLotes:"id",
             ordenProductos:"codigo",
-        },
-        filtros:{
+        
+        
            
 
             venMin: "1970-01-01",
             ingMax: new Date().toISOString().split("T")[0],
             ingMin: "1970-01-01",
             busqueda:1, 
-        },
          ...objeto
 
     }

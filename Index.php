@@ -6,7 +6,8 @@ $pagina = "";
 $paginaDisponible=[
                     ["producto","Productos"],
                     ["caja","Caja"],
-                    ["venta","Ventas"]
+                    ["venta","Ventas"],
+                    ["lotes","Inventario"]
 ];
 
 session_start();

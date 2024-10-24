@@ -75,3 +75,4 @@ export class cuadroProductoLotes extends HTMLElement{
                 
     }
 }
+customElements.define("cuadro-producto-lotes", cuadroProductoLotes)

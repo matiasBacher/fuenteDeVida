@@ -1,5 +1,10 @@
 <?php
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
+use FontLib\TrueType\Collection;
+
+
 
 require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/Lote.php");
@@ -74,42 +79,91 @@ class ControladorLoteClass{
 
             private function consulta(){
                 global $entityManager;
-                $filtro = is_array($this->objeto->filtros)?
-                    $this->objeto->filtros:
-                    get_object_vars($this->objeto->filtros);
+              
+
+                if(isset($this->objeto->venMax)){
+                    $filtro["venMax"]=$this->objeto->venMax;
+                }
 
 
-                $busqueda=$filtro['busqueda'];
+                $busqueda=$this->objeto->busqueda;
+                $busqueda=is_numeric($busqueda)?$busqueda:"%{$busqueda}%";
+
+                  $filtro = [
+                            "busqueda"=>$busqueda,
+                            "venMin"=>$this->objeto->venMin,
+                            "ingMin"=>$this->objeto->ingMin,
+                            "ingMax"=>$this->objeto->ingMax,
+
+                ];
 
 
 
-                $ordenProducto=$this->objeto->orden->ordenProductos ;
-                $ordenLotes=$this->objeto->orden->ordenLotes;
+                $ordenProducto=$this->objeto->ordenProductos ;
+                $ordenLotes=$this->objeto->ordenLotes;
 
                 $mensaje="";
-                $productos=$entityManager->createQuery(
-                    "SELECT p, l  FROM modelo\Producto p  JOIN p.lotes l 
-                    WHERE p.codigo = :busqueda". 
+                $productos=$entityManager->getRepository(Producto::class)
+                ->createQueryBuilder("p")
+                ->where(is_numeric($busqueda)?"p.codigo = ?":"p.nombre = ?")
+                ->setParameter($busqueda)
+                ->getQuery()
+                ->getArrayResult();
 
-                    (isset($filtro['venMax'])?"AND l.vencimiento <= :venMax":" ").
 
-                    "AND l.vencimiento >= :venMin 
-                    AND l.ingreso <= :ingMax 
-                    AND l.ingreso >= :ingMin 
-                    ORDER BY p.{$ordenProducto} asc, l.{$ordenLotes} ASC"
-)
-
-                ->setParameters($filtro
-                    )
 
                 
-                ->getResult();
 
                 if(count($productos)<=0){
                     $mensaje="busquedaNoExitosa";
                 }
                 else{
                     $mensaje="busquedaExitosa";
+                }
+
+          
+
+                      
+
+
+                foreach($productos as $p){
+                    $
+                    $lotes = $p->getLotes()->filter(function($x){
+                        return (
+                            ($x->getVencimiento() >= new DateTime($filtro['venMin'])) 
+                            and (isset($filtro["venMax"])
+                                    ?($x->getVencimiento() >= new DateTime($filtro['venMax']))
+                                    :true) 
+                            and ($x->getIngreso() >= new DateTime($filtro['ingMin']))
+                            and ($x->getIngreso() <= new DateTime($filtro['ingMax']))
+
+                        );
+                    }
+                    );
+                    $arrayOrd = $lotes->toArray();
+                    usort($arrayOrd,function($a,$b){
+                        
+                        switch($ordenLotes){
+                            case "nombre":
+                                $ComparadorA=$a->getNombre();
+                                $ComparadorB=$b->getNombre();
+                                break;
+                            case "vencimiento":
+                                $ComparadorA=$a->getVencimiento();
+                                $ComparadorB=$b->getVencimiento();
+                                break;
+                            case "ingreso":
+                                $ComparadorA=$a->getIngreso();
+                                $ComparadorB=$b->getIngreso();
+                                break;
+
+
+                            
+                            
+                        }
+
+                    })
+                    $p->setLotes()
                 }
 
 

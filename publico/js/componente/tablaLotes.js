@@ -19,7 +19,7 @@ export class tablaLotes extends HTMLTableElement{
         this.render()
         
     }
-    static get observedAtrributes(){
+    static get observedAttributes(){
         return ["vacio"]
     }
 
@@ -58,7 +58,7 @@ export class tablaLotes extends HTMLTableElement{
         }
         tBody.innerHTML=""
         if(this.vacio){
-            tbody.innerHTML=/*html*/
+            tBody.innerHTML=/*html*/
             `<tr>
                 <td collspan="6">No hay lotes</td>
             </tr>`
