@@ -136,8 +136,8 @@ class ControladorLoteClass{
                             and (isset($filtro["venMax"])
                                     ?($x->getVencimiento() >= new DateTime($filtro['venMax']))
                                     :true) 
-                            and ($x->getIngreso() <= new DateTime($filtro['ingMin']))
-                            and ($x->getIngreso() >= new DateTime($filtro['ingMax']))
+                            and ($x->getIngreso() >= new DateTime($filtro['ingMin']))
+                            and ($x->getIngreso() <= new DateTime($filtro['ingMax']))
 
                         );
                     }
