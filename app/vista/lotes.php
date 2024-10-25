@@ -2,8 +2,8 @@
 <script type="module" src="publico/js/componente/contenedorCuadroProductoLotes.js"></script>
 <h1>Filtrar Productos</h1>
     <div class="filter-product">
-        <input type="text" placeholder="Buscar producto..." class="search-box">
-        <select name="order-product" class="select-box">
+        <input type="text" placeholder="Buscar producto..." class="search-box" id="buscador">
+        <select name="order-product" class="select-box" id="selectFiltroProductos">
             <option value="nombre">Ordenar por Nombre</option>
             <option value="precio">Ordenar por Precio</option>
             <option value="categoria">Ordenar por Categoría</option>
@@ -15,11 +15,11 @@
      <div class="filtroDeLotes">
         <h1>Filtrar Lotes</h1>    
         <div class="filter-lotes">
-            <select name="order-lotes" class="select-box">
+            <select id="selectFiltroLotes" name="order-lotes" class="select-box">
                 <option value="nombre">Ordenar por Nombre</option>
-                <option value="precio">Ordenar por Precio</option>
-                <option value="categoria">Ordenar por Categoría</option>
-                <option value="codigo">Ordenar por Código</option>
+                <option value="id">Ordenar por Codigo</option>
+                <option value="vencimiento">Ordenar por Fecha Vencimiento</option>
+                <option value="codigo">Ordenar por Fecha Ingreso</option>
             </select>
         <?php swich("vencido","1","Vencidos" ) ?>
         </div>
