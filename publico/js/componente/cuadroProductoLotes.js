@@ -49,25 +49,28 @@ export class cuadroProductoLotes extends HTMLElement{
     }
     render(){
         this.innerHTML=/*html*/
-        `<div class="cabezera-producto-lote">
-            <div class="codigo-producto-lote">
-                <span class="etiqueta-codigo-producto-lote">Codigo: </span>
-                <span class="texto-codigo-producto-lote">
-                    ${this.producto.codigo.toString().padEnd(8,"0")}
-                </span>
-            <div class="nombre-producto-lote">
-                <span class="etiqueta-nombre-producto-lote">Nombre: </span>
-                <span class="texto-nombre-producto-lote">
-                    ${this.producto.nombre}
-                </span>
+        `<div class="contenedor-lotes">
+            <div class="cabezera-producto-lote">
+                <div class="codigo-producto-lote">
+                    <span class="etiqueta-codigo-producto-lote">Codigo: </span>
+                    <span class="texto-codigo-producto-lote">
+                        ${this.producto.codigo.toString().padEnd(8,"0")}
+                    </span>
+                <div class="nombre-producto-lote">
+                    <span class="etiqueta-nombre-producto-lote">Nombre: </span>
+                    <span class="texto-nombre-producto-lote">
+                        ${this.producto.nombre}
+                    </span>
+                </div>
+                <div class="contenedorBotones-producto-lote">
+                    <button class="button boton-producto-lote">Agregar</button>
+                </div>
             </div>
-            <div class="contenedorBotones-producto-lote">
-                <button class="button boton-producto-lote">+</button>
+            <div class="contenedor-tabla-producto-lote">
+                <table is="tabla-lotes">
             </div>
         </div>
-        <div class="contenedor-tabla-producto-lote">
-            <table is="tabla-lotes">
-        </div>`
+        `
 
             const tablaLotes=this.querySelector("table")
             tablaLotes.lotes=this.producto.lote

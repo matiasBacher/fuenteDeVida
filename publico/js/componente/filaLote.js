@@ -79,8 +79,8 @@ export class filaLote extends HTMLTableRowElement{
             <td>${lote.vencimiento}</td>
             <td>${lote.cantidad}</td>
             <td>
-                <button class="button button-remove">Eliminar</button>
-                <button class="button button-modify">Modificar</button>
+                <button class="button button-modify">🖊</button>
+                <button class="button button-remove">Eliminar</button>                
             </td>`
 
     }
