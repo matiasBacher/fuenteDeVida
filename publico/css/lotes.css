@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.filter-product, .filter-lotes {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    padding: 8px;
+    margin-right: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.select-box {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkbox-label {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.date-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.date-box {
+    
+    background-color: rgb(135, 177, 144);
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 300px;
+    height: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #000000;
+    flex-grow: 1;
+    margin: 0px 5px;
+
+}
+
+.date-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.date-box {
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    width: 45%;
+    text-align: center;
+    background-color: #87b190;
+}
+
+.date-box h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+input[type="date"] {
+    padding: 8px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filtroDeLotes{
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 5px;
+    flex-direction: column;
+}
