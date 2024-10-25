@@ -44,17 +44,19 @@ export class contenedorCuadroProductoLotes extends HTMLElement{
         if(this.vacio){
             this.innerHTML=/*html*/
             `<div>
-                No se encontraron productos
+                No se encontraron productos.
             </div>`
         }
         else{
             this.innerHTML=""
+            let div=document.createElement("div")
+
             this.productos.forEach((x)=>{
                 let cuadroProducto=document.createElement("cuadro-producto-lotes")
                 cuadroProducto.producto=x
-                this.appendChild(cuadroProducto)
-            })
-
+                div.appendChild(cuadroProducto)
+            }) 
+            this.appendChild(div)
         }
         }
 

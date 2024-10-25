@@ -44,11 +44,11 @@ export class tablaLotes extends HTMLTableElement{
         const tHead=this.createTHead()
         tHead.innerHTML=/*html*/
         `<tr>
-            <th>codigo</th>
+            <th>Codigo</th>
             <th>Proveedor</th>
-            <th>fecha ingreso</th>
-            <th>vencimiento</th>
-            <th>cantidad</th>
+            <th>Fecha Ingreso</th>
+            <th>Vencimiento</th>
+            <th>Cantidad</th>
             <th>Acciones</th>
         </tr>`
 
@@ -60,7 +60,7 @@ export class tablaLotes extends HTMLTableElement{
         if(this.vacio){
             tBody.innerHTML=/*html*/
             `<tr>
-                <td collspan="6">No hay lotes</td>
+                <td collspan="6">No hay lotes.</td>
             </tr>`
 
 

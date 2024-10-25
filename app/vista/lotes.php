@@ -49,6 +49,7 @@
 
 
     <contenedor-cuadro-productos-lotes></contenedor-cuadro-productos-lotes>
+    
 <!-- Modal -->
 <div class="modal">
     <div class="modal-content">
