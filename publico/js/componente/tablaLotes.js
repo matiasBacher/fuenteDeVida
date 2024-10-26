@@ -60,7 +60,7 @@ export class tablaLotes extends HTMLTableElement{
         if(this.vacio){
             tBody.innerHTML=/*html*/
             `<tr>
-                <td collspan="6">No hay lotes.</td>
+                <td colspan="6">No hay lotes.</td>
             </tr>`
 
 

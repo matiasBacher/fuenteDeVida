@@ -1,4 +1,12 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/app/vista/componentes/swich.php");?>
+<?php 
+
+use modelo\Proveedor;
+include_once($_SERVER['DOCUMENT_ROOT']."/app/vista/componentes/swich.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
+
+$proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
+
+?>
 <script type="module" src="publico/js/componente/contenedorCuadroProductoLotes.js"></script>
 <h1>Filtrar Productos</h1>
     <div class="filter-product">
@@ -15,7 +23,7 @@
      <div class="filtroDeLotes">
         <h1>Filtrar Lotes</h1>    
         <div class="filter-lotes">
-            <select id="selectFiltroLotes" name="order-lotes" class="select-box">
+            <select id="selectFiltroLotes" name="order-lotes" class="select-box" >
                 <option value="nombre">Ordenar por Nombre</option>
                 <option value="id">Ordenar por Codigo</option>
                 <option value="vencimiento">Ordenar por Fecha Vencimiento</option>
@@ -31,9 +39,13 @@
             <div class="date-box">
                 <h2>Ingreso</h2>
                 <label for="ingreso-desde">Desde</label>
-                <input type="date" id="ingreso-desde" name="ingreso-desde">
+                <input type="date" id="ingreso-desde" name="ingreso-desde" 
+                value="<?=date("Y-m-d", strtotime("-1 month"))?>"
+                max="<?=date("Y-m-d", strtotime("-1 month"))?>">
                 <label for="ingreso-hasta">Hasta</label>
-                <input type="date" id="ingreso-hasta" name="ingreso-hasta">
+                <input type="date" id="ingreso-hasta" name="ingreso-hasta" 
+                value="<?=date("Y-m-d")?>" 
+                max="<?=date("Y-m-d")?>">
             </div>
 
             <!-- Cuadro de Vencimiento -->
@@ -42,7 +54,7 @@
                 <label for="vencimiento-desde">Desde</label>
                 <input type="date" id="vencimiento-desde" name="vencimiento-desde">
                 <label for="vencimiento-hasta">Hasta</label>
-                <input type="date" id="vencimiento-hasta" name="vencimiento-hasta">
+                <input type="date" id="vencimiento-hasta" name="vencimiento-hasta" >
             </div>
         </div>
     </div>
@@ -51,15 +63,22 @@
     <contenedor-cuadro-productos-lotes></contenedor-cuadro-productos-lotes>
     
 <!-- Modal -->
-<div class="modal">
-    <div class="modal-content">
+<div class="fondoModal modal">
+
+    <div class="modal-content" id="modalAgregMod">
+        <span class="close" id="closeModalConsultarVenta">&times;</span>
+
         
         <!-- Proveedor -->
         <div class="input-group">
             <label for="proveedor">Proveedor</label>
             <select id="proveedor">
-                <option value="arcor">Arcor</option>
-                <option value="dietetica_carla">Dietetica Carla</option>
+                <?php 
+                    foreach($proveedores as $proveedor):?>
+                    <option value="<?=$proveedor->getId()?>">
+                        <?$proveedor->getRazonSocial()?>
+                    </option>
+                    <?php endforeach ;?>
             </select>
         </div>
 
@@ -78,8 +97,9 @@
         <!-- Ingreso -->
         <div class="input-group">
             <label for="ingreso">Ingreso</label>
-            <input type="checkbox" id="ingreso" name="ingreso"> Hoy
+            <input type="date" id="ingreso" name="ingreso" format="Y-m-d">
         </div>
+
 
         <!-- Código del Lote -->
         <div class="input-group">
@@ -87,10 +107,23 @@
             <input type="text" id="codigo-lote" value="00000003" disabled>
         </div>
 
+        <!-- producto -->
+         <div class="input-group">
+            <div id="codigoProductoModAgr">
+                <span class="etiquetaProducto">Nombre Producto:</span></div>
+                <span class="contProd"></span>
+         </div>
+            <div id="nombreProdutoModAgr">
+                <span class="etiquetaProducto">Nombre Producto:</span></div>
+                <span class="contProd"></span>
+         </div>
+
+        <div></div>
+
         <!-- Botones -->
         <div class="modal-footer">
-            <button class="btn modificar-btn">Modificar</button>
-            <button class="btn cerrar-btn">Cerrar</button>
+            <button class="button">Agregar</button>
+           
         </div>
     </div>
 </div>

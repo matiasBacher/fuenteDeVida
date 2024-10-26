@@ -1,5 +1,6 @@
 
 import{contenedorCuadroProductoLotes} from "../componente/contenedorCuadroProductoLotes.js"
+import { abrirModal } from "../modulo/mensajesYCargas.js"
 import { consultaLote } from "../modulo/sincLote.js"
 
 
@@ -17,6 +18,26 @@ const contenedor= document.querySelector("contenedor-cuadro-productos-lotes")
  venMin: document.querySelector("#vencimiento-desde"),
  venMax: document.querySelector("#vencimiento-hasta")
  }
+
+ const modalAgregModif = document.querySelector("#modalAgregMod")
+
+const elementoModAgreg = {
+    proveedor: document.querySelector("#proveedor"),
+    cantidad: document.querySelector("#cantidad"),
+    vencimiento: document.querySelector("#vencimiento"),
+    ingreso: document.querySelector('#ingreso'),
+    id: document.querySelector("codigo-lote"),
+    producto:{
+            codigo:document.querySelector("#codigoProductoModAgr > .contProd"),
+            nombre:document.querySelector("#nombreProductoModAgr > .contProd"),
+            }
+}
+function annadirProductoModal(producto){
+    Object.keys(elementoModAgreg.producto).forEach(k=>{
+        elementoFltro.producto[k].textContent= producto[k]
+
+    })
+}
  function retonarValue(objeto){
     let objetoRetorno ={}
     Object.keys(objeto).forEach((k,i)=>{
@@ -64,4 +85,14 @@ document.addEventListener("buscarLotesProductos", (e)=>{
 
     },1000)
 })
+
+let modoModificar = false
+document.addEventListener("annadirLote",(e)=>{
+    let producto = e.detail.producto
+    annadirProductoModal(producto)
+    abrirModal(modalAgregModif)
+
+})
+
+
 

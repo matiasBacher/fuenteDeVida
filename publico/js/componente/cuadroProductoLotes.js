@@ -56,6 +56,7 @@ export class cuadroProductoLotes extends HTMLElement{
                     <span class="texto-codigo-producto-lote">
                         ${this.producto.codigo.toString().padEnd(8,"0")}
                     </span>
+                </div>
                 <div class="nombre-producto-lote">
                     <span class="etiqueta-nombre-producto-lote">Nombre: </span>
                     <span class="texto-nombre-producto-lote">

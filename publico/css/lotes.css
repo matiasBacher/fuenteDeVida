@@ -102,14 +102,26 @@ contenedor-cuadro-productos-lotes > div{
     border-radius: 8px;
     padding: 15px;
     background-color: rgb(145, 177, 144);
+    
 }
 .cabezera-producto-lote{
-    margin-top: 20px;
-    border-radius: 8px;
+
     padding: 15px;
     background-color: rgb(135 177 144);
-    border:#000000 1px solid;
     padding: 5px;
+    display: flex;
+    justify-content: space-between;
+        align-items: center;
+        
+
+}
+.contenedor-lotes{
+    border:#000000 1px solid;
+        margin-top: 20px;
+    border-radius: 8px;
+        padding: 5px;
+
+
 }
 
 span.etiqueta-codigo-producto-lote, span.etiqueta-nombre-producto-lote{
