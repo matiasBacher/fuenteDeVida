@@ -32,7 +32,7 @@ export class cuadroProductoLotes extends HTMLElement{
             bubbles:true,
             composed:true
         })
-        this.dispararEvento(evento)
+        this.dispatchEvent(evento)
     }
     set producto(valor){
         this._producto={...this._producto,...valor}

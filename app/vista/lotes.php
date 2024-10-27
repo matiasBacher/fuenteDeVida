@@ -63,9 +63,9 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
     <contenedor-cuadro-productos-lotes></contenedor-cuadro-productos-lotes>
     
 <!-- Modal -->
-<div class="fondoModal modal">
+<div class="fondoModal modal"  id="modalAgregMod">
 
-    <div class="modal-content" id="modalAgregMod">
+    <div class="modal-content">
         <span class="close" id="closeModalConsultarVenta">&times;</span>
 
         
@@ -76,7 +76,7 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
                 <?php 
                     foreach($proveedores as $proveedor):?>
                     <option value="<?=$proveedor->getId()?>">
-                        <?$proveedor->getRazonSocial()?>
+                        <?=$proveedor->getRazonSocial()?>
                     </option>
                     <?php endforeach ;?>
             </select>
@@ -110,15 +110,15 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
         <!-- producto -->
          <div class="input-group">
             <div id="codigoProductoModAgr">
-                <span class="etiquetaProducto">Nombre Producto:</span></div>
+                <span class="etiquetaProducto">Nombre Producto:</span>
                 <span class="contProd"></span>
-         </div>
+            </div>
             <div id="nombreProdutoModAgr">
-                <span class="etiquetaProducto">Nombre Producto:</span></div>
+                <span class="etiquetaProducto">Nombre Producto:</span>
                 <span class="contProd"></span>
-         </div>
+            </div>
 
-        <div></div>
+        </div>
 
         <!-- Botones -->
         <div class="modal-footer">

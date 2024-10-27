@@ -1,6 +1,6 @@
 
 import{contenedorCuadroProductoLotes} from "../componente/contenedorCuadroProductoLotes.js"
-import { abrirModal } from "../modulo/mensajesYCargas.js"
+import { abrirModal, cerrarModal } from "../modulo/mensajesYCargas.js"
 import { consultaLote } from "../modulo/sincLote.js"
 
 
@@ -20,31 +20,36 @@ const contenedor= document.querySelector("contenedor-cuadro-productos-lotes")
  }
 
  const modalAgregModif = document.querySelector("#modalAgregMod")
+ const botonAgregarModificar= document.querySelector(".modal-footer").querySelector("button")
+ const cerraModalAgregModif=document.querySelector("#closeModalConsultarVenta")
 
 const elementoModAgreg = {
     proveedor: document.querySelector("#proveedor"),
     cantidad: document.querySelector("#cantidad"),
     vencimiento: document.querySelector("#vencimiento"),
     ingreso: document.querySelector('#ingreso'),
-    id: document.querySelector("codigo-lote"),
+    id: document.querySelector("#codigo-lote"),
     producto:{
             codigo:document.querySelector("#codigoProductoModAgr > .contProd"),
-            nombre:document.querySelector("#nombreProductoModAgr > .contProd"),
+            nombre:document.querySelector("#nombreProdutoModAgr > .contProd"),
             }
 }
+//añade informacion del producto al modal
 function annadirProductoModal(producto){
     Object.keys(elementoModAgreg.producto).forEach(k=>{
-        elementoFltro.producto[k].textContent= producto[k]
+        elementoModAgreg.producto[k].textContent= producto[k]
 
     })
 }
+ //retorna valores de objeto con filtros
  function retonarValue(objeto){
     let objetoRetorno ={}
     Object.keys(objeto).forEach((k,i)=>{
-        objetoRetorno[k] =objeto[k].value
+        objetoRetorno[k] =objeto[k].value??""
     })
     return objetoRetorno
  }
+ //fumcion para crear un evento para enviar informaciom de la busqueda
  const eventoBusqueda= (evento)=>{
     let e= new CustomEvent("buscarLotesProductos",
         {detail:{
@@ -58,7 +63,31 @@ function annadirProductoModal(producto){
 
 
 }
+//funcion para modificar el modal segun si es para agregar lotes o modificarlo
+let modoModificar= false
+const cambiarModoModalLote=(valor=null)=>{
+    if(valor!==null)modoModificar=valor
+    
+    const codigoLote=elementoModAgreg.id.parentElement
+    if(modoModificar){
+        codigoLote.classList.remove("oculto")
+        botonAgregarModificar.textContent="modificar"
+    }
+    else{
+        codigoLote.classList.add("oculto")
+        botonAgregarModificar.textContent="agregar"
+        
+    }
 
+    }
+function eventoBotonAgregarModificar(e){
+    const objeto=retonarValue()
+
+
+
+}
+
+//añado eventos a los elementos filtros
  Object.keys(elementoFltro).forEach(x=>{
     if(x=="buscador"){
         elementoFltro[x].addEventListener("keyup", eventoBusqueda)
@@ -70,7 +99,7 @@ function annadirProductoModal(producto){
 
 
 
-
+// evento que dispara la busqueda de lotes
 var contador
 
 
@@ -86,13 +115,20 @@ document.addEventListener("buscarLotesProductos", (e)=>{
     },1000)
 })
 
-let modoModificar = false
+const loteAlta={
+
+}
+//abrir modal agregar lote
 document.addEventListener("annadirLote",(e)=>{
     let producto = e.detail.producto
     annadirProductoModal(producto)
+    cambiarModoModalLote(false)
     abrirModal(modalAgregModif)
+    console.log(producto)
 
 })
+//cerrar Modal
+cerraModalAgregModif.addEventListener("click", ()=>cerrarModal(modalAgregModif))
 
 
 
