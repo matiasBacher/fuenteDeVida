@@ -51,25 +51,29 @@ export class cuadroProductoLotes extends HTMLElement{
         this.innerHTML=/*html*/
         `<div class="contenedor-lotes">
             <div class="cabezera-producto-lote">
-                <div class="codigo-producto-lote">
-                    <span class="etiqueta-codigo-producto-lote">Codigo: </span>
-                    <span class="texto-codigo-producto-lote">
-                        ${this.producto.codigo.toString().padEnd(8,"0")}
-                    </span>
-                </div>
-                <div class="nombre-producto-lote">
-                    <span class="etiqueta-nombre-producto-lote">Nombre: </span>
-                    <span class="texto-nombre-producto-lote">
-                        ${this.producto.nombre}
-                    </span>
+                <div class="cabezera-producto-lote-texto">
+                    <div class="codigo-producto-lote">
+                        <span class="etiqueta-codigo-producto-lote">Codigo: </span>
+                        <span class="texto-codigo-producto-lote">
+                            ${this.producto.codigo.toString().padEnd(8,"0")}
+                        </span>
+                    </div>
+                    <div class="nombre-producto-lote">                    
+                        <span class="etiqueta-nombre-producto-lote">Nombre: </span>
+                        <span class="texto-nombre-producto-lote">
+                            ${this.producto.nombre}
+                        </span>
+                    </div>
                 </div>
                 <div class="contenedorBotones-producto-lote">
                     <button class="button boton-producto-lote">Agregar</button>
                 </div>
             </div>
+
             <div class="contenedor-tabla-producto-lote">
                 <table is="tabla-lotes">
             </div>
+            
         </div>
         `
 

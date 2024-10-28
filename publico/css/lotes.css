@@ -45,18 +45,17 @@ h1{
     flex-wrap: wrap;
 }
 
-.date-box {
-    
+.date-box {    
     background-color: rgb(135, 177, 144);
     border-radius: 8px;
     padding: 10px;
     min-width: 300px;
-    height: 150px;
+    height: 100px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #000000;
     flex-grow: 1;
     margin: 0px 5px;
-
+    text-align: center;
 }
 
 .date-box:hover {
@@ -64,24 +63,16 @@ h1{
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
 }
 
-.date-box {
-    border: 1px solid #000000;
-    border-radius: 8px;
-
-    text-align: center;
-    background-color: #87b190;
-}
-
 .date-box h2 {
     font-size: 20px;
     margin-bottom: 10px;
 }
 
-input[type="date"] {
+.inputDate{
     padding: 8px;
-    margin-left: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    max-width: 50%;
 }
 
 .filtroDeLotes{
@@ -111,16 +102,16 @@ contenedor-cuadro-productos-lotes > div{
     padding: 5px;
     display: flex;
     justify-content: space-between;
-        align-items: center;
+    align-items: center;
+    max-width: 100%;
         
 
 }
 .contenedor-lotes{
-    border:#000000 1px solid;
+        border:#000000 1px solid;
         margin-top: 20px;
-    border-radius: 8px;
+        border-radius: 8px;
         padding: 5px;
-
 
 }
 
@@ -159,3 +150,78 @@ button.button.button-remove{
     margin-right: 10px;
     font-weight: 800;
 }
+
+/*------------------------------- Modal lotes -------------------------------*/
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    align-items: center;
+}
+
+.modal-lotes{
+    width: 400px;
+    margin-top: 50px;
+ }
+
+.input-group{
+    padding: 5px;
+    
+}
+.input-group-producto-modal-lotes {
+    margin-bottom: 20px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    border: #000000 2px solid;
+    margin-top: 5px;
+    border-radius: 4px;
+    background-color: rgb(135, 177, 144);
+}
+
+.inputLotesModal {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.selectorLotesModal{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modificar-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.cerrar-btn {
+    background-color: #dc3545;
+    color: white;
+ }
+
+ .titulos-Modal-Lotes{
+    font-weight: bold;
+    font-size: 16px;
+ }
+
+ .modal-footer{
+    display: block;
+ }

@@ -39,21 +39,21 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
                 <h2>Ingreso</h2>
                 <label for="ingreso-desde">Desde</label>
                 <input type="date" id="ingreso-desde" name="ingreso-desde" 
-                value="<?=date("Y-m-d", strtotime("-1 month"))?>"
-                max="<?=date("Y-m-d", strtotime("-1 month"))?>">
+                    value="<?=date("Y-m-d", strtotime("-1 month"))?>"
+                    max="<?=date("Y-m-d", strtotime("-1 month"))?>" class="inputDate">
                 <label for="ingreso-hasta">Hasta</label>
                 <input type="date" id="ingreso-hasta" name="ingreso-hasta" 
-                value="<?=date("Y-m-d")?>" 
-                max="<?=date("Y-m-d")?>">
+                    value="<?=date("Y-m-d")?>" 
+                    max="<?=date("Y-m-d")?>" class="inputDate">
             </div>
 
             <!-- Cuadro de Vencimiento -->
             <div class="date-box">
                 <h2>Vencimiento</h2>
                 <label for="vencimiento-desde">Desde</label>
-                <input type="date" id="vencimiento-desde" name="vencimiento-desde">
+                <input type="date" id="vencimiento-desde" name="vencimiento-desde" class="inputDate">
                 <label for="vencimiento-hasta">Hasta</label>
-                <input type="date" id="vencimiento-hasta" name="vencimiento-hasta" >
+                <input type="date" id="vencimiento-hasta" name="vencimiento-hasta" class="inputDate">
             </div>
         </div>
     </div>
@@ -67,62 +67,66 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
     <div class="modal-content">
         <span class="close" id="closeModalConsultarVenta">&times;</span>
 
-        
-        <!-- Proveedor -->
-        <div class="input-group">
-            <label for="proveedor">Proveedor</label>
-            <select id="proveedor">
-                <?php 
-                    foreach($proveedores as $proveedor):?>
-                    <option value="<?=$proveedor->getId()?>">
-                        <?=$proveedor->getRazonSocial()?>
-                    </option>
-                    <?php endforeach ;?>
-            </select>
-        </div>
-
-        <!-- Cantidad -->
-        <div class="input-group">
-            <label for="cantidad">Cantidad</label>
-            <input type="number" id="cantidad" min="1" value="1">
-        </div>
-
-        <!-- Vencimiento -->
-        <div class="input-group">
-            <label for="vencimiento">Vencimiento</label>
-            <input type="date" id="vencimiento" name="vencimiento" format="Y-m-d">
-        </div>
-
-        <!-- Ingreso -->
-        <div class="input-group">
-            <label for="ingreso">Ingreso</label>
-            <input type="date" id="ingreso" name="ingreso" format="Y-m-d">
-        </div>
-
-
-        <!-- Código del Lote -->
-        <div class="input-group">
-            <label for="codigo-lote">Código del Lote</label>
-            <input type="text" id="codigo-lote" value="00000003" disabled>
-        </div>
-
-        <!-- producto -->
-         <div class="input-group">
-            <div id="codigoProductoModAgr">
-                <span class="etiquetaProducto">Nombre Producto:</span>
-                <span class="contProd"></span>
-            </div>
-            <div id="nombreProdutoModAgr">
-                <span class="etiquetaProducto">Nombre Producto:</span>
-                <span class="contProd"></span>
+        <div class="modal-lotes">
+            <!-- Proveedor -->
+            <div class="input-group">
+                <label for="proveedor" class="titulos-Modal-Lotes">Proveedor *</label>
+                <select id="proveedor" class="selectorLotesModal">
+                    <?php 
+                        foreach($proveedores as $proveedor):?>
+                        <option value="<?=$proveedor->getId()?>">
+                            <?=$proveedor->getRazonSocial()?>
+                        </option>
+                        <?php endforeach ;?>
+                </select>
             </div>
 
-        </div>
+            <!-- Cantidad -->
+            <div class="input-group">
+                <label for="cantidad" class="titulos-Modal-Lotes">Cantidad *</label>
+                <input type="number" id="cantidad" min="1" value="1" class="inputLotesModal">
+                <span class="error" id="error-cantidad">Espacio vacío</span>
+            </div>
 
-        <!-- Botones -->
-        <div class="modal-footer">
-            <button class="button">Agregar</button>
-           
+            <!-- Vencimiento -->
+            <div class="input-group">
+                <label for="vencimiento" class="titulos-Modal-Lotes">Vencimiento *</label>
+                <input type="date" id="vencimiento" name="vencimiento" format="Y-m-d" class="inputLotesModal">
+                <span class="error" id="error-vencimiento">Espacio vacío</span>
+            </div>
+
+            <!-- Ingreso -->
+            <div class="input-group">
+                <label for="ingreso" class="titulos-Modal-Lotes">Ingreso *</label>
+                <input type="date" id="ingreso" name="ingreso" format="Y-m-d" class="inputLotesModal">
+                <span class="error" id="error-ingreso">Espacio vacío</span>
+            </div>
+
+
+            <!-- Código del Lote -->
+            <div class="input-group">
+                <label for="codigo-lote">Código del Lote</label>
+                <input type="text" id="codigo-lote" value="00000003" disabled class="inputLotesModal" >
+            </div>
+
+            <!-- producto -->
+            <div class="input-group input-group-producto-modal-lotes" >
+                <div id="codigoProductoModAgr">
+                    <span class="etiquetaProducto" class="titulos-Modal-Lotes" ><b>Codigo del Producto:</b></span>
+                    <span class="contProd"></span>
+                </div>
+                <div id="nombreProdutoModAgr">
+                    <span class="etiquetaProducto" class="titulos-Modal-Lotes" ><b>Nombre del Producto:</b></span>
+                    <span class="contProd"></span>                    
+                </div>
+
+            </div>
+
+            <!-- Botones -->
+            <div class="modal-footer">
+                <button class="button">Agregar</button>            
+            </div>
+
         </div>
     </div>
 </div>
