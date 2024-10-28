@@ -1,7 +1,7 @@
 
 import{contenedorCuadroProductoLotes} from "../componente/contenedorCuadroProductoLotes.js"
-import { abrirModal, cerrarModal } from "../modulo/mensajesYCargas.js"
-import { consultaLote } from "../modulo/sincLote.js"
+import { abrirModal, cerrarModal, errorMensaje, okMensaje } from "../modulo/mensajesYCargas.js"
+import { altaLote, consultaLote } from "../modulo/sincLote.js"
 
 
 
@@ -45,7 +45,7 @@ function annadirProductoModal(producto){
  function retonarValue(objeto){
     let objetoRetorno ={}
     Object.keys(objeto).forEach((k,i)=>{
-        objetoRetorno[k] =objeto[k].value??""
+        objetoRetorno[k] =objeto[k].value??{}
     })
     return objetoRetorno
  }
@@ -81,7 +81,34 @@ const cambiarModoModalLote=(valor=null)=>{
 
     }
 function eventoBotonAgregarModificar(e){
-    const objeto=retonarValue()
+    const objeto=retonarValue(elementoModAgreg)
+    objeto.producto.codigo=elementoModAgreg.producto.codigo.textContent
+    objeto.producto.nombre=elementoModAgreg.producto.nombre.textContent
+
+    let idProveedor=objeto.proveedor
+    objeto.proveedor={}
+    objeto.proveedor.id=idProveedor
+    let evento;
+    if(modoModificar){
+        evento= new CustomEvent("modalModificarLote",{
+
+            detail:{
+                lote:objeto
+            },
+            bubbles:true
+        })
+
+    }
+    else{
+         evento= new CustomEvent("modalAnnadirLote",{
+            detail:{
+                lote:objeto
+            },
+            bubbles:true
+        })
+    }
+    e.target.dispatchEvent(evento)
+
 
 
 
@@ -124,11 +151,28 @@ document.addEventListener("annadirLote",(e)=>{
     annadirProductoModal(producto)
     cambiarModoModalLote(false)
     abrirModal(modalAgregModif)
-    console.log(producto)
 
 })
 //cerrar Modal
 cerraModalAgregModif.addEventListener("click", ()=>cerrarModal(modalAgregModif))
+botonAgregarModificar.addEventListener("click", eventoBotonAgregarModificar)
 
+//agregar lote
+document.addEventListener("modalAnnadirLote", async(e)=>{
+    let respuesta = await altaLote(e.detail.lote)
+switch(respuesta.mensaje){
+    case "loteRepetido":
+        errorMensaje.fire({Text:"El lote ya existe"})
+        break
+    case "errorAlta":
+        errorMensaje.fire({Text:"Error al grabar el lote"})
+        console.log(respuesta.error)
+        break
+    case "altaSxito":
+        okMensaje.fire({Text:"Lote guardado con el éxito"})
+        break
+}
+ 
+})
 
 

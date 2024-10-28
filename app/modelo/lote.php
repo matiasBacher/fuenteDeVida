@@ -34,8 +34,8 @@ class Lote implements \JsonSerializable{
     private int $cantidad;
 
 
-    #[ORM\ManyToOne(targetEntity: EstadoVencimiento::class)]
-    #[ORM\JoinColumn(name:"idEstadoVencimiento", referencedColumnName:"id", nullable:false)]
+    #[ORM\ManyToOne(targetEntity: EstadoVencimiento::class, cascade:["persist"])]
+    #[ORM\JoinColumn(name:"idEstadoVencimiento", referencedColumnName:"id", nullable:false, )]
     private EstadoVencimiento $estadoVencimiento;
 
     #[ORM\ManyToOne(targetEntity: Proveedor::class)]
