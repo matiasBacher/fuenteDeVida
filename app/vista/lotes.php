@@ -24,7 +24,6 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
         <h1>Filtrar Lotes</h1>    
         <div class="filter-lotes">
             <select id="selectFiltroLotes" name="order-lotes" class="select-box" >
-                <option value="nombre">Ordenar por Nombre</option>
                 <option value="id">Ordenar por Codigo</option>
                 <option value="vencimiento">Ordenar por Fecha Vencimiento</option>
                 <option value="codigo">Ordenar por Fecha Ingreso</option>

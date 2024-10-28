@@ -146,10 +146,7 @@ class ControladorLoteClass{
                     usort($arrayOrd,function($a,$b) use ($ordenLotes){
                         
                         switch($ordenLotes){
-                            case "nombre":
-                                $ComparadorA=$a->getNombre();
-                                $ComparadorB=$b->getNombre();
-                                break;
+                         
                             case "vencimiento":
                                 $ComparadorA=$a->getVencimiento();
                                 $ComparadorB=$b->getVencimiento();
@@ -164,7 +161,7 @@ class ControladorLoteClass{
                                 break;
                             }
                             return $ComparadorA==$ComparadorB?0
-                                :($ComparadorA<$ComparadorB?1:-1);
+                                :($ComparadorA>$ComparadorB?1:-1);
                         }
                     );
 
@@ -211,7 +208,7 @@ class ControladorLoteClass{
                     try{
                         $entityManager->persist($lote);
                         $entityManager->flush();
-                        $mensaje="altaModificacion";
+                        $mensaje="modificacionExito";
                     }
                     catch (Exception $e){
                         $mensaje="errorModificacion";

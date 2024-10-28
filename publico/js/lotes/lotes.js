@@ -1,7 +1,7 @@
 
 import{contenedorCuadroProductoLotes} from "../componente/contenedorCuadroProductoLotes.js"
 import { abrirModal, cerrarModal, errorMensaje, okMensaje } from "../modulo/mensajesYCargas.js"
-import { altaLote, consultaLote } from "../modulo/sincLote.js"
+import { altaLote, consultaLote, modificarLote } from "../modulo/sincLote.js"
 
 
 
@@ -41,6 +41,21 @@ function annadirProductoModal(producto){
 
     })
 }
+//añade informacion del lote al modal
+function annadirLoteModal(lote, vaciar=false){
+    Object.keys(elementoModAgreg).forEach(k=>{
+        if(k=="proveedor"){
+            elementoModAgreg[k].value=lote.proveedor?lote.proveedor.id:""
+        }
+        else if(k=="producto"){
+            annadirProductoModal(lote.producto)
+        }
+        else{
+            elementoModAgreg[k].value=lote[k]??""
+        }
+    })
+}
+ 
  //retorna valores de objeto con filtros
  function retonarValue(objeto){
     let objetoRetorno ={}
@@ -81,13 +96,13 @@ const cambiarModoModalLote=(valor=null)=>{
 
     }
 function eventoBotonAgregarModificar(e){
-    const objeto=retonarValue(elementoModAgreg)
-    objeto.producto.codigo=elementoModAgreg.producto.codigo.textContent
+    const objeto=retonarValue(elementoModAgreg)//Se saca valores de objeto con elementos del formulario modal
+    objeto.producto.codigo=elementoModAgreg.producto.codigo.textContent //texto de un div
     objeto.producto.nombre=elementoModAgreg.producto.nombre.textContent
 
     let idProveedor=objeto.proveedor
     objeto.proveedor={}
-    objeto.proveedor.id=idProveedor
+    objeto.proveedor.id=idProveedor//Se crea un objeto del Con la información del Input
     let evento;
     if(modoModificar){
         evento= new CustomEvent("modalModificarLote",{
@@ -148,10 +163,17 @@ const loteAlta={
 //abrir modal agregar lote
 document.addEventListener("annadirLote",(e)=>{
     let producto = e.detail.producto
-    annadirProductoModal(producto)
+    annadirLoteModal({producto:producto})
     cambiarModoModalLote(false)
     abrirModal(modalAgregModif)
 
+})
+//abrir modal modificar lote
+document.addEventListener("modificarLote", async (e)=>{
+    let lote = e.detail.lote
+    annadirLoteModal(lote)
+    cambiarModoModalLote(true)
+    abrirModal(modalAgregModif)
 })
 //cerrar Modal
 cerraModalAgregModif.addEventListener("click", ()=>cerrarModal(modalAgregModif))
@@ -174,5 +196,21 @@ switch(respuesta.mensaje){
 }
  
 })
-
+//agregar lote
+document.addEventListener("modalModificarLote", async(e)=>{
+    let respuesta = await modificarLote(e.detail.lote)
+switch(respuesta.mensaje){
+    case "loteRepetido":
+        errorMensaje.fire({Text:"Cambie los datos"})
+        break
+    case "errorAlta":
+        errorMensaje.fire({Text:"Error al modificar lote "})
+        console.log(respuesta.error)
+        break
+    case "modificacionExito":
+        okMensaje.fire({Text:"Lote modificado con el éxito"})
+        break
+}
+ 
+})
 
