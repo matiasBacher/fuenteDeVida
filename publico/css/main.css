@@ -336,3 +336,9 @@ input:checked + .slider:before {
         font-size: 15px;
         margin-left: 125px;
     }
+   
+    
+    input.invalid, .form-group select.invalid, .form-group textarea.invalid {
+        border: 2px solid rgb(204, 2, 2);
+        border-radius: 8px;
+    }

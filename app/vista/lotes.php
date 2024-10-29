@@ -40,7 +40,7 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
                 <label for="ingreso-desde">Desde</label>
                 <input type="date" id="ingreso-desde" name="ingreso-desde" 
                     value="<?=date("Y-m-d", strtotime("-1 month"))?>"
-                    max="<?=date("Y-m-d", strtotime("-1 month"))?>" class="inputDate">
+                    max="<?=date("Y-m-d")?>" class="inputDate">
                 <label for="ingreso-hasta">Hasta</label>
                 <input type="date" id="ingreso-hasta" name="ingreso-hasta" 
                     value="<?=date("Y-m-d")?>" 
@@ -79,6 +79,7 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
                         </option>
                         <?php endforeach ;?>
                 </select>
+                <span class="error" id="error-proveedor">Espacio vacío</span>
             </div>
 
             <!-- Cantidad -->
@@ -98,7 +99,9 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
             <!-- Ingreso -->
             <div class="input-group">
                 <label for="ingreso" class="titulos-Modal-Lotes">Ingreso *</label>
-                <input type="date" id="ingreso" name="ingreso" format="Y-m-d" class="inputLotesModal">
+                <input type="date" id="ingreso" name="ingreso" format="Y-m-d" class="inputLotesModal"
+                value="<?=date("Y-m-d")?>" 
+                    max="<?=date("Y-m-d")?>">
                 <span class="error" id="error-ingreso">Espacio vacío</span>
             </div>
 

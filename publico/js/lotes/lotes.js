@@ -1,7 +1,8 @@
 
 import{contenedorCuadroProductoLotes} from "../componente/contenedorCuadroProductoLotes.js"
-import { abrirModal, cerrarModal, errorMensaje, okMensaje } from "../modulo/mensajesYCargas.js"
-import { altaLote, consultaLote, modificarLote } from "../modulo/sincLote.js"
+import { abrirModal, cerrarModal, errorMensaje, okMensaje, preguntaMensaje } from "../modulo/mensajesYCargas.js"
+import { altaLote, borrarLote, consultaLote, modificarLote } from "../modulo/sincLote.js"
+import {validarVacio} from "../modulo/validaciones.js"
 
 
 
@@ -34,6 +35,22 @@ const elementoModAgreg = {
             nombre:document.querySelector("#nombreProdutoModAgr > .contProd"),
             }
 }
+let elementoValidar = []
+let validador={}
+let errorObjeto={}
+let manejador=["proveedor", "cantidad", "vencimiento", "ingreso"]
+manejador.forEach(k=>{
+    elementoValidar.push(elementoModAgreg[k])
+    validador[k]=false
+    errorObjeto[k]=document.querySelector(`#error-${k}`)
+
+    })
+elementoValidar.forEach((x)=>{
+    x.addEventListener("blur", ()=>{
+        validarVacio(x.id, elementoModAgreg, errorObjeto, "Campo no completado", false, validador )
+    })
+})
+
 //añade informacion del producto al modal
 function annadirProductoModal(producto){
     Object.keys(elementoModAgreg.producto).forEach(k=>{
@@ -96,33 +113,40 @@ const cambiarModoModalLote=(valor=null)=>{
 
     }
 function eventoBotonAgregarModificar(e){
-    const objeto=retonarValue(elementoModAgreg)//Se saca valores de objeto con elementos del formulario modal
-    objeto.producto.codigo=elementoModAgreg.producto.codigo.textContent //texto de un div
-    objeto.producto.nombre=elementoModAgreg.producto.nombre.textContent
 
-    let idProveedor=objeto.proveedor
-    objeto.proveedor={}
-    objeto.proveedor.id=idProveedor//Se crea un objeto del Con la información del Input
-    let evento;
-    if(modoModificar){
-        evento= new CustomEvent("modalModificarLote",{
+    elementoValidar.forEach((x)=>{
+        let blur= new Event("blur")
+        x.dispatchEvent(blur)
+    })
+    if(Object.keys(validador).every(x=>{return validador[x]})){
+        const objeto=retonarValue(elementoModAgreg)//Se saca valores de objeto con elementos del formulario modal
+        objeto.producto.codigo=elementoModAgreg.producto.codigo.textContent //texto de un div
+        objeto.producto.nombre=elementoModAgreg.producto.nombre.textContent
 
-            detail:{
-                lote:objeto
-            },
-            bubbles:true
-        })
+        let idProveedor=objeto.proveedor
+        objeto.proveedor={}
+        objeto.proveedor.id=idProveedor//Se crea un objeto del Con la información del Input
+        let evento;
+        if(modoModificar){
+            evento= new CustomEvent("modalModificarLote",{
 
+                detail:{
+                    lote:objeto
+                },
+                bubbles:true
+            })
+
+        }
+        else{
+            evento= new CustomEvent("modalAnnadirLote",{
+                detail:{
+                    lote:objeto
+                },
+                bubbles:true
+            })
+        }
+        e.target.dispatchEvent(evento)
     }
-    else{
-         evento= new CustomEvent("modalAnnadirLote",{
-            detail:{
-                lote:objeto
-            },
-            bubbles:true
-        })
-    }
-    e.target.dispatchEvent(evento)
 
 
 
@@ -131,7 +155,7 @@ function eventoBotonAgregarModificar(e){
 
 //añado eventos a los elementos filtros
  Object.keys(elementoFltro).forEach(x=>{
-    if(x=="buscador"){
+    if(x=="busqueda"){
         elementoFltro[x].addEventListener("keyup", eventoBusqueda)
     }
     else{
@@ -184,33 +208,66 @@ document.addEventListener("modalAnnadirLote", async(e)=>{
     let respuesta = await altaLote(e.detail.lote)
 switch(respuesta.mensaje){
     case "loteRepetido":
-        errorMensaje.fire({Text:"El lote ya existe"})
+        errorMensaje.fire({text:"El lote ya existe"})
         break
     case "errorAlta":
-        errorMensaje.fire({Text:"Error al grabar el lote"})
+        errorMensaje.fire({text:"Error al grabar el lote"})
         console.log(respuesta.error)
         break
-    case "altaSxito":
-        okMensaje.fire({Text:"Lote guardado con el éxito"})
+    case "altaExito":
+        okMensaje.fire({text:"Lote guardado con el éxito"})
+        annadirLoteModal({})
+        let input= new Event("keyup")
+        elementoFltro.busqueda.dispatchEvent(input)
+
         break
 }
  
 })
-//agregar lote
+//modificar lote lote
 document.addEventListener("modalModificarLote", async(e)=>{
     let respuesta = await modificarLote(e.detail.lote)
 switch(respuesta.mensaje){
     case "loteRepetido":
-        errorMensaje.fire({Text:"Cambie los datos"})
+        errorMensaje.fire({text:"Cambie los datos"})
         break
     case "errorAlta":
-        errorMensaje.fire({Text:"Error al modificar lote "})
+        errorMensaje.fire({text:"Error al modificar lote "})
         console.log(respuesta.error)
         break
     case "modificacionExito":
-        okMensaje.fire({Text:"Lote modificado con el éxito"})
+        okMensaje.fire({text:"Lote modificado con el éxito"})
+        cerrarModal(modalAgregModif)
+        let keyup= new Event("keyup")
+        elementoFltro.busqueda.dispatchEvent(keyup)
+    
         break
 }
  
+})
+
+//borrar lote
+document.addEventListener("borrarLote",(e)=>{
+    preguntaMensaje.fire({
+        title:`Desea eliminar el lote con codigo: ${e.detail.lote.id}`
+    }).then(async (result) => {
+        if (result.isConfirmed) { 
+          let respuesta = await borrarLote(e.detail.lote)
+          switch(respuesta.mensaje){
+           case "exitoBorrado":
+            okMensaje.fire({text: `El lote numero: ${e.detail.lote.id} fue borrado con exitosamente`})
+            break
+        case "errorLoteNulo":
+            okMensaje.fire({text: `No existe el lote número: ${e.detail.lote.id}`})
+            break
+        case "errorBorrado":
+            okMensaje.fire({text:`Error al borrar el lote`})
+            console.log(respuesta.error)
+
+          }
+
+        }
+    })
+
 })
 

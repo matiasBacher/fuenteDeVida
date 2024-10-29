@@ -30,19 +30,25 @@ class ControladorLoteClass{
         return $this->resultado;
     }
 
-    public function ComprobarSiLoteRepetido():bool{
+    public function ComprobarSiLoteRepetido($modoModificar = false):bool{
         global $entityManager;
         $idProducto = $this->objeto->producto->codigo;
         $idProveedor = $this->objeto->proveedor->id;
         $fechaIngreso = new DateTime($this->objeto->ingreso??"now");
         $fechaVencimiento= new DateTime($this->objeto->vencimiento);
 
+        $criterios = ["producto"=>$idProducto,
+                    "proveedor"=>$idProveedor,
+                    "ingreso"=>$fechaIngreso,
+                    "vencimiento"=>$fechaVencimiento];
+
+        if($modoModificar){
+            $criterios["cantidad"]=$this->objeto->cantidad;
+        }
+
         $objetoEncontrado=$entityManager->getRepository(Lote::class)
-                            ->findOneBy(
-                                ["producto"=>$idProducto,
-                                "proveedor"=>$idProveedor,
-                                "ingreso"=>$fechaIngreso,
-                                "vencimiento"=>$fechaVencimiento]);
+                            ->findOneBy($criterios
+                                );
         if($objetoEncontrado) return true;
         else return false;
     }
@@ -184,8 +190,9 @@ class ControladorLoteClass{
                 $mensaje="";
                 $error="";
 
-                if($this->ComprobarSiLoteRepetido()){
+                if($this->ComprobarSiLoteRepetido(true)){
                     $mensaje="loteRepetido";
+
                 }
                 else{
 
@@ -214,13 +221,14 @@ class ControladorLoteClass{
                         $mensaje="errorModificacion";
                         $error=$e->getMessage();
                     }
-                    return[
-                        "mensaje"=>$mensaje,
-                        "error"=>$error,
-                    ];
+                
 
 
                 }
+                return[
+                    "mensaje"=>$mensaje,
+                    "error"=>$error,
+                ];
 
             }
 
@@ -233,7 +241,7 @@ class ControladorLoteClass{
                 ];
 
                 try {
-                    $lote = $entityManager->find(Lote::class, $this->objeto->codigo);
+                    $lote = $entityManager->find(Lote::class, $this->objeto->id);
                     if($lote==null){
                         $retorno["mensaje"]="errorLoteNulo";
                         return $retorno;
@@ -248,6 +256,7 @@ class ControladorLoteClass{
                  }
                  try{
                     $entityManager->remove($lote);
+                    $entityManager->flush();
                  }
                  catch(Exception $e){
 
