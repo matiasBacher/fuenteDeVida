@@ -1,3 +1,4 @@
+//metodo compartido entre agregar venta y modificar venta
 import { tablaDeProducto } from "./tablaDeProducto.js";
 import { tablaCarrito} from "./carrito.js";
 import{devolverBusquedaProducto}  from "../modulo/sincProducto.js"; 

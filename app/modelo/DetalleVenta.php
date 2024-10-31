@@ -28,22 +28,23 @@ class DetalleVenta implements \JsonSerializable
     #[ORM\Column(name: "precioFecha", type:"integer", nullable:false, options:["unsigned" => true])]
     private int $precio; 
 
-    #[ORM\ManyToOne(targetEntity: Producto::class)]
-    #[ORM\JoinColumn(name: "ID_LOTE", referencedColumnName: "ID_PRODUCTO")]
-    private ?Producto $producto = null;
+    #[ORM\ManyToOne(targetEntity: Lote::class)]
+    #[ORM\JoinColumn(name: "ID_LOTE", referencedColumnName: "ID_LOTE")]
+    private ?Lote $lote = null;
 
     // Getters y setters
-    public function __construct(int $cantidad=1, Producto $producto){
+    public function __construct(int $cantidad=1, Lote $lote){
         $this->cantidad=$cantidad;
-        $this->producto=$producto;
-        $this->precio=$producto->getPrecioDeVenta();
+        $this->lote=$lote;
+        $this->precio=$this->getProducto()->getPrecioDeVenta();
     }
     public function jsonSerialize(){
         return[
             "id"=> $this->getID(),
             "precio"=> $this->getPrecio(),
             "cantidad"=> $this->getCantidad(),
-            "producto"=> $this->getProducto(),
+            "producto"=> $this->getProducto()->getDatosBasicos(),
+            "lote"=> $this->getLote()->datosBasicos()
         ];
     }
     public function getID(){
@@ -90,16 +91,32 @@ class DetalleVenta implements \JsonSerializable
 
     public function getProducto(): ?Producto
     {
-        return $this->producto;
+        return $this->lote->getProducto();
     }
 
-    public function setProducto(?Producto $producto): self
-    {
-        $this->producto = $producto;
-        return $this;
-    }
+
 
 public function getPrecio():int {
     return $this->precio;
 }
+
+    /**
+     * Get the value of lote
+     */ 
+    public function getLote()
+    {
+        return $this->lote;
+    }
+
+    /**
+     * Set the value of lote
+     *
+     * @return  self
+     */ 
+    public function setLote($lote)
+    {
+        $this->lote = $lote;
+
+        return $this;
+    }
 }

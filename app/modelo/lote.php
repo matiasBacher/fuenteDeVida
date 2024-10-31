@@ -265,18 +265,24 @@ public function restarCantidad($cantidad){
         return $this;
     }
 
-    public function jsonSerialize(){
+    public function datosBasicos(){
+
         return[
             "id"=>$this->getId(),
             "cantidad"=>$this->getCantidad(),
             "vencimiento"=>$this->getVencimiento()->format("Y-m-d"),
             "ingreso"=>$this->getIngreso()->format("Y-m-d"),
-            "producto"=>$this->getProducto()->getDatosBasicos(),
                             
             "proveedor"=>$this->getProveedor(),
             "estadoVencimiento"=>$this->getEstadoVencimiento(),
             
         ];
+    }
+    public function jsonSerialize(){
+
+            $retorno = $this->datosBasicos();
+            $retorno["producto"]=$this->getProducto()->getDatosBasicos();
+            return $retorno;
     }
 
 }
