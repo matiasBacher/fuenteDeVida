@@ -269,7 +269,7 @@ public function restarCantidad($cantidad){
 
         return[
             "id"=>$this->getId(),
-            "cantidad"=>$this->getCantidad(),
+            "inventario"=>$this->getCantidad(),
             "vencimiento"=>$this->getVencimiento()->format("Y-m-d"),
             "ingreso"=>$this->getIngreso()->format("Y-m-d"),
                             

@@ -39,8 +39,19 @@ export class contenedorCuadroProductoLotes extends HTMLElement{
     attributeChangedCallback(nombreAtributo, valorViejo, valorNuevo){
         this.render()
     }
+    _opcionesPorDefecto(){
+        return{
+            cuadros: "cuadro-producto-lotes" 
+        }
+    }
+    _definirOpciones(){
+        return{
+
+        }
+    }
 
     render(){
+        let propiedades={...this._opcionesPorDefecto(), ...this._definirOpciones()}
         if(this.vacio){
             this.innerHTML=/*html*/
             `<div>
@@ -52,7 +63,7 @@ export class contenedorCuadroProductoLotes extends HTMLElement{
             let div=document.createElement("div")
 
             this.productos.forEach((x)=>{
-                let cuadroProducto=document.createElement("cuadro-producto-lotes")
+                let cuadroProducto=document.createElement(propiedades.cuadros)
                 cuadroProducto.producto=x
                 div.appendChild(cuadroProducto)
             }) 

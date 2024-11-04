@@ -39,17 +39,27 @@ export class tablaLotes extends HTMLTableElement{
             this.setAttribute("vacio", "false")
         }
     }
+    _cabezera(){
+        const r= /*html*/
+        `
+            <th>Codigo</th>
+            <th>Proveedor</th>
+            <th>Fecha Ingreso</th>
+            <th>Vencimiento</th>
+            <th>Inventario</th>
+            <th>Acciones</th>
+        `;
+        return r
+    }
+    _tipoFilaLote(){
+        return "fila-lote"
+    }
 
     render(){
         const tHead=this.createTHead()
         tHead.innerHTML=/*html*/
         `<tr>
-            <th>Codigo</th>
-            <th>Proveedor</th>
-            <th>Fecha Ingreso</th>
-            <th>Vencimiento</th>
-            <th>Cantidad</th>
-            <th>Acciones</th>
+            ${this._cabezera()}
         </tr>`
 
         let tBody = this.querySelector("tbody");
@@ -67,7 +77,7 @@ export class tablaLotes extends HTMLTableElement{
         }
         else{
             this.lotes.forEach(element => {
-                let tr=document.createElement("tr",{is:"fila-lote"})
+                let tr=document.createElement("tr",{is:this._tipoFilaLote()})
                 tr.definirLote(element)
                 tBody.appendChild(tr)
                 

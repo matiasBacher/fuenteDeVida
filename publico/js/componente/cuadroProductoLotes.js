@@ -47,31 +47,62 @@ export class cuadroProductoLotes extends HTMLElement{
         return this._tablaLotes
 
     }
-    render(){
-        this.innerHTML=/*html*/
-        `<div class="contenedor-lotes">
-            <div class="cabezera-producto-lote">
-                <div class="cabezera-producto-lote-texto">
-                    <div class="codigo-producto-lote">
-                        <span class="etiqueta-codigo-producto-lote">Codigo: </span>
-                        <span class="texto-codigo-producto-lote">
-                            ${this.producto.codigo.toString().padEnd(8,"0")}
-                        </span>
-                    </div>
-                    <div class="nombre-producto-lote">                    
+    _opcionesPorDefecto(){
+        return {
+            nombre:true,
+            codigo:true,
+            botones: true,
+            tabla:"tabla-lotes"
+        }
+    }
+    _partesRender(valor){
+        let r
+        switch(valor){
+            case "nombre":
+                r= /*html*/
+                    `<div class="nombre-producto-lote">                    
                         <span class="etiqueta-nombre-producto-lote">Nombre: </span>
                         <span class="texto-nombre-producto-lote">
                             ${this.producto.nombre}
                         </span>
-                    </div>
-                </div>
-                <div class="contenedorBotones-producto-lote">
+                    </div>`
+                break
+            case "codigo":
+                r= /*html*/
+                    `<div class="codigo-producto-lote">
+                        <span class="etiqueta-codigo-producto-lote">Codigo: </span>
+                        <span class="texto-codigo-producto-lote">
+                            ${this.producto.codigo.toString().padEnd(8,"0")}
+                        </span>
+                    </div>`
+                break
+            case "botones":
+                r= /*html*/
+                `<div class="contenedorBotones-producto-lote">
                     <button class="button boton-producto-lote">Agregar</button>
+                </div>`
+                break
+        }
+        return r
+    }
+    _definirOpciones(){
+    return {}
+    }
+    render(){
+        const opciones={...this._opcionesPorDefecto(), ...this._definirOpciones()}
+        this.innerHTML=/*html*/
+        `<div class="contenedor-lotes">
+            <div class="cabezera-producto-lote">
+                <div class="cabezera-producto-lote-texto">
+                    ${opciones.nombre?this._partesRender("nombre"):``}
+                    ${opciones.codigo?this._partesRender("codigo"):``}
+                    
                 </div>
+                ${opciones.botones?this._partesRender("botones"):``}
             </div>
 
             <div class="contenedor-tabla-producto-lote">
-                <table is="tabla-lotes">
+                <table is="${opciones.tabla}">
             </div>
             
         </div>

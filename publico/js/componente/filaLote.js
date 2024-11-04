@@ -3,16 +3,39 @@ export class filaLote extends HTMLTableRowElement{
         super()
         this.lote=this.devolverLoteGenerico()
         this.estadoVencimiento=this.lote.estadoVencimiento
-        this.addEventListener("click", (evento)=>{
-            let elemento=evento.target
-            if(elemento.matches(".button-remove")){
-                this._dispararEvento("borrarLote")
-            }
-            if(elemento.matches(".button-modify")){
-                this._dispararEvento("modificarLote")
-            }
-        })
+        this._annadirEvento()
     }
+    _controladorEvento(){
+        const eventos={
+            click:[
+                {selector:".button-remove",
+                evento: "borrarLote",},
+            
+                {selector:".button-modify",
+                evento: "modificarLote",},
+            ]
+                
+            
+        }
+        return eventos
+
+    }
+    _annadirEvento(){
+        const eventos = this._controladorEvento()
+        Object.keys(eventos).forEach(k=>{
+                this.addEventListener(k, (e)=>{
+                    let elemento=e.target
+                    eventos[k].some((q)=>{
+                        if(elemento.matches(q.selector)){
+                            this._dispararEvento(q.evento)
+                            return true
+                        }
+                    })
+
+                })
+            })
+        }
+        
     _dispararEvento(nombre){
        const evento= new CustomEvent(nombre,{
             detail:{
@@ -61,11 +84,17 @@ export class filaLote extends HTMLTableRowElement{
             proveedor:{nombre:"propio"},
             ingreso:"1970-01-01",
             vencimiento:`${fechaHoy.getFullYear()}-${fechaHoy.getMonth()}-${fechaHoy.getDay()}`,
-            cantidad:0
+            inventario:0
         }
     }
     static get observedAttributes() {
         return ["estadoVencimiento"]
+    }
+    _botones(){
+        const r= /*html*/
+            `<button class="button button-modify">🖊</button>
+            <button class="button button-remove">Eliminar</button>`
+        return r
     }
 
     render(){
@@ -77,10 +106,9 @@ export class filaLote extends HTMLTableRowElement{
             <td>${lote.proveedor.razonSocial}</td>
             <td>${lote.ingreso}</td>
             <td>${lote.vencimiento}</td>
-            <td>${lote.cantidad}</td>
+            <td>${lote.inventario}</td>
             <td>
-                <button class="button button-modify">🖊</button>
-                <button class="button button-remove">Eliminar</button>                
+                ${this._botones()}
             </td>`
 
     }

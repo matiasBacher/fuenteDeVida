@@ -15,7 +15,7 @@ session_start();
            if (!isset($_SESSION["usuario"])) {
             $pagina="login";}
             elseif (!isset($_GET["p"])) {
-            $pagina=$paginaDisponible[0][0];
+            $pagina=array_keys($paginaDisponible)[0];
             }
             else{
                 $pagina = $_GET["p"];
