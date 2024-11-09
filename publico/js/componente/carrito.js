@@ -193,11 +193,11 @@ export class Carrito extends HTMLElement{
                 <table colspan="5"class="tabla-lotes-carrito">
                     <thead>
                         <tr>
-                            <th>codigo<th>
-                            <th>ingreso<th>
-                            <th>vencimiento<th>
-                            <th>cantidad<th>
-                            <th>acciones<th>
+                            <th>Codigo<th>
+                            <th>Ingreso<th>
+                            <th>Vencimiento<th>
+                            <th>Cantidad<th>
+                            <th>Acciones<th>
                         </tr>
                     </thead>
                     <tbody>

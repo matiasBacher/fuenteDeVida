@@ -214,7 +214,7 @@ export class Carrito {
                         <td>${lote.ingreso}</td>
                         <td>${lote.vencimiento}</td>
                         <td><input class="input-cantidad-lote-detalles" type='number' value="${lote.cantidad}" ></td>
-                        <td><button class="button button-remove quitarLote">quitar</td>
+                        <td><button class="button button-remove quitarLote">Quitar</td>
                         `
                 })
                 htmlProductos+=/*html*/
@@ -233,11 +233,11 @@ export class Carrito {
                         <table class="tabla-lotes-carrito">
                             <thead>
                                 <tr>
-                                    <th>codigo</th>
-                                    <th>ingreso</th>
-                                    <th>vencimiento</th>
-                                    <th>cantidad</th>
-                                    <th>acciones</th>
+                                    <th>Codigo</th>
+                                    <th>Ingreso</th>
+                                    <th>Vencimiento</th>
+                                    <th>Cantidad</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>

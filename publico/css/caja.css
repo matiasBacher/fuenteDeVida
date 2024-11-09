@@ -50,7 +50,7 @@
     box-sizing: border-box;
 }
 
-.product-list th, .product-list td, .cart th, .cart td {
+.product-list th, .cart th, .cart td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -63,9 +63,14 @@
     background-color: rgb(124, 148, 128);
 }
 
-.product-list th, .product-list td {
+.product-list th {
     border: 1px solid #000000;
-    padding: 8px;  
+    padding: 8px;
+}
+
+.product-list td{
+    border: 1px solid #000000;
+    padding: 2px 10px;
 }
 
 .product-list tr:hover{
@@ -91,7 +96,6 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 10px 5px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s ease;
@@ -129,9 +133,8 @@
     background-color: rgb(124, 148, 128);
 }
 
-.carrito-list th, .product-list td {
+.carrito-list th {
     border: 1px solid #000000;
-
 }
 
 .carrito-list tr:hover{
@@ -173,6 +176,19 @@ input [type="number"]{
 }
 
 .fila-producto-carrito td{
+    border: 1px solid #000000;
+    padding: 2px 10px;
+}
+/*--------------------------Segunda Tabla del carrito --------------------------*/
+
+.tabla-lotes-carrito th{
+    background-color: #00c578;
+    text-align: left;
+    color: #ffffff;
+    padding: 8px;
+}
+
+.tabla-lotes-carrito td{
     border: 1px solid #000000;
     padding: 2px 10px;
 }
