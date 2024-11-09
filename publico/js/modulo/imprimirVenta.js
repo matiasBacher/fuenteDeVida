@@ -1,4 +1,4 @@
-import { tablaResumen } from "../caja/carrito.js"
+import { tablaResumen } from "../caja/tablaResumen.js"
 export{imprimirVenta}
 function imprimirVenta(venta){
     let productos=[]

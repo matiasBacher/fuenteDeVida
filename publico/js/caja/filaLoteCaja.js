@@ -12,8 +12,10 @@ export class filaLoteCaja extends filaLote {
     }
     
     _botones(){
-        return /*html*/
+
+        const b= /*html*/
         `<button class="agregar-carrito">Agregar al carrito</button>`
+        return b
     }
 
 }

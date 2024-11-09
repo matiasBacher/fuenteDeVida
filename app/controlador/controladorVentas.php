@@ -19,7 +19,7 @@ if(isset ($_POST["accion"])){
 
             $detallesventa[]=new DetalleVenta(
             $detalle->cantidad, 
-            $entityManager->find(Lote::class, $detalle->codigo)) ;
+            $entityManager->find(Lote::class, $detalle->id)) ;
         }
 
         $venta= new Venta($entityManager->find(MedioPago::class, $_POST["metodo"]), $detallesventa);
