@@ -130,7 +130,7 @@ function detalleIndivididual(detalleVenta){
     let detalle = document.createElement("tr")
 
     detalle.innerHTML=
-    `<td> ${detalleVenta.id}</>`+
+    `<td> ${detalleVenta.lote.id}</>`+
     `<td> ${detalleVenta.producto.nombre}</>`+
     `<td> ${detalleVenta.cantidad}</>`+
     `<td> ${detalleVenta.precio}</>`+

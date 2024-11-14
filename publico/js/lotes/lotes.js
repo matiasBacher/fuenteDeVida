@@ -67,6 +67,9 @@ function annadirLoteModal(lote, vaciar=false){
         else if(k=="producto"){
             annadirProductoModal(lote.producto)
         }
+        else if(k=="cantidad"){
+            elementoModAgreg[k].value=lote.inventario
+        }
         else{
             elementoModAgreg[k].value=lote[k]??""
         }

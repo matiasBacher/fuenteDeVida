@@ -63,10 +63,10 @@ if(isset ($_POST["accion"])){
         $detalleVentaJson = json_decode($_POST["detalleVenta"]);
         $detallesventa = []; 
         foreach($detalleVentaJson as $detalle){
-
+            $lote=$entityManager->find(Lote::class, $detalle->id);
             $detallesventa[]=new DetalleVenta( 
                 $detalle->cantidad,
-                $entityManager->find(Lote::class, $detalle->codigo)) ;
+                $lote) ;
         }
         $medioPago=$entityManager->find(MedioPago::class, intval($_POST["metodo"]));
 

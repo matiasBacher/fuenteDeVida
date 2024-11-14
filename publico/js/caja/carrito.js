@@ -32,13 +32,36 @@ export class Carrito {
 
         this.render()
     }
+    agregarDetallesMod(detalle){
+        let codigoProducto=detalle.producto.codigo
+        if( !(this._detalles[codigoProducto]) ){
+            this._detalles[codigoProducto]=detalle.producto
+            this._detalles[codigoProducto].lotes=[]
+        }
+        let loteSalida= {
+                    id: detalle.lote.id,
+                    ingreso: detalle.lote.ingreso,
+                    vencimiento: detalle.lote.vencimiento,
+                    cantidad: detalle.cantidad,
+                    inventario: detalle.lote.inventario,
+                    producto: JSON.parse(JSON.stringify(detalle.producto))
+        }
+        this._detalles[codigoProducto].lotes.push(loteSalida)
+
+        this._calcularCantidaProducto(this._detalles[codigoProducto])
+        this._calcularTotalProducto(this._detalles[codigoProducto])
+        this.render()
+
+
+
+    }
 
     agregarDetalles(lote){
      let codigoProducto = lote.producto.codigo??null
      if(codigoProducto===null){
         console.error("producto si codigo")
         return "sinProducto"
-
+        
      }
 
      if( this._detalles[codigoProducto] ){
@@ -54,7 +77,6 @@ export class Carrito {
      }
     let loteSalida=JSON.parse(JSON.stringify(lote))
     loteSalida.cantidad=0
-    loteSalida.total=lote.producto.precio
     this._detalles[codigoProducto].lotes.push(loteSalida)
     this.setCantidadLote(lote.id, codigoProducto, 1)
     this.render()
@@ -66,7 +88,7 @@ export class Carrito {
      }
     quitarProducto(codigoProducto){
             delete this._detalles[codigoProducto]            
-            this._calcularTotalVenta
+            this._calcularTotalVenta()
             this.render()
 
 
@@ -93,7 +115,7 @@ export class Carrito {
         }
         else{
             this._calcularCantidaProducto(this._detalles[codigoProducto])
-            this._calcularTotalProducto(codigoProducto)
+            this._calcularTotalProducto(this._detalles[codigoProducto])
             this._calcularTotalVenta()
             this.render()}
     }
