@@ -23,6 +23,7 @@ if(isset ($_POST["accion"])){
         }
 
         $venta= new Venta($entityManager->find(MedioPago::class, $_POST["metodo"]), $detallesventa);
+        $venta->restarInventarioAutomatico();
         try{
             $entityManager->persist($venta);
             
@@ -55,6 +56,8 @@ if(isset ($_POST["accion"])){
     }
     if($_POST["accion"]=="registrarModificacionVenta"){
         $ventaAnterior=$entityManager->find(Venta::class,$_POST["idVentaModificar"]);
+        $ventaAnterior->recomponerLotesAuto();
+
         $ventaAnterior->setErrorVenta(true);         
 
         $detalleVentaJson = json_decode($_POST["detalleVenta"]);
@@ -70,6 +73,7 @@ if(isset ($_POST["accion"])){
         $venta= new Venta($medioPago, $detallesventa);
         $venta->setVentaAnterior($ventaAnterior);
         $venta->setMotivoCorreccion($_POST["motivoCorreccionVenta"]);
+        $venta->restarInventarioAutomatico();
         try{
 
             $entityManager->persist($venta);

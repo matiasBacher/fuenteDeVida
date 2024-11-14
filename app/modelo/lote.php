@@ -145,7 +145,7 @@ public function addCantidad(int $cantidad){
     }
 }
 public function restarCantidad($cantidad){
-    if($cantidad<$this->cantidad){
+    if($cantidad<=$this->cantidad){
         $this->cantidad-=$cantidad;
     }
     else{

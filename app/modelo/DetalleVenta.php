@@ -1,5 +1,7 @@
 <?php
 namespace modelo;
+
+use Exception;
 require_once($_SERVER["DOCUMENT_ROOT"]."/vendor/autoload.php");
 
 use Doctrine\ORM\Mapping as ORM;
@@ -74,7 +76,25 @@ class DetalleVenta implements \JsonSerializable
 
     public function setCantidad(?int $cantidad): self
     {
-        $this->cantidad = $cantidad;
+        if(isset($this->cantidad)){
+            $cantidadAnterior = $this->cantidad;
+            $diferencia=$cantidadAnterior-$cantidad;
+            if($diferencia<0){
+                try{
+                    $this->lote->restarCantidad($diferencia*1 );
+                }
+                catch(Exception $e){
+                    throw $e;
+                }
+            }
+            else{
+                try{
+                    $this->lote->addCantidad($diferencia);
+                }
+                catch(Exception $e){
+                    throw $e;
+                }
+            }}
         return $this;
     }
 
@@ -118,5 +138,21 @@ public function getPrecio():int {
         $this->lote = $lote;
 
         return $this;
+    }
+    public function restarLoteAuto(){
+        try{
+            $this->getLote()->restarCantidad($this->getCantidad());
+        }
+        catch(Exception $e){
+            throw  $e;
+        }
+    }
+    public function recomponerLoteAuto(){
+        try{
+            $this->getLote()->addCantidad($this->getCantidad());
+        }
+        catch(Exception $e){
+            throw $e;
+        }
     }
 }
