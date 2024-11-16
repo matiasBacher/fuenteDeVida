@@ -3,7 +3,7 @@ export{dibujarSelectCategorias}
 function dibujarSelectCategorias(padre, memoria){
 padre.innerHTML=""
   let primerOption=document.createElement("option")
-  primerOption.textContent="Selecione una opcion";
+  primerOption.textContent="Seleccione una opcion.";
   primerOption.value=""
   padre.appendChild(primerOption);
 for(let i=0; i<memoria.length; i++){

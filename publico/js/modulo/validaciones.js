@@ -22,11 +22,11 @@ function validarVacio(opcion, elementoObjeto, errorObjeto, mensajr,  corregir=fa
         elementoObjeto[opcion].classList.add('invalid');
         errorObjeto[opcion].innerText=mensajr
         errorObjeto[opcion].style.display = 'block';
-        valido[0]=false   }
+        valido[opcion]=false   }
  else {
     elementoObjeto[opcion].classList.remove('invalid');
     errorObjeto[opcion].style.display = 'none';
-    valido[0]=true
+    valido[opcion]=true
  }
 
 

@@ -1,12 +1,17 @@
 <?php
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
+use FontLib\TrueType\Collection;
+
+
 
 require_once($_SERVER['DOCUMENT_ROOT']."/bootstrap.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/modelo/Lote.php");
 
-use modelo\Lote;
-use modelo\Proveedor;
-use modelo\Producto;
+use modelo\Lote as Lote;
+use modelo\Proveedor as Proveedor;
+use modelo\Producto as Producto;
 
 class ControladorLoteClass{
     private string $accion;
@@ -25,19 +30,25 @@ class ControladorLoteClass{
         return $this->resultado;
     }
 
-    public function ComprobarSiLoteRepetido():bool{
+    public function ComprobarSiLoteRepetido($modoModificar = false):bool{
         global $entityManager;
         $idProducto = $this->objeto->producto->codigo;
         $idProveedor = $this->objeto->proveedor->id;
         $fechaIngreso = new DateTime($this->objeto->ingreso??"now");
         $fechaVencimiento= new DateTime($this->objeto->vencimiento);
 
+        $criterios = ["producto"=>$idProducto,
+                    "proveedor"=>$idProveedor,
+                    "ingreso"=>$fechaIngreso,
+                    "vencimiento"=>$fechaVencimiento];
+
+        if($modoModificar){
+            $criterios["cantidad"]=$this->objeto->cantidad;
+        }
+
         $objetoEncontrado=$entityManager->getRepository(Lote::class)
-                            ->findOneBy(
-                                ["producto"=>$idProducto,
-                                "proveedor"=>$idProveedor,
-                                "ingreso"=>$fechaIngreso,
-                                "vencimiento"=>$fechaVencimiento]);
+                            ->findOneBy($criterios
+                                );
         if($objetoEncontrado) return true;
         else return false;
     }
@@ -74,45 +85,93 @@ class ControladorLoteClass{
 
             private function consulta(){
                 global $entityManager;
-                $filtro = is_array($this->objeto->filtros)?
-                    $this->objeto->filtros:
-                    get_object_vars($this->objeto->filtros);
+              
+
+                if(isset($this->objeto->venMax)){
+                    $filtro["venMax"]=$this->objeto->venMax;
+                }
 
 
-                $busqueda=$filtro['busqueda'];
+                $busqueda=$this->objeto->busqueda;
+                $busqueda=is_numeric($busqueda)?$busqueda:"%{$busqueda}%";
+
+                  $filtro = [
+                            "busqueda"=>$busqueda,
+                            "venMin"=>$this->objeto->venMin,
+                            "ingMin"=>$this->objeto->ingMin,
+                            "ingMax"=>$this->objeto->ingMax,
+
+                ];
 
 
 
-                $ordenProducto=$this->objeto->orden->ordeProductos;
-                $ordenLotes=$this->objeto->orden->ordenLotes;
+                $ordenProducto=$this->objeto->ordenProductos ;
+                $ordenLotes=$this->objeto->ordenLotes;
 
                 $mensaje="";
                 $productos=$entityManager->getRepository(Producto::class)
                 ->createQueryBuilder("p")
-                ->innerJoin(Lote::class, "l")
-                ->where(is_numeric($busqueda)?
-                "p.codigo = :busqueda":"p.nombre like :busqueda")
-
-                ->andWhere("l.vencimiento <= :venMax")
-                ->andWhere("l.vencimiento >= :venMin")
-
-                ->andWhere("l.ingreso <= :ingMax")
-                ->andWhere("l.ingreso >= :ingMin")
-                
-                ->orderBy("p.$ordenProducto","asc")
-                ->addOrderBy("l.$ordenLotes")
-
-                ->setParameters($filtro
-                    )
-
+                ->where(is_numeric($busqueda)?"p.codigo = :n":"p.nombre LIKE :n")
+                ->setParameter("n", $busqueda)
                 ->getQuery()
                 ->getResult();
+
+
+
+                
 
                 if(count($productos)<=0){
                     $mensaje="busquedaNoExitosa";
                 }
                 else{
                     $mensaje="busquedaExitosa";
+                }
+
+          
+
+                      
+
+
+                foreach($productos as $p){
+                    
+                    
+                    $lotes = $p->getLotes()->filter(function($x) use ($filtro){
+                        return (
+
+                            ($x->getVencimiento() >= new DateTime($filtro['venMin'])) 
+                            and (isset($filtro["venMax"])
+                                    ?($x->getVencimiento() >= new DateTime($filtro['venMax']))
+                                    :true) 
+                            and ($x->getIngreso() >= new DateTime($filtro['ingMin']))
+                            and ($x->getIngreso() <= new DateTime($filtro['ingMax']))
+
+                        );
+                    }
+                    );
+                    $arrayOrd = $lotes->toArray();
+                    usort($arrayOrd,function($a,$b) use ($ordenLotes){
+                        
+                        switch($ordenLotes){
+                         
+                            case "vencimiento":
+                                $ComparadorA=$a->getVencimiento();
+                                $ComparadorB=$b->getVencimiento();
+                                break;
+                            case "ingreso":
+                                $ComparadorA=$a->getIngreso();
+                                $ComparadorB=$b->getIngreso();
+                                break;
+                            default:
+                                $ComparadorA=$a->getId();
+                                $ComparadorB=$b->getId();
+                                break;
+                            }
+                            return $ComparadorA==$ComparadorB?0
+                                :($ComparadorA>$ComparadorB?1:-1);
+                        }
+                    );
+
+                    $p->setLotes(new ArrayCollection($arrayOrd));
                 }
 
 
@@ -131,8 +190,9 @@ class ControladorLoteClass{
                 $mensaje="";
                 $error="";
 
-                if($this->ComprobarSiLoteRepetido()){
+                if($this->ComprobarSiLoteRepetido(true)){
                     $mensaje="loteRepetido";
+
                 }
                 else{
 
@@ -155,19 +215,20 @@ class ControladorLoteClass{
                     try{
                         $entityManager->persist($lote);
                         $entityManager->flush();
-                        $mensaje="altaModificacion";
+                        $mensaje="modificacionExito";
                     }
                     catch (Exception $e){
                         $mensaje="errorModificacion";
                         $error=$e->getMessage();
                     }
-                    return[
-                        "mensaje"=>$mensaje,
-                        "error"=>$error,
-                    ];
+                
 
 
                 }
+                return[
+                    "mensaje"=>$mensaje,
+                    "error"=>$error,
+                ];
 
             }
 
@@ -180,7 +241,7 @@ class ControladorLoteClass{
                 ];
 
                 try {
-                    $lote = $entityManager->find(Lote::class, $this->objeto->codigo);
+                    $lote = $entityManager->find(Lote::class, $this->objeto->id);
                     if($lote==null){
                         $retorno["mensaje"]="errorLoteNulo";
                         return $retorno;
@@ -195,6 +256,7 @@ class ControladorLoteClass{
                  }
                  try{
                     $entityManager->remove($lote);
+                    $entityManager->flush();
                  }
                  catch(Exception $e){
 

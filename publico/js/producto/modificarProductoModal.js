@@ -15,7 +15,6 @@ async function abrirModalModificarProducto(producto){
 
 }
 
-let isValidModif=[false]
 const modalModifPro = document.getElementById('mProducto');
 const closeModifPro = document.getElementById('McloseModalAddProduct');
 
@@ -36,6 +35,10 @@ let elemModifProdErr={
     categoria:  document.getElementById('McategoriaError'),
 }
 let modifElemAValid=[ elemModifProd.precio, elemModifProd.nombre, elemModifProd.categoria]
+const isValidModif = {}
+modifElemAValid.forEach((x)=>{
+    isValidModif[x.name]=false; 
+})
 
 let arrayFunc = []
 modifElemAValid.forEach(x=>{
@@ -43,7 +46,7 @@ modifElemAValid.forEach(x=>{
     let corregir=x.name=="nombre"
     let f= ()=>{
         validarVacio(nombre, elemModifProd, elemModifProdErr, 
-        "Por favor complete el campo", corregir, isValidModif)}
+        "Por favor complete el campo.", corregir, isValidModif)}
     x.addEventListener("blur", f)
     arrayFunc.push(f)
 })
@@ -63,20 +66,20 @@ const MproductForm= document.getElementById("MproductoForm")
 const enviarModif = document.getElementById("MmodalAgregProdEnviar")
  enviarModif.addEventListener('click',  async ()=>{
     validarTodo(arrayFunc)
-    if(isValidModif[0]){
+    if(Object.values(isValidModif).every(x=>x)){
         let m = await modificarProducto(MproductForm, parseInt(MproductForm.codigo.value))
  
  
         if(m.mensajeBorrado<0){
-            errorMensaje.fire({text:"No se pudo Borrar el producto"})            
+            errorMensaje.fire({text:"No se pudo Borrar el producto."})            
             return;
         }
         if(m.mensajeGrabado<1){
-            errorMensaje.fire({text:"falla a grabar los productos"})
+            errorMensaje.fire({text:"Falla a grabar los productos."})
             return
         }
         if(m.mensajeGrabado==1){
-            okMensaje.fire({text:"El producto se actualizo con exito"})
+            okMensaje.fire({text:"El producto se actualizo con exito."})
             cerrarModal(modalModifPro)
             hacerTabla()
        }

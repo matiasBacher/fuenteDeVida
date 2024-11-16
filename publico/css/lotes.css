@@ -1,0 +1,227 @@
+h1{
+    padding: 5px;
+    margin: 2px;
+}
+
+.filter-product{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 1px;
+}
+
+.filter-lotes {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.search-box {
+    padding: 8px;
+    margin-right: 10px;
+    width: 50%;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.select-box {
+    padding: 8px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.checkbox-label {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.date-filters {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    max-width: 100%;
+    flex-wrap: wrap;
+}
+
+.date-box {    
+    background-color: rgb(135, 177, 144);
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 300px;
+    height: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #000000;
+    flex-grow: 1;
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.date-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.date-box h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.inputDate{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 50%;
+}
+
+.filtroDeLotes{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 5px;
+    flex-direction: column;
+}
+
+
+/*------------------- Cuadro de los lotes* -------------------*/
+contenedor-cuadro-productos-lotes > div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: rgb(145, 177, 144);
+    
+}
+.cabezera-producto-lote{
+
+    padding: 15px;
+    background-color: rgb(135 177 144);
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+        
+
+}
+.contenedor-lotes{
+        border:#000000 1px solid;
+        margin-top: 20px;
+        border-radius: 8px;
+        padding: 5px;
+
+}
+
+span.etiqueta-codigo-producto-lote, span.etiqueta-nombre-producto-lote{
+    font-weight: bold;
+}
+
+.contenedor-tabla-producto-lote{
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.contenedor-lotes table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+.contenedor-lotes thead th{
+    background-color: #28a745;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+.contenedor-lotes tbody td{
+    padding: 8px;
+    border-bottom: 1px solid #000000;
+    text-align: center;
+}
+
+button.button.button-remove{
+    background-color: #d32a2a;
+    padding: 5px 10px;
+    font-size: large;
+    margin: 0px;
+    margin-right: 10px;
+    font-weight: 800;
+}
+
+/*------------------------------- Modal lotes -------------------------------*/
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    align-items: center;
+}
+
+.modal-lotes{
+    width: 400px;
+    margin-top: 50px;
+ }
+
+.input-group{
+    padding: 5px;
+    
+}
+.input-group-producto-modal-lotes {
+    margin-bottom: 20px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    border: #000000 2px solid;
+    margin-top: 5px;
+    border-radius: 4px;
+    background-color: rgb(135, 177, 144);
+}
+
+.inputLotesModal {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.selectorLotesModal{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modificar-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.cerrar-btn {
+    background-color: #dc3545;
+    color: white;
+ }
+
+ .titulos-Modal-Lotes{
+    font-weight: bold;
+    font-size: 16px;
+ }
+
+ .modal-footer{
+    display: block;
+ }

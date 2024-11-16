@@ -4,26 +4,29 @@ $pagina = "";
 
 #en futuro hacer la variable dinamica por medio del tipo usuario
 $paginaDisponible=[
-                    ["producto","Productos"],
-                    ["caja","Caja"],
-                    ["venta","Ventas"]
+                    "producto"=>"Productos",
+                    "caja"=>"Caja",
+                    "venta"=>"Ventas",
+                    "lotes"=>"Inventario"
 ];
+
 
 session_start();
            if (!isset($_SESSION["usuario"])) {
             $pagina="login";}
             elseif (!isset($_GET["p"])) {
-            $pagina=$paginaDisponible[0][0];
+            $pagina=array_keys($paginaDisponible)[0];
             }
             else{
                 $pagina = $_GET["p"];
             }
+
            ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Productos</title>
+    <title>Gestión de <?=$paginaDisponible[$pagina]?></title>
     <link rel="icon" type="image/x-icon" href="/publico/img/favicon.png">
     <link rel="stylesheet" href="/publico/css/sweetalert2.min.css">
     <link rel="stylesheet" href="/publico/css/main.css">
@@ -38,9 +41,9 @@ session_start();
         
             <div class="menu">            
                 <?php 
-                foreach($paginaDisponible as $p):?>
-                    <a class="top<?=$pagina==$p[0]?" menuSeleccionado":""?>" 
-                    href="index.php?p=<?=$p[0]?>"><?=$p[1]?></a>
+                foreach($paginaDisponible as $key=>$value):?>
+                    <a class="top <?=$pagina==$key?" menuSeleccionado":""?>" 
+                    href="index.php?p=<?=$key?>"><?=$value?></a>
                 <?php endforeach?>
                 <a id="logOutCont" class="top" href="#">
                     <?php include("publico/img/iconos/box-arrow-left.svg")?>

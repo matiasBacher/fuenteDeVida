@@ -18,7 +18,7 @@ async function cargarCategorias(){ //busca las categorias en la BD
         } else {
             ocualtarCarga()
 
-            throw new Error('Error al obtener la respuesta del servidor')
+            throw new Error('Error al obtener la respuesta del servidor.')
         }
         } catch (error) {
             ocualtarCarga()
@@ -48,7 +48,7 @@ async function actualizarCategoria(id,  nombreNuevo){
             }
             else{
                 ocualtarCarga
-                errorMensaje.fire({text:"Error al obtener la respuesta del servidor"})
+                errorMensaje.fire({text:"Error al obtener la respuesta del servidor."})
             }
     }
     catch(e){
@@ -74,7 +74,7 @@ async function actualizarCategoria(id,  nombreNuevo){
                 if(response.ok){
                     respuesta = await response.json();
                 } else {
-                    errorMensaje.fire({text:"Error al obtener la respuesta del servidor"})
+                    errorMensaje.fire({text:"Error al obtener la respuesta del servidor."})
                     ocualtarCarga()
                 }
                 } catch (e) {
@@ -112,7 +112,7 @@ async function actualizarCategoria(id,  nombreNuevo){
                     respuesta = await response.json();
                 } else {
                     ocualtarCarga()
-                    throw new Error('Error al obtener la respuesta del servidor')
+                    throw new Error('Error al obtener la respuesta del servidor.')
                 }
             } catch (error) {
                 ocualtarCarga()

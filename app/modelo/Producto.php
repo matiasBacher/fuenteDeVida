@@ -13,7 +13,6 @@ use modelo\Propiedades;
 #[ORM\Table(name: "productos")]
 class Producto implements \JsonSerializable {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column(name: 'ID_PRODUCTO', type: 'integer')]
     private int $codigo;
     #[ORM\Column(name: 'NOMBRE_PRODUCTO', type: 'string', length: 250, nullable: true)]
@@ -44,7 +43,7 @@ class Producto implements \JsonSerializable {
     #[ORM\InverseJoinColumn(name: "ID_PROPIEDADES", referencedColumnName: "ID_PROPIEDADES")]
     #[ORM\ManyToMany(targetEntity: Propiedad::class)]
     
-    private Collection $conjuntoPropiedades;
+    private ?Collection $conjuntoPropiedades=null;
 
     #[ORM\OneToMany(mappedBy: "producto",targetEntity: Lote::class, cascade: ["remove"], fetch:  "EAGER", )]
     private ?Collection $lotes=null;
@@ -54,16 +53,16 @@ class Producto implements \JsonSerializable {
 
      // Constructor
     public function __construct(int $codigo, string $nombre="", 
-    int $precioDeVenta=0, string $categoria="", 
-    string $descripcion="", Propiedades $propiedades= null, string $fechaCreacion="") {
+    int $precioDeVenta=0, categorias $categoria=null, 
+    string $descripcion="",  string $fechaCreacion="",?Collection $propiedades=null) {
 
         $this->codigo = $codigo;
         $this->nombre = $nombre;
         $this->precioDeVenta = $precioDeVenta;
-        $this->categoria = $categoria;
-        $this->propiedades = $propiedades ?? new Propiedades();
+        $this->cat = $categoria;
         $this->descripcion = $descripcion;
-        $this->fechaCreacion =new \DateTime($fechaCreacion ?: 'now');
+        $this->fechaCreacion =new \DateTime($fechaCreacion ?? 'now');
+        $this->conjuntoPropiedades=$propiedades?? new ArrayCollection;
 
         
 
@@ -81,9 +80,10 @@ class Producto implements \JsonSerializable {
                             "codigo"=> $this->codigo,
                             "nombre"=> $this->nombre,
                             "precio"=> $this->precioDeVenta,
-                            "categoria"=> $this->categoria,
+                            "categoria"=> $this->cat->getNom(),
                             "cat"=> $this->getCat(),
-                            "propiedades"=> $this->propiedades??$this->conjuntoPropiedades,
+                            "propiedades"=> $this->propiedades??$this->conjuntoPropiedades->map(
+                                        function($x){ return $x->getNombre();})->toArray(),
                             "descripcion"=> $this->descripcion,
                             'fechaCreacion' => $this->fechaCreacion->format('Y-m-d H:i:s'),        
                 ];
@@ -128,11 +128,18 @@ class Producto implements \JsonSerializable {
     public function setPropiedades(Propiedades $propiedades) {
         $this->propiedades = $propiedades;
     }
+    public function setDescripcion($descripcion){ 
+        $this->descripcion=$descripcion;
+     }
     public function getDescripcion(){
         return $this->descripcion;
     }
     public function getFechaCreacion(){
         return $this->fechaCreacion->format('d-m-Y');
+    }
+
+    public function addPropiedad(Propiedad $propiedad){
+        $this->conjuntoPropiedades->add($propiedad);
     }
 
     /**
@@ -171,6 +178,26 @@ class Producto implements \JsonSerializable {
     public function setCat($cat)
     {
         $this->cat = $cat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of conjuntoPropiedades
+     */ 
+    public function getConjuntoPropiedades()
+    {
+        return $this->conjuntoPropiedades;
+    }
+
+    /**
+     * Set the value of conjuntoPropiedades
+     *
+     * @return  self
+     */ 
+    public function setConjuntoPropiedades($conjuntoPropiedades)
+    {
+        $this->conjuntoPropiedades = $conjuntoPropiedades;
 
         return $this;
     }

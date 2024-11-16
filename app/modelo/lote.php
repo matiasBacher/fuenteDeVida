@@ -34,8 +34,8 @@ class Lote implements \JsonSerializable{
     private int $cantidad;
 
 
-    #[ORM\ManyToOne(targetEntity: EstadoVencimiento::class)]
-    #[ORM\JoinColumn(name:"idEstadoVencimiento", referencedColumnName:"id", nullable:false)]
+    #[ORM\ManyToOne(targetEntity: EstadoVencimiento::class, cascade:["persist"])]
+    #[ORM\JoinColumn(name:"idEstadoVencimiento", referencedColumnName:"id", nullable:false, )]
     private EstadoVencimiento $estadoVencimiento;
 
     #[ORM\ManyToOne(targetEntity: Proveedor::class)]
@@ -141,15 +141,15 @@ public function addCantidad(int $cantidad){
     if($cantidad>=0){
     $this->cantidad+=$cantidad;}
     else{
-        throw new Exception("ponga una cantidad positiva");
+        throw new Exception("Ponga una cantidad positiva.");
     }
 }
 public function restarCantidad($cantidad){
-    if($cantidad<$this->cantidad){
+    if($cantidad<=$this->cantidad){
         $this->cantidad-=$cantidad;
     }
     else{
-        throw new Exception("no se puede restar por debajo de cero");
+        throw new Exception("No se puede restar por debajo de cero.");
     }
 }
 
@@ -203,14 +203,14 @@ public function restarCantidad($cantidad){
 
     }
     public function setVencimientoLargo(){
-        $this->definirEstadoVencimiento("vencimiento largo");
+        $this->definirEstadoVencimiento("Vencimiento largo.");
     }
     public function setPorVencer(){
-        $this->definirEstadoVencimiento("por vencer");
+        $this->definirEstadoVencimiento("Por vencer.");
     }
     public function setVencido(){
         
-        $this->definirEstadoVencimiento("vencido");
+        $this->definirEstadoVencimiento("Vencido.");
        
     }
     public function comprobarVencimiento(){
@@ -265,17 +265,24 @@ public function restarCantidad($cantidad){
         return $this;
     }
 
-    public function jsonSerialize(){
+    public function datosBasicos(){
+
         return[
             "id"=>$this->getId(),
-            "cantidad"=>$this->getCantidad(),
-            "vencimiento"=>$this->getVencimiento(),
-            "ingreso"=>$this->getIngreso(),
-            "producto"=>$this->getProducto()->getDatosBasicos(),
+            "inventario"=>$this->getCantidad(),
+            "vencimiento"=>$this->getVencimiento()->format("Y-m-d"),
+            "ingreso"=>$this->getIngreso()->format("Y-m-d"),
                             
-            "provedor"=>$this->getProveedor(),
+            "proveedor"=>$this->getProveedor(),
+            "estadoVencimiento"=>$this->getEstadoVencimiento(),
             
         ];
+    }
+    public function jsonSerialize(){
+
+            $retorno = $this->datosBasicos();
+            $retorno["producto"]=$this->getProducto()->getDatosBasicos();
+            return $retorno;
     }
 
 }

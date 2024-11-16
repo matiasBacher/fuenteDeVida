@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use modelo\DetalleVenta;
 use modelo\Venta;
+use modelo\Lote;
 if(isset ($_POST["accion"])){
     if($_POST["accion"]=="altaVenta"){
 
@@ -18,10 +19,11 @@ if(isset ($_POST["accion"])){
 
             $detallesventa[]=new DetalleVenta(
             $detalle->cantidad, 
-            $entityManager->find(Producto::class, $detalle->codigo)) ;
+            $entityManager->find(Lote::class, $detalle->id)) ;
         }
 
         $venta= new Venta($entityManager->find(MedioPago::class, $_POST["metodo"]), $detallesventa);
+        $venta->restarInventarioAutomatico();
         try{
             $entityManager->persist($venta);
             
@@ -54,21 +56,24 @@ if(isset ($_POST["accion"])){
     }
     if($_POST["accion"]=="registrarModificacionVenta"){
         $ventaAnterior=$entityManager->find(Venta::class,$_POST["idVentaModificar"]);
+        $ventaAnterior->recomponerLotesAuto();
+
         $ventaAnterior->setErrorVenta(true);         
 
         $detalleVentaJson = json_decode($_POST["detalleVenta"]);
         $detallesventa = []; 
         foreach($detalleVentaJson as $detalle){
-
+            $lote=$entityManager->find(Lote::class, $detalle->id);
             $detallesventa[]=new DetalleVenta( 
                 $detalle->cantidad,
-                $entityManager->find(Producto::class, $detalle->codigo)) ;
+                $lote) ;
         }
         $medioPago=$entityManager->find(MedioPago::class, intval($_POST["metodo"]));
 
         $venta= new Venta($medioPago, $detallesventa);
         $venta->setVentaAnterior($ventaAnterior);
         $venta->setMotivoCorreccion($_POST["motivoCorreccionVenta"]);
+        $venta->restarInventarioAutomatico();
         try{
 
             $entityManager->persist($venta);

@@ -114,6 +114,16 @@ class Venta implements \JsonSerializable
             "esOriginal"=>!$this->tieneCorreccion()
         ];
     } 
+    public function restarInventarioAutomatico(){
+        foreach($this->detalles->toArray() as $detalle){
+            $detalle->restarLoteAuto();
+        }
+    }
+    public function recomponerLotesAuto(){
+        foreach($this->detalles->toArray() as $detalle){
+            $detalle->recomponerLoteAuto();
+        }
+    }
     public function getDetalles(): Collection
     {
         return $this->detalles;
