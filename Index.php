@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."\bootstrap.php");
+require_once($_SERVER['DOCUMENT_ROOT']."\app\controlador\ControladorLoteClass.php");
 $pagina = "";
 
 #en futuro hacer la variable dinamica por medio del tipo usuario
@@ -19,6 +20,10 @@ session_start();
             }
             else{
                 $pagina = $_GET["p"];
+            }
+            if($pagina!="login"){
+                ControladorLoteClass::actualizarVencimientoTodosLotes();
+                
             }
 
            ?>

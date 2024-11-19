@@ -3,6 +3,7 @@
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use FontLib\TrueType\Collection;
+use modelo\ModificacionVencimiento;
 
 
 
@@ -30,6 +31,39 @@ class ControladorLoteClass{
         return $this->resultado;
     }
 
+    static function actualizarVencimientoTodosLotes(){
+        global $entityManager;
+        $hoy= new DateTime();
+        $ultimaFecha=$entityManager->getRepository(ModificacionVencimiento::class)->findOneBy([], ["fecha"=>"DESC"]);
+        if($hoy->format("Y-m-d")>$ultimaFecha->getFecha()->format("Y-m-d")){
+            $diasMargen=Lote::$diasVencimiento;
+            $nuevaModificacion= new ModificacionVencimiento();
+            $lotes=$entityManager->getRepository(Lote::class)->createQueryBuilder("l")
+            ->where("l.vencimiento BETWEEN :fechaInicio AND :fechaFin")
+            ->setParameters(
+                [
+                    "fechaFin"=>(clone ($hoy))->modify("+{$diasMargen} days"),
+                    "fechaInicio"=>isset($ultimaFecha)
+                                        ?(clone ($ultimaFecha->getFecha()))->modify("-{$diasMargen} days")
+                                        :new DateTime("1970-01-02"),
+                ]
+            )
+            ->getQuery()
+            ->getResult();
+
+            foreach($lotes as $lote){
+                $lote->comprobarVencimiento();
+                $entityManager->persist($lote);
+            }
+            try{
+                $entityManager->persist($nuevaModificacion);
+                $entityManager->flush();
+            }
+            catch(Exception $e){
+                throw $e;
+            }
+        }
+    }
     public function ComprobarSiLoteRepetido($modoModificar = false):bool{
         global $entityManager;
         $idProducto = $this->objeto->producto->codigo;
