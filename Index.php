@@ -8,7 +8,9 @@ $paginaDisponible=[
                     "producto"=>"Productos",
                     "caja"=>"Caja",
                     "venta"=>"Ventas",
-                    "lotes"=>"Inventario"
+                    "lotes"=>"Inventario",
+                    "proveedor"=>"Proveedor",
+                    "informes"=>"Informes"
 ];
 
 
