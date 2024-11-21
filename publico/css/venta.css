@@ -219,10 +219,10 @@ input[type="range"]:hover {
     width:550px;
 }
 
-/* Estilos para la parte del producto */
+/* ---------------------- Estilos para la parte del producto ---------------------- */
 
 .modal-content{
-    max-width: 700px;
+    max-width: 800px;
     padding: 15px;
 }
 
@@ -282,7 +282,6 @@ input[type="range"]:hover {
 /* Estilos para la parte del carrito */
 
 
-
 .carrito-list table {
     width: 100%;
     border-collapse: collapse;
@@ -307,8 +306,7 @@ input[type="range"]:hover {
 }
 
 .carrito-list th, .product-list td {
-    border: 1px solid #000000;
-    padding: 8px;  
+    padding: 4px;  
 }
 
 .carrito-list tr:hover{
@@ -321,11 +319,53 @@ input[type="range"]:hover {
     color: #ffffff;
 }
 
+button.button.button-remove.quitarProducto{
+    font-size: 11px;
+    padding: 8px 2px;
+}
+
 #listaCarrito{
     overflow-y:scroll;
     max-height: 400px;
     display: block;
     margin-bottom: 10px;
+}
+
+/* ---------------------- Segunda tabla dentro de la modificacion ---------------------- */
+table.tabla-lotes-carrito{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tabla-lotes-carrito thead{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tabla-lotes-carrito th{
+    background-color: #77da8e;
+    text-align: left;
+    color: #000000;
+    padding: 8px 1px
+}
+
+.fila-producto-carrito td{
+    border-bottom: 1px solid #000000;
+    padding: 2px 10px;
+    background-color: #28a745;
+}
+
+button.button.button-remove.quitarLote{
+    font-size: 11px;
+    padding: 6px 8p
+}
+
+input.input-cantidad-lote-detalles{
+    width: 85%;    
 }
 
 .selectorCantidad {
