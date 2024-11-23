@@ -42,6 +42,7 @@ DOMVentas.addEventListener("click", (e)=>{
         carrito.vaciarCarrito()
         productoLotes.lotes=[]       
         let elementoVenta = receptor.parentElement.parentElement
+        textAreaMotivoModificacion.value=""
         abrirModal(modalVentaModificar)
         ventaCargada=elementoVenta.venta
         total.textContent=ventaCargada.total
