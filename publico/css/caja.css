@@ -33,10 +33,12 @@
 }
 
 /*--------------------------estilo producto--------------------------*/
+.product-list{
+    padding-bottom: 20px;
+    border-bottom: 4px solid;
+}
 .contenedor-lotes{
-    padding-top: 5px;
-    padding-bottom: 15px;
-    border-top: 5px solid black;
+    margin-bottom: 50px;
 }
 .product-list table {
     width: 100%;
@@ -51,7 +53,6 @@
 }
 
 .product-list th, .cart th, .cart td {
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
@@ -64,12 +65,11 @@
 }
 
 .product-list th {
-    border: 1px solid #000000;
     padding: 8px;
 }
 
 .product-list td{
-    border: 1px solid #000000;
+    border-bottom: 1px solid #000000;
     padding: 2px 10px;
 }
 
@@ -80,12 +80,11 @@
 .product-list th {
     background-color: #226304;
     text-align: left;
-    color: #ffffff;
 }
 
 #product-table{
     overflow-y:scroll;
-    max-height: 250px;
+    max-height: 350px;
     display: block;
 }
 
@@ -112,6 +111,41 @@
 .etiqueta-nombre-producto-lote {
     padding-top: 5px;
 }
+
+.nombre-producto-lote{
+    color: #000000;
+    background-color: #28a745;
+    text-align: center;
+    font-size: 18px;
+}
+
+span.etiqueta-nombre-producto-lote{
+    font-weight: bold;
+}
+
+.codigo-producto-lote{
+    color: #000000;
+    background-color: #28a745;
+    text-align: center;
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+span.etiqueta-codigo-producto-lote{
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.cabezera-producto-lote{
+    max-width: 600px;
+}
+
+.cabezera-producto-lote-texto{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #28a745;
+    border: 2px solid;
+}
 /*--------------------------estilo carrito--------------------------*/
 .carrito-list table {
     width: 100%;
@@ -122,8 +156,7 @@
 .carrito-list thead, .carrito-list tbody tr{
     display:table;
     width:100%;
-    table-layout:fixed;
-    
+    table-layout:fixed;    
 }
 
 .carrito-list tr:nth-of-type(2n+1){
@@ -131,10 +164,6 @@
 }
 .carrito-list tr:nth-of-type(2n) {
     background-color: rgb(124, 148, 128);
-}
-
-.carrito-list th {
-    border: 1px solid #000000;
 }
 
 .carrito-list tr:hover{
@@ -176,21 +205,37 @@ input [type="number"]{
 }
 
 .fila-producto-carrito td{
-    border: 1px solid #000000;
+    border-bottom: 1px solid #000000;
     padding: 2px 10px;
+    background-color: #28a745;
 }
+
 /*--------------------------Segunda Tabla del carrito --------------------------*/
+table.tabla-lotes-carrito{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+}
 
 .tabla-lotes-carrito th{
-    background-color: #00c578;
+    background-color: #77da8e;
     text-align: left;
-    color: #ffffff;
+    color: #000000;
     padding: 8px;
 }
 
 .tabla-lotes-carrito td{
-    border: 1px solid #000000;
     padding: 2px 10px;
+}
+
+input.input-cantidad-lote-detalles{
+    width: 95%;
+}
+
+button.button.button-remove.quitarLote{
+align-items: center;
 }
 
 /*--------------------------metodo de pago--------------------------*/
