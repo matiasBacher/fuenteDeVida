@@ -1,10 +1,11 @@
 import { tablaResumen } from "../caja/tablaResumen.js"
+import { juntarProductoVenta } from "./juntarProductoVenta.js"
 export{imprimirVenta}
 function imprimirVenta(venta){
     let productos=[]
     let detalles
     if(venta.id!==undefined){
-        detalles=venta.detalles
+        detalles=juntarProductoVenta(venta)
     }
     else
     {

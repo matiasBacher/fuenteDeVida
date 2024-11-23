@@ -25,7 +25,7 @@ export async function consultaLote(objeto){
             venMin: "1970-01-01",
             ingMax: new Date().toISOString().split("T")[0],
             ingMin: "1970-01-01",
-            busqueda:1, 
+            busqueda:"", 
          ...objeto
 
     }

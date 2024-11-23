@@ -72,7 +72,7 @@ export class cuadroProductoLotes extends HTMLElement{
                     `<div class="codigo-producto-lote">
                         <span class="etiqueta-codigo-producto-lote">Codigo: </span>
                         <span class="texto-codigo-producto-lote">
-                            ${this.producto.codigo.toString().padEnd(8,"0")}
+                            ${this.producto.codigo.toString().padStart(8,"0")}
                         </span>
                     </div>`
                 break

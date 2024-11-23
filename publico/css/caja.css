@@ -38,7 +38,7 @@
     border-bottom: 4px solid;
 }
 .contenedor-lotes{
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .product-list table {
     width: 100%;
@@ -142,9 +142,8 @@ span.etiqueta-codigo-producto-lote{
 .cabezera-producto-lote-texto{
     display: flex;
     justify-content: space-around;
-    padding: 10px;
     background-color: #28a745;
-    border: 2px solid;
+    
 }
 /*--------------------------estilo carrito--------------------------*/
 .carrito-list table {
@@ -166,9 +165,7 @@ span.etiqueta-codigo-producto-lote{
     background-color: rgb(124, 148, 128);
 }
 
-.carrito-list tr:hover{
-    background-color:#86d694 ;
-}
+
 
 .carrito-list th {
     background-color: #226304;
@@ -193,7 +190,9 @@ span.etiqueta-codigo-producto-lote{
     font-weight: bold;
     font-size: 16px;
 }
-
+.fila-lotes-carrito{
+    background-color: transparent !important;
+}
 input [type="number"]{
     width: 20px;
     }
