@@ -44,7 +44,7 @@ function ponerTotales(){
 
 botonImprimir.addEventListener("click", async ()=>{
     
-        let recepcion = await altaVenta(JSON.parse(selectMedioPago.value)[0], carrito.getDetallesSuelto)
+        let recepcion = await altaVenta(JSON.parse(selectMedioPago.value)[0], carrito.getDetallesSuelto())
         let mensaje = recepcion.mensaje
         let venta = recepcion.venta
         cerrarModal(resumenVenta)

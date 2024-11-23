@@ -218,7 +218,7 @@ class Venta implements \JsonSerializable
     public function getTotal(){
         $total = 0;
         foreach($this->detalles->getIterator() as $detalle){
-            $total+=$detalle->getPrecio();
+            $total+=$detalle->getTotal();
         }
         return $total; 
     }

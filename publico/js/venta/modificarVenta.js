@@ -69,7 +69,7 @@ agregar(carrito, ponerTotales)
 botonModificar.addEventListener("click", async ()=>{
     if(carrito.getCantidad()>=1){
         if(!textAreaMotivoModificacion.value.trim()==""){
-            let mensaje= await registrarModVenta(ventaCargada.id, selectMedioPago.value, 
+            let mensaje= await registrarModVenta(ventaCargada.idVerdadero, selectMedioPago.value, 
                                             carrito.getDetallesSuelto(), textAreaMotivoModificacion.value )
             mensaje=mensaje.mensaje
             carrito.vaciarCarrito()

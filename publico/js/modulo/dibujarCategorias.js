@@ -1,5 +1,6 @@
 import { actualizarCategoria, eliminarCategoria, cargarCategorias} from "./sincCat.js";
 import { categoriaEnMemoria, grabarCategoria } from "../producto/variablesGlobales.js";
+import { inputPreguntaMensaje } from "./mensajesYCargas.js";
 export {dibujarCategorias }
 function dibujarCategorias(padre, memoria){
     padre.innerHTML="";

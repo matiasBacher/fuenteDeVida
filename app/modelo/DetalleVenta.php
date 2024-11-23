@@ -102,7 +102,9 @@ class DetalleVenta implements \JsonSerializable
     {
         return $this->venta;
     }
-
+    public function getTotal(){
+        return $this->cantidad*$this->getPrecio();
+    }
     public function setVenta(?Venta $venta): self
     {
         $this->venta = $venta;
