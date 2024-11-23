@@ -80,7 +80,7 @@ function annadirLoteModal(lote, vaciar=false){
  function retonarValue(objeto){
     let objetoRetorno ={}
     Object.keys(objeto).forEach((k,i)=>{
-        objetoRetorno[k] =objeto[k].value??{}
+        if(objeto[k].value) objetoRetorno[k] =objeto[k].value
     })
     return objetoRetorno
  }
@@ -123,6 +123,7 @@ function eventoBotonAgregarModificar(e){
     })
     if(Object.keys(validador).every(x=>{return validador[x]})){
         const objeto=retonarValue(elementoModAgreg)//Se saca valores de objeto con elementos del formulario modal
+        objeto.producto={}
         objeto.producto.codigo=elementoModAgreg.producto.codigo.textContent //texto de un div
         objeto.producto.nombre=elementoModAgreg.producto.nombre.textContent
 

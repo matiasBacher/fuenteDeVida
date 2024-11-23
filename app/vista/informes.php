@@ -12,8 +12,8 @@ $payload=[
 ];
 
 $token = JWT::encode($payload, $key, "HS256");
-$iframeUrl = $url."/embed/dashboard/".$token."#theme=night&background=true&bordered=false&titled=false";?>
-<div style="aspect-ratio: 3 / 4; width: 100%;  border: 1px solid black;">
+$iframeUrl = $url."/embed/dashboard/".$token."#theme=night&bordered=false&titled=false";?>
+<div class="contenedorInforme">
 
-<iframe src="<?=$iframeUrl?>"  allowtransparency frameborder="0"  style="width: 100%; height: 100%; border: none;" ></iframe>
+<iframe src="<?=$iframeUrl?>"  allowtransparency frameborder="0"   ></iframe>
 </div>

@@ -49,7 +49,7 @@ export class filaLote extends HTMLTableRowElement{
 
     definirLote(lote){
         this.lote=lote
-        this.estadoVencimiento=this.lote.estadoVencimiento
+        this.estadoVencimiento=this.lote.estadoVencimiento.nombre
 
         this.render()
         

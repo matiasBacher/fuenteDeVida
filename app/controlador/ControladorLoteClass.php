@@ -121,9 +121,7 @@ class ControladorLoteClass{
                 global $entityManager;
               
 
-                if(isset($this->objeto->venMax)){
-                    $filtro["venMax"]=$this->objeto->venMax;
-                }
+          
 
 
                 $busqueda=$this->objeto->busqueda;
@@ -136,6 +134,9 @@ class ControladorLoteClass{
                             "ingMax"=>$this->objeto->ingMax,
 
                 ];
+                if(isset($this->objeto->venMax)){
+                    $filtro["venMax"]=$this->objeto->venMax;
+                }
 
 
 
@@ -174,7 +175,7 @@ class ControladorLoteClass{
 
                             ($x->getVencimiento() >= new DateTime($filtro['venMin'])) 
                             and (isset($filtro["venMax"])
-                                    ?($x->getVencimiento() >= new DateTime($filtro['venMax']))
+                                    ?($x->getVencimiento() <= new DateTime($filtro['venMax']))
                                     :true) 
                             and ($x->getIngreso() >= new DateTime($filtro['ingMin']))
                             and ($x->getIngreso() <= new DateTime($filtro['ingMax']))

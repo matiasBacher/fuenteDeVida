@@ -138,7 +138,6 @@ span.etiqueta-codigo-producto-lote, span.etiqueta-nombre-producto-lote{
 
 .contenedor-lotes tbody td{
     padding: 8px;
-    border-bottom: 1px solid #000000;
     text-align: center;
 }
 
@@ -225,3 +224,31 @@ button.button.button-remove{
  .modal-footer{
     display: block;
  }
+ /* contenedor-cuadro-productos-lotes tr{
+   
+ } */
+tr[estadovencimiento="Por vencer."]{
+
+
+    
+ box-shadow: inset 0 0 1px 1px black, inset 0 0 4px 5px orange;
+
+    border: 0px !important; 
+}
+tr[estadovencimiento="Por vencer."] td:nth-child(4){
+    color: orange;
+    font-weight: 600;
+}
+
+tr[estadovencimiento="Vencido."]{
+
+
+    
+    box-shadow: inset 0 0 1px 1px black, inset 0 0 4px 5px orangered;
+   
+       border: 0px !important; 
+   }
+   tr[estadovencimiento="Vencido."] td:nth-child(4){
+       color: orangered;
+       font-weight: 600;
+   }

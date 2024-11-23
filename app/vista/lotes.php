@@ -92,7 +92,7 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
             <!-- Vencimiento -->
             <div class="input-group">
                 <label for="vencimiento" class="titulos-Modal-Lotes">Vencimiento *</label>
-                <input type="date" id="vencimiento" name="vencimiento" format="Y-m-d" class="inputLotesModal">
+                <input type="date" id="vencimiento" name="vencimiento" format="Y-m-d" class="inputLotesModal" min="<?=date("Y-m-d")?>">
                 <span class="error" id="error-vencimiento">Espacio vacío</span>
             </div>
 
