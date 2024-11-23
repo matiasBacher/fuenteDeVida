@@ -3,7 +3,7 @@ import { Carrito } from "../caja/carrito.js";
 import { abrirModal, cerrarModal, errorMensaje, okMensaje } from "../modulo/mensajesYCargas.js"
 import { registrarModVenta } from "../modulo/sincVenta.js";
 import { recargarTabla } from "./venta.js";
-
+import { contenedorCuadroProductoLotesCaja } from "../caja/contenedorCuadroProductoLotesCaja.js";
 
 let ventaCargada
 let productoCarrito=[]
