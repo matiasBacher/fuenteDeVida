@@ -93,26 +93,24 @@ contenedor-cuadro-productos-lotes > div{
     border-radius: 8px;
     padding: 15px;
     background-color: rgb(145, 177, 144);
-    
 }
-.cabezera-producto-lote{
 
-    padding: 15px;
-    background-color: rgb(135 177 144);
+.cabezera-producto-lote{
+    background-color: rgb(118 163 128);
     padding: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 100%;
-        
-
+    max-width: 100%;  
 }
-.contenedor-lotes{
-        border:#000000 1px solid;
-        margin-top: 20px;
-        border-radius: 8px;
-        padding: 5px;
 
+.contenedor-lotes{
+    border:#000000 2px solid;
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: rgb(118 163 128);
+    margin-bottom: 50px;
 }
 
 span.etiqueta-codigo-producto-lote, span.etiqueta-nombre-producto-lote{
