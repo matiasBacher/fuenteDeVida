@@ -28,7 +28,7 @@ $proveedores=$entityManager->getRepository(Proveedor::class)->findAll();
                 <option value="vencimiento">Ordenar por Fecha Vencimiento</option>
                 <option value="codigo">Ordenar por Fecha Ingreso</option>
             </select>
-        <?php swich("vencido","1","Vencidos" ) ?>
+        <?php #swich("vencido","1","Vencidos" ) ?>
         </div>
 
         <!-- Ingreso y Vencimiento -->

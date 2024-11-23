@@ -172,13 +172,14 @@ class ControladorLoteClass{
                     
                     $lotes = $p->getLotes()->filter(function($x) use ($filtro){
                         return (
-
-                            ($x->getVencimiento() >= new DateTime($filtro['venMin'])) 
+                            ($x->getCantidad()>0)
+                            and ($x->getVencimiento() >= new DateTime($filtro['venMin'])) 
                             and (isset($filtro["venMax"])
                                     ?($x->getVencimiento() <= new DateTime($filtro['venMax']))
                                     :true) 
                             and ($x->getIngreso() >= new DateTime($filtro['ingMin']))
                             and ($x->getIngreso() <= new DateTime($filtro['ingMax']))
+
 
                         );
                     }
