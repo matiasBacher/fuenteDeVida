@@ -161,6 +161,7 @@ function eventoBotonAgregarModificar(e){
  Object.keys(elementoFltro).forEach(x=>{
     if(x=="busqueda"){
         elementoFltro[x].addEventListener("keyup", eventoBusqueda)
+        console.log("bbbbbbbbbbbbbbbbbbbbbbbbbb")
     }
     else{
         elementoFltro[x].addEventListener("change", eventoBusqueda)
@@ -220,7 +221,7 @@ switch(respuesta.mensaje){
         break
     case "altaExito":
         okMensaje.fire({text:"Lote guardado con el éxito"})
-        annadirLoteModal({})
+        cerrarModal(modalAgregModif)
         let input= new Event("keyup")
         elementoFltro.busqueda.dispatchEvent(input)
 

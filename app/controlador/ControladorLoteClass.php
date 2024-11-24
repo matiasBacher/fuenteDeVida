@@ -247,6 +247,7 @@ class ControladorLoteClass{
                     $lote->setProveedor($proveedor);
                     $lote->setVencimiento($fechaVencimiento);
                     $lote->setCantidad($cantidad);
+                    $lote->setIngreso($fechaIngreso);
 
                     try{
                         $entityManager->persist($lote);
