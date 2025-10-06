@@ -114,7 +114,7 @@ class RegistroModificacionInventario implements \JsonSerializable{
         $this->idDevolucion = $idDevolucion;
         return $this;
     }
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed{
         return [
             "id"=>$this->id,
             "detalleVenta"=>$this->detalleVenta,

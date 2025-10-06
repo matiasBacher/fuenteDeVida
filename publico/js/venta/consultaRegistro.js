@@ -1,6 +1,7 @@
 import { abrirModal, cerrarModal, errorMensaje, okMensaje } from "../modulo/mensajesYCargas.js"
 import { consultarVentasCorregidas } from "../modulo/sincVenta.js"
 import { tablaVentas } from "./tablaVenta.js"
+import { eventoImprimir } from "./imprimirVenta.js"
 
 const registrosVentas = []
 const modalConsultaVenta =  document.getElementById("modalConsultarModVentas")
@@ -26,6 +27,8 @@ DOMVentas.addEventListener("click",async (e)=>{
         registrosVentas.push(...await consultarVentasCorregidas(venta.idVerdadero))
         contenedor.appendChild(tablaVentas(registrosVentas, 
             {razonModificacion:true, identificador:true, tieneID:false, modificar:false, consultar:false}))
+        eventoImprimir(modalConsultaVenta)
+        
 
 
 

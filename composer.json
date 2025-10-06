@@ -8,6 +8,9 @@
         "firebase/php-jwt": "^6.10"
     },
     "autoload": {
+        "files": [
+      "bootstrap.php"
+    ],
         "psr-4": { 
             "modelo\\": "app/modelo"
     }

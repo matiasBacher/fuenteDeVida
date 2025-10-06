@@ -20,7 +20,7 @@ class EstadoInventarioLote implements \JsonSerializable{
     #[ORM\Column(name:"nombre")]
     private string $nombre;
 
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed{
         return[
             "id"=>$this->id,
             "nombre"=>$this->nombre

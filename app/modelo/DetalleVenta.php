@@ -35,12 +35,12 @@ class DetalleVenta implements \JsonSerializable
     private ?Lote $lote = null;
 
     // Getters y setters
-    public function __construct(int $cantidad=1, Lote $lote){
+    public function __construct(Lote $lote, int $cantidad=1){
         $this->cantidad=$cantidad;
         $this->lote=$lote;
         $this->precio=$this->getProducto()->getPrecioDeVenta();
     }
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed{
         return[
             "id"=> $this->getID(),
             "precio"=> $this->getPrecio(),

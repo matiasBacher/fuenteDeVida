@@ -18,12 +18,12 @@ class categorias implements \JsonSerializable {
     #[ORM\Column(name: "NOMBRE_CATEGORIA", type: "string", length: 250)]
     private $nombre;
 
-function __construct(?int $id = null, $nombre) {
+function __construct($nombre, ?int $id = null) {
     $this->id = $id;
     $this->nombre = $nombre;
 }
 
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed{
         return [
             "id"=> $this->id,
             "nombre"=> $this->nombre,

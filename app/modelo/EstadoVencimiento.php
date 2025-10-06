@@ -15,7 +15,7 @@ class EstadoVencimiento implements \JsonSerializable{
 
     #[ORM\Column(name: "nombre", type: "string")]
     private string $nombre;
-    function jsonSerialize(){
+    function jsonSerialize(): mixed{
         return [
             "nombre"=>$this->nombre,
             "id"=>$this->id,

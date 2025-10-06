@@ -1,7 +1,6 @@
 import { imprimirVenta } from "../modulo/imprimirVenta.js";
-import { DOMVentas } from "./venta.js";
 export{eventoImprimir}
-function eventoImprimir() {
+function eventoImprimir(DOMVentas) {
 DOMVentas.addEventListener("click", (e)=>{
     let receptor=e.target
     console.log(receptor)

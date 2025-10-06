@@ -76,4 +76,4 @@ elementoFiltro.forEach(x => {
     
 });
 recargarTabla()
-eventoImprimir()
+eventoImprimir(DOMVentas)
