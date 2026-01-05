@@ -31,52 +31,9 @@
 
                             <!-- ACA COMIENZA EL SWITCH -->
                             <div id="<?=$letra."caracteristicas"?>">
-
-                                <div class="comSwitch">
-                                    <label class="switch">
-                                        <input type="checkbox" name="sinTacc" value="1">
-                                        <span class="slider round"></span>
-                                    </label>
-
-                                    <div class="textSwitch">Sin Tacc</div>
-                                </div>
-
-                                <div class="comSwitch">
-                                    <label class="switch">
-                                        <input type="checkbox" name="esDiuretico" value="1">
-                                        <span class="slider round"></span>
-                                    </label>
-
-                                    <div class="textSwitch">Diuretico</div>
-                                </div>
-
-                                <div class="comSwitch">
-                                    <label class="switch">
-                                        <input type="checkbox" name="aptoDiabetico" value="1">
-                                        <span class="slider round"></span> 
-                                    </label>
-
-                                    <div class="textSwitch">Apto Diabético</div>
-                                </div>
-
-                                <div class="comSwitch">
-                                    <label class="switch">
-                                        <input type="checkbox" name="sinSodio" value="1">
-                                        <span class="slider round"></span> 
-                                    </label>
-
-                                    <div class="textSwitch">Bajo Sodio</div>
-                                </div>
+                                <?php swichPropiedad()?>
 
 
-                                <div class="comSwitch">
-                                    <label class="switch">
-                                        <input type="checkbox" name="esNatural" value="1">
-                                        <span class="slider round"></span> 
-                                    </label>
-
-                                    <div class="textSwitch">Natural</div>
-                                </div>
                             </div>
                         </div>
                         <!-- ACA TERMINA EL SWITCH -->

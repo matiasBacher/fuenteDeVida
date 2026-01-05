@@ -1,4 +1,4 @@
-
+<?php require_once($_SERVER['DOCUMENT_ROOT']."/app/vista/componentes/swichPropiedades.php");?>
             <h1>Listado de Productos</h1>
             <div class="search-bar">
                 <input type="text" id="buscarProducto" placeholder="Buscar productos...">
@@ -15,63 +15,11 @@
             <div id="filter-box" class="filter-box">
                 
 
-                    <div class="comSwitch">
-                        <label class="switch">
-                            <input type="checkbox" name="caracteristicas[]" id="sinTacc" value="Sin Tacc">
-                            <span class="slider round"></span>
-                        </label>
-
-                        <div class="textSwitch">Sin Tacc</div>
-                    </div>
-
-                    <div class="comSwitch">
-                        <label class="switch">
-                            <input type="checkbox" name="caracteristicas[]" id="esDiuretico" value="Diuretico">
-                            <span class="slider round"></span>
-                        </label>
-
-                        <div class="textSwitch">Diuretico</div>
-                    </div>
-
-                    <div class="comSwitch">
-                        <label class="switch">
-                            <input type="checkbox" name="caracteristicas[]" id="aptoDiabetico" value="Apto Diabético">
-                            <span class="slider round"></span> 
-                        </label>
-
-                        <div class="textSwitch">Apto Diabético</div>
-                    </div>
-
-                    <div class="comSwitch">
-                        <label class="switch">
-                            <input type="checkbox" name="caracteristicas[]" id="sinSodio" value="Bajo Sodio">
-                            <span class="slider round"></span> 
-                        </label>
-
-                        <div class="textSwitch">Bajo Sodio</div>
-                    </div>
+                   <?php swichPropiedad()?>
 
                  
 
-                    <div class="comSwitch">
-                        <label class="switch">
-                            <input type="checkbox" name="caracteristicas[]" id="esNatural" value="Natural">
-                            <span class="slider round"></span> 
-                        </label>
-
-                        <div class="textSwitch">Natural</div>
-                    </div>
-
-                    <!-- <div class="comSwitch">
-                        <label class="switch">
-                            <input type="checkbox" name="caracteristicas[]" value="En Stock">
-                            <span class="slider round"></span> 
-                        </label>
-
-                        <div class="textSwitch">En Stock</div>
-                    </div>
-                 -->
-            </div>
+            </div>      
             <!-- ACA TERMINA EL SWITCH -->
 
 
@@ -110,9 +58,9 @@
              modalAgregModif(true);
              modalAgregModif(false);
             ?>
-            <script src="publico/js/producto.js"></script>
-            <script src="publico/js/addCatModal.js"></script>
-            <script src="publico/js/agregarProductoModal.js"></script>
-            <script src="publico/js/modificarProductoModal.js"></script>
+            <script type="module" src="publico/js/producto/producto.js"></script>
+            <script type="module" src="publico/js/producto/addCatModal.js"></script>
+            <script type="module" src="publico/js/producto/agregarProductoModal.js"></script>
+            <script type="module" src="publico/js/producto/modificarProductoModal.js"></script>
  
 

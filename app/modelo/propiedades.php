@@ -1,72 +1,84 @@
 <?php
 
-class Propiedades implements JsonSerializable  {
-    private bool $esDiuretico = false;
-    private bool $sinSodio = false;
-    private bool $esNatural = false;
-    private bool $sinTacc = false;
-    private bool $aptoDiabetico = false;
+namespace modelo;
 
-    // Constructor
-    public function __construct(bool $esDiuretico = false, bool $sinSodio = false, bool $esNatural = false, bool $sinTacc = false, bool $aptoDiabetico = false) {
-        $this->esDiuretico = $esDiuretico;
-        $this->sinSodio = $sinSodio;
-        $this->esNatural = $esNatural;
-        $this->sinTacc = $sinTacc;
-        $this->aptoDiabetico = $aptoDiabetico;
-    }
-    
-    // Métodos getter y setter
-    public function getEsDiuretico(): bool {
-        return $this->esDiuretico;
-    }
+class Propiedades implements \JsonSerializable
+{
+  private bool $esDiuretico = false;
+  private bool $sinSodio = false;
+  private bool $esNatural = false;
+  private bool $sinTacc = false;
+  private bool $aptoDiabetico = false;
 
-    public function setEsDiuretico(bool $esDiuretico): void {
-        $this->esDiuretico = $esDiuretico;
-    }
+  // Constructor
+  public function __construct(bool $esDiuretico = false, bool $sinSodio = false, bool $esNatural = false, bool $sinTacc = false, bool $aptoDiabetico = false)
+  {
+    $this->esDiuretico = $esDiuretico;
+    $this->sinSodio = $sinSodio;
+    $this->esNatural = $esNatural;
+    $this->sinTacc = $sinTacc;
+    $this->aptoDiabetico = $aptoDiabetico;
+  }
 
-    public function getSinSodio(): bool {
-        return $this->sinSodio;
-    }
+  // Métodos getter y setter
+  public function getEsDiuretico(): bool
+  {
+    return $this->esDiuretico;
+  }
 
-    public function setSinSodio(bool $sinSodio): void {
-        $this->sinSodio = $sinSodio;
-    }
+  public function setEsDiuretico(bool $esDiuretico): void
+  {
+    $this->esDiuretico = $esDiuretico;
+  }
 
-    public function getEsNatural(): bool {
-        return $this->esNatural;
-    }
+  public function getSinSodio(): bool
+  {
+    return $this->sinSodio;
+  }
 
-    public function setEsNatural(bool $esNatural): void {
-        $this->esNatural = $esNatural;
-    }
+  public function setSinSodio(bool $sinSodio): void
+  {
+    $this->sinSodio = $sinSodio;
+  }
 
-    public function getSinTacc(): bool {
-        return $this->sinTacc;
-    }
+  public function getEsNatural(): bool
+  {
+    return $this->esNatural;
+  }
 
-    public function setSinTacc(bool $sinTacc): void {
-        $this->sinTacc = $sinTacc;
-    }
+  public function setEsNatural(bool $esNatural): void
+  {
+    $this->esNatural = $esNatural;
+  }
 
-    public function getAptoDiabetico(): bool {
-        return $this->aptoDiabetico;
-    }
+  public function getSinTacc(): bool
+  {
+    return $this->sinTacc;
+  }
 
-    public function setAptoDiabetico(bool $aptoDiabetico): void {
-        $this->aptoDiabetico = $aptoDiabetico;
-    }
+  public function setSinTacc(bool $sinTacc): void
+  {
+    $this->sinTacc = $sinTacc;
+  }
 
-    public function jsonSerialize() {
-        return [
-            'esDiuretico' => $this->esDiuretico,
-            'sinSodio' => $this->sinSodio,
-            'esNatural' => $this->esNatural,
-            'sinTacc' => $this->sinTacc,
-            'aptoDiabetico' => $this->aptoDiabetico
-        ];
-    }
+  public function getAptoDiabetico(): bool
+  {
+    return $this->aptoDiabetico;
+  }
 
+  public function setAptoDiabetico(bool $aptoDiabetico): void
+  {
+    $this->aptoDiabetico = $aptoDiabetico;
+  }
+
+  public function jsonSerialize(): mixed
+  {
+    return [
+      'esDiuretico' => $this->esDiuretico,
+      'sinSodio' => $this->sinSodio,
+      'esNatural' => $this->esNatural,
+      'sinTacc' => $this->sinTacc,
+      'aptoDiabetico' => $this->aptoDiabetico
+    ];
+  }
 }
-
-

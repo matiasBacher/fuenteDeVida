@@ -53,13 +53,6 @@ h1 {
     margin-right: 5px;
 }
 
-.form-group .error {
-    display: none;
-    color: red;
-    font-size: 15px;
-    margin-left: 125px;
-}
-
 .form-group input.invalid, .form-group select.invalid, .form-group textarea.invalid {
     border: 2px solid red;
     border-radius: 8px;

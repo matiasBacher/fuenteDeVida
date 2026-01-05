@@ -1,0 +1,512 @@
+/* Contenedor de filtros */
+
+.contenedorFiltro {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    max-width: 100%;
+    flex-wrap: wrap;
+
+}
+
+.filtroVenta {
+    
+    background-color: rgb(135, 177, 144);
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 300px;
+    height: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #000000;
+    flex-grow: 1;
+    margin: 0px 5px;
+
+}
+
+.filtroVenta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Título del filtro */
+.tituloFiltroVenta {    
+    color: #000000;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Estilo para las etiquetas y los inputs de fecha */
+.elementoFiltro {
+    margin-bottom: 10px;
+}
+
+input[type="date"] {
+    padding: 10px;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus {
+    border-color: rgb(132, 189, 144);;
+    outline: none;
+}
+
+label[for="desde"]{
+    margin-left: 10%;
+}
+
+label[for="hasta"]{
+    margin-left: 10%;
+}
+
+
+/* Estilo para el rango de precios */
+input[type="range"] {
+    width: 40%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 5px;
+    background: #ccc;
+    outline: none;
+    transition: background 0.3s ease;    
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #faab00;
+    cursor: pointer;  
+    border: #000000 solid 2px;
+}
+.mostradorRango{
+    width: 10em;
+    display: inline-block;
+    text-align: left;
+}
+input[type="range"]:hover {
+    background: #7ea087;
+}
+
+/* Ventas (resultados) */
+#ventas {
+    margin: 10px auto;
+    padding: 10px 70px;
+    max-width: 100%;
+    background-color: rgb(145, 168, 150);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 800px;
+}
+
+.contenedorVentas{
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 768px) {
+    .filtroVenta {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    input[type="date"],
+    input[type="range"] {
+        font-size: 0.9em;
+    }
+
+    .textSwitch {
+        font-size: 0.9em;
+    }
+}
+
+.comSwitch {
+    display: inline-flex;
+    margin-left: 25%;
+}
+
+/* Estilos para la tabla de detalles */
+.ventaCuadro{
+    border: #000000 solid 1px;
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: rgb(135, 177, 144);
+}
+
+.ventaCuadro table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.ventaCuadro thead th {
+    background-color: #28a745;
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+}
+
+.ventaCuadro tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #000000;
+}
+
+.ventaCuadro tbody tr:hover {
+    background-color: #86d694;
+}
+
+/* Estilos para el total */
+.contenedorTotal {
+    text-align: right;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Estilos para los botones */
+.contedorBotones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ventaCuadro button {
+    margin-left: 5px;
+}
+
+/*------------------ Estilos para la modificacion de las ventas ------------------ */
+
+/* Estilos para el buscador*/
+.search-bar {
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    max-width: 1000px;    
+    }
+
+.search-bar input {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.search-bar select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.form{
+    width:550px;
+}
+
+/* ---------------------- Estilos para la parte del producto ---------------------- */
+
+.modal-content{
+    max-width: 800px;
+    padding: 15px;
+}
+
+.product-list table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align:left;
+    margin-bottom: 40px;
+}
+
+.product-list thead, .product-list tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    box-sizing: border-box;
+}
+
+.product-list th, .product-list td, .cart th, .cart td {
+    padding: 8px;
+}
+
+.product-list tr:nth-of-type(2n+1){
+    background-color: rgb(145, 168, 150);
+}
+.product-list tr:nth-of-type(2n) {
+    background-color: rgb(124, 148, 128);
+}
+
+.product-list tr:hover{
+    background-color:#86d694 ;
+}
+
+.product-list th {
+    background-color: #226304;
+    text-align: left;
+    color: #ffffff;
+}
+
+#product-table{
+    overflow-y:scroll;
+    max-height: 232px;
+    display: block;
+}
+
+.cabezera-producto-lote-texto{
+    display: flex;
+    justify-content: space-around;
+    background-color: #28a745;
+}
+
+.codigo-producto-lote{
+    color: #000000;
+    background-color: #28a745;
+    text-align: center;
+    font-size: 18px;
+}
+
+.nombre-producto-lote{
+    color: #000000;
+    background-color: #28a745;
+    text-align: center;
+    font-size: 18px;
+}
+
+span.etiqueta-nombre-producto-lote{
+    font-weight: bold;
+}
+
+span.etiqueta-codigo-producto-lote{
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.agregar-carrito{
+    background-color: #faab00;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+    font-size: 11px;
+    border: black 2px solid;
+}
+
+/* Estilos para la parte del carrito */
+
+
+.carrito-list table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 20px;
+    caption-side: bottom;
+    color: #000000;
+    text-align:left;
+    letter-spacing: 1px;
+}
+.carrito-list thead, .carrito-list tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    box-sizing: border-box;
+}
+
+.carrito-list tr:nth-of-type(2n+1){
+    background-color: rgb(145, 168, 150);
+}
+.carrito-list tr:nth-of-type(2n) {
+    background-color: rgb(124, 148, 128);
+}
+
+.carrito-list th, .product-list td {
+    padding: 4px;  
+}
+
+.carrito-list tr:hover{
+    background-color:#86d694 ;
+}
+
+.carrito-list th {
+    background-color: #226304;
+    text-align: left;
+    color: #ffffff;
+}
+
+button.button.button-remove.quitarProducto{
+    font-size: 11px;
+    padding: 8px 2px;
+}
+
+#listaCarrito{
+    overflow-y:scroll;
+    max-height: 400px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* ---------------------- Segunda tabla dentro de la modificacion ---------------------- */
+table.tabla-lotes-carrito{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tabla-lotes-carrito thead{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tabla-lotes-carrito th{
+    background-color: #77da8e;
+    text-align: left;
+    color: #000000;
+    padding: 8px 1px
+}
+
+.fila-producto-carrito td{
+    border-bottom: 1px solid #000000;
+    padding: 2px 10px;
+    background-color: #28a745;
+}
+
+button.button.button-remove.quitarLote{
+    font-size: 11px;
+    padding: 6px 8p
+}
+
+input.input-cantidad-lote-detalles{
+    width: 85%;    
+}
+
+.selectorCantidad {
+    max-width: 25%;
+    border-radius: 8px;
+    font-size: 20px;
+    margin-left: 30%;
+}
+
+.totalCarrito{
+    margin-left: 65%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input [type="number"]{
+    width: 20px;
+    }
+
+/* Estilos para medio de pago */
+.mdp {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.metodo-pago select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.cobrar{
+    background-color: #226304;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.cobrar:hover {
+    filter: brightness(150%);
+    transform: scale(1.02);
+}
+
+/* Estilos para motivo de modificacion*/
+
+#motivoCorreccion{
+    width: 450px;
+    height: 50px;
+}
+
+/*------------------ Estilos para la modificacion del modal de consulta ------------------ */
+
+.modalContent{
+    background-color: rgb(145, 168, 150);
+    margin:  auto;
+    width: 500px;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 5px;    
+    padding: 10px;
+}
+
+.contenedorVentas{
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: rgb(145, 177, 144);
+}
+
+.identificadorVenta.ventaActual{
+    background-color: rgb(237, 255, 105);
+    border-radius: 3px;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 3px;
+}
+
+.cuerpoRazon{
+    border-radius: 8px;
+    border: #000000 1px solid;
+    font-size: 16px;
+    padding: 5px;
+    font-weight:lighter;
+}
+
+.identificadorVenta.ventaOriginal{
+    background-color: aquamarine;
+    border-radius: 3px;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 3px;
+    text-decoration: underline;
+}
+
+.contenedorEncabezado{
+    padding: 5px;
+}
+
+.contedorBotones{
+    display: flex;
+    justify-content: flex-end;
+}

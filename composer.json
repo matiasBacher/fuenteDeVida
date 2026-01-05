@@ -1,5 +1,18 @@
 {
     "require": {
-        "dompdf/dompdf": "^3.0"
+        "dompdf/dompdf": "^3.0",
+        "doctrine/orm": "^2.11.0",
+        "doctrine/dbal": "^3.2",
+        "symfony/yaml": "^5.4",
+        "symfony/cache": "^5.4",
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+        "files": [
+      "bootstrap.php"
+    ],
+        "psr-4": { 
+            "modelo\\": "app/modelo"
     }
+}
 }
