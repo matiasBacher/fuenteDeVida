@@ -40,8 +40,8 @@ use const JSON_UNESCAPED_UNICODE;
  *
  * @link    www.doctrine-project.org
  *
- * @psalm-import-type AssociationMapping from ClassMetadata
- * @psalm-import-type FieldMapping from ClassMetadata
+ * @phpstan-import-type AssociationMapping from ClassMetadata
+ * @phpstan-import-type FieldMapping from ClassMetadata
  */
 final class MappingDescribeCommand extends AbstractEntityManagerCommand
 {
@@ -65,7 +65,7 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $ui = (new SymfonyStyle($input, $output))->getErrorStyle();
+        $ui = new SymfonyStyle($input, $output);
 
         $entityManager = $this->getEntityManager($input);
 
@@ -98,7 +98,7 @@ EOT
                     $this->formatField('Embedded class?', $metadata->isEmbeddedClass),
                     $this->formatField('Parent classes', $metadata->parentClasses),
                     $this->formatField('Sub classes', $metadata->subClasses),
-                    $this->formatField('Embedded classes', $metadata->subClasses),
+                    $this->formatField('Embedded classes', $metadata->embeddedClasses),
                     $this->formatField('Named queries', $metadata->namedQueries),
                     $this->formatField('Named native queries', $metadata->namedNativeQueries),
                     $this->formatField('SQL result set mappings', $metadata->sqlResultSetMappings),
@@ -131,8 +131,7 @@ EOT
     /**
      * Return all mapped entity class names
      *
-     * @return string[]
-     * @psalm-return class-string[]
+     * @return class-string[]
      */
     private function getMappedEntities(EntityManagerInterface $entityManager): array
     {
@@ -235,7 +234,7 @@ EOT
      * @param mixed  $value A Value to show
      *
      * @return string[]
-     * @psalm-return array{0: string, 1: string}
+     * @phpstan-return array{0: string, 1: string}
      */
     private function formatField(string $label, $value): array
     {
@@ -249,10 +248,10 @@ EOT
     /**
      * Format the association mappings
      *
-     * @psalm-param array<string, FieldMapping|AssociationMapping> $propertyMappings
+     * @phpstan-param array<string, FieldMapping|AssociationMapping> $propertyMappings
      *
      * @return string[][]
-     * @psalm-return list<array{0: string, 1: string}>
+     * @phpstan-return list<array{0: string, 1: string}>
      */
     private function formatMappings(array $propertyMappings): array
     {
@@ -272,10 +271,10 @@ EOT
     /**
      * Format the entity listeners
      *
-     * @psalm-param list<object> $entityListeners
+     * @phpstan-param list<object> $entityListeners
      *
      * @return string[]
-     * @psalm-return array{0: string, 1: string}
+     * @phpstan-return array{0: string, 1: string}
      */
     private function formatEntityListeners(array $entityListeners): array
     {

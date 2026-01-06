@@ -17,17 +17,17 @@ class ControladorProveedoresClass
     $this->objeto = $objeto;
   }
 
-  public function hacer()
+  public function hacer(): void
   {
     $this->resultados = call_user_func([$this, $this->accion]);
   }
 
-  public function getResultados()
+  public function getResultados(): array
   {
     return $this->resultados;
   }
 
-  public function alta()
+  public function alta(): array
   {
     global $entityManager;
     $mensaje = "";
@@ -38,9 +38,49 @@ class ControladorProveedoresClass
     try {
       $entityManager->persist($proveedor);
       $entityManager->flush();
+      $mensaje = "altaExito";
     } catch (Exception $e) {
-      $mensaje = "no se pudo cargar el proveedor";
+      $mensaje = "errorAlta";
       $error = $e->getMessage();
     }
+    return [
+      "mensaje" => $mensaje,
+      "error" => $error,
+    ];
+  }
+  public function borrar(): array
+  {
+    global $entityManager;
+    $mensaje = "";
+    $error = "";
+
+    try {
+      $proveedor = $entityManager->find(Proveedor::class, $this->objeto->id);
+      if ($proveedor == null) {
+        $mensaje = "errorProveedorNulo";
+        return ["mensaje" => $mensaje, "error" => $error];
+      }
+    } catch (Exception $e) {
+      $mensaje = "errorProveedorNoEncontrado";
+      $error = $e->getMessage();
+
+      return ["mensaje" => $mensaje, "error" => $error];
+    }
+    try {
+      $entityManager->remove($proveedor);
+
+      $mensaje = "exitoBorrado";
+      return ["mensaje" => $mensaje, "error" => $error];
+    } catch (Exception $e) {
+      $mensaje = "errorBorrar";
+      $error = $e->getMessage();
+
+      return ["mensaje" => $mensaje, "error" => $error];
+    }
+  }
+  public function modificar(): array
+  {
+    $mensaje = "";
+    $error = "";
   }
 }

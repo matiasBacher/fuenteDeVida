@@ -2,12 +2,18 @@
 
 namespace modelo;
 
+use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "proveedores")]
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false)]
 class Proveedor implements \JsonSerializable
 {
+  use SoftDeleteable;
+
   #[ORM\Id]
   #[ORM\Column(name: "ID_PROVEEDOR", type: "integer")]
   #[ORM\GeneratedValue(strategy: "NONE")]
@@ -23,11 +29,11 @@ class Proveedor implements \JsonSerializable
   private ?string $correo = null;
 
 
-  #[ORM\Column(name: "CUIL_PROVEEDORR", type: "integer", nullable: true)]
+  #[ORM\Column(name: "CUIL_PROVEEDOR", type: "integer", nullable: true)]
   private ?int $cuil = null;
 
 
-  public function __construct(string $razonSocial, ?int $telefono = null, ?string $correo = null, ?int $cuil)
+  public function __construct(string $razonSocial, ?int $telefono = null, ?string $correo = null, ?int $cuil = null)
   {
     $this->razonSocial = $razonSocial;
     $this->telefono = $telefono;
