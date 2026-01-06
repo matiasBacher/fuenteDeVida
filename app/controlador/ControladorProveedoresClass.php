@@ -2,6 +2,8 @@
 
 use modelo\Proveedor as Proveedor;
 
+require_once($_SERVER['DOCUMENT_ROOT'] . "/bootstrap.php");
+
 class ControladorProveedoresClass
 {
   private string $accion;
@@ -14,27 +16,31 @@ class ControladorProveedoresClass
     $this->accion = $accion;
     $this->objeto = $objeto;
   }
-  
-  public function hacer(){
-    $this->resultados=call_user_func([$this, $this->accion]);
+
+  public function hacer()
+  {
+    $this->resultados = call_user_func([$this, $this->accion]);
   }
 
-  public function getResultados(){
+  public function getResultados()
+  {
     return $this->resultados;
   }
 
-  public function alta(){
-    $mensaje="";
-    $error="";
+  public function alta()
+  {
+    global $entityManager;
+    $mensaje = "";
+    $error = "";
 
-    $proveedor = new Proveedor()
+    $proveedor = new Proveedor($this->objeto->razonSocial, $this->objeto->telefono, $this->objeto->correo, $this->objeto->cuil);
 
-    try{
-
+    try {
+      $entityManager->persist($proveedor);
+      $entityManager->flush();
+    } catch (Exception $e) {
+      $mensaje = "no se pudo cargar el proveedor";
+      $error = $e->getMessage();
     }
-  
+  }
 }
-
-
-}
-
