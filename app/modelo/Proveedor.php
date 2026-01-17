@@ -32,13 +32,21 @@ class Proveedor implements \JsonSerializable
   #[ORM\Column(name: "CUIL_PROVEEDOR", type: "integer", nullable: true)]
   private ?int $cuil = null;
 
+  #[ORM\ManyToOne(targetEntity: Domicilio::class)]
+  #[ORM\JoinColumn(name: "ID_DOMICILIO", referencedColumnName: "ID_DOMICILIO", nullable: true)]
+  private ?Domicilio $domicilio = null;
 
-  public function __construct(string $razonSocial, ?int $telefono = null, ?string $correo = null, ?int $cuil = null)
+
+
+  public function __construct(string $razonSocial, ?int $telefono = null, ?string $correo = null, ?int $cuil = null, ?Domicilio $domicilio = null)
   {
+    global $entityManager;
     $this->razonSocial = $razonSocial;
     $this->telefono = $telefono;
     $this->correo = $correo;
     $this->cuil = $cuil;
+
+    $this->domicilio = $domicilio;
   }
 
   // Getters and setters
@@ -58,15 +66,27 @@ class Proveedor implements \JsonSerializable
     return $this;
   }
 
-  public function getCuil()
+  public function setCuil(int $cuil): void
+  {
+    $this->cuil = $cuil;
+  }
+  public function getCuil(): ?int
   {
     return $this->cuil;
   }
-  public function getTelefono()
+  public function setTelefono(int $telefono): void
+  {
+    $this->telefono = $telefono;
+  }
+  public function getTelefono(): ?int
   {
     return $this->telefono;
   }
-  public function getCorreo()
+  public function setCorreo(int $correo): void
+  {
+    $this->correo = $correo;
+  }
+  public function getCorreo(): ?string
   {
     return $this->correo;
   }
@@ -77,10 +97,10 @@ class Proveedor implements \JsonSerializable
     return [
       'id' => $this->id,
       // 'domicilioId' => $this->domicilioId,
-      // 'cuil' => $this->cuil,
+      'cuil' => $this->cuil,
       'razonSocial' => $this->razonSocial,
-      // 'telefono' => $this->telefono,
-      // 'email' => $this->email,
+      'telefono' => $this->telefono,
+      'correo' => $this->correo,
       // 'domicilio' => $this->domicilio ? $this->domicilio->jsonSerialize() : null, // Llamada recursiva si el domicilio también implementa JsonSerializable
     ];
   }
